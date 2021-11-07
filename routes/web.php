@@ -15,12 +15,37 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
+
+//Index
 Route::get('/', function () {
     return view('welcome');
 });
 
 
+//Sucursal
 Route::get('/sucursal/registrar',[SucursalController::class,'mostrarFormularioRegistrar']);
-
 Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal']);
 
+
+//Informe
+
+
+//Itineario
+
+
+//Manifiesto
+
+
+//Nave
+
+
+//Ruta
+
+
+//Usuario
+
+
+//Reserva
+
+
+//Venta
