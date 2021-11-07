@@ -14,20 +14,20 @@ class CreatePasajesTable extends Migration
     public function up()
     {
         Schema::create('pasajes', function (Blueprint $table) {
+
             $table->id();
 
             $table->string('cedula');
+
             $table->string('nombre');
+
             $table->string('apellido');
 
             $table->unsignedBigInteger('servicio_fk');
 
-            $table->foreign('servicio_fk')->references('id')->on('servicios');
+            $table->foreign('servicio_fk')->references('id')->on('servicios')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
-
-
-
 
             $table->timestamps();
         });

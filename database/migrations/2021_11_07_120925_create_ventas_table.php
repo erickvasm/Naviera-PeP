@@ -14,6 +14,7 @@ class CreateVentasTable extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
+
             $table->id();
 
             $table->double('monto');
@@ -22,16 +23,17 @@ class CreateVentasTable extends Migration
 
             $table->unsignedBigInteger('cliente_fk');
 
-            $table->foreign('cliente_fk')->references('id')->on('clientes');
+            $table->foreign('cliente_fk')->references('id')->on('clientes')->onUpdate('cascade')->onDelete('cascade');
 
             $table->unsignedBigInteger('servicio_fk');
 
-            $table->foreign('servicio_fk')->references('id')->on('servicios');
+            $table->foreign('servicio_fk')->references('id')->on('servicios')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedBigInteger('itinerario_fk');
+
+            $table->foreign('itinerario_fk')->references('id')->on('itinerarios')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
-
-
-
 
             $table->timestamps();
         });

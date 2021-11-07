@@ -17,7 +17,6 @@ class CreateNavesTable extends Migration
 
             $table->id();
 
-            
             $table->string('nombre');
             
             $table->integer('capacidad_pasajeros');
@@ -25,8 +24,6 @@ class CreateNavesTable extends Migration
             $table->double('capacidad_carga');
 
             $table->engine = 'InnoDB';
-
-
 
             $table->timestamps();
         });

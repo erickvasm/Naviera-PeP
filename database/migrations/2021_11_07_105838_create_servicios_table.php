@@ -14,16 +14,16 @@ class CreateServiciosTable extends Migration
     public function up()
     {
         Schema::create('servicios', function (Blueprint $table) {
+
             $table->id();
 
             $table->boolean('tipo_servicio');
 
             $table->unsignedBigInteger('usuario_fk');
 
-            $table->foreign('usuario_fk')->references('id')->on('usuarios');
+            $table->foreign('usuario_fk')->references('id')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
-
 
             $table->timestamps();
         });

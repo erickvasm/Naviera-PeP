@@ -14,6 +14,7 @@ class CreateUsuariosTable extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
+
             $table->id();
 
             $table->boolean('tipo');
@@ -24,10 +25,9 @@ class CreateUsuariosTable extends Migration
 
             $table->unsignedBigInteger('surcursal_fk');
 
-            $table->foreign('surcursal_fk')->references('id')->on('surcursales');
+            $table->foreign('surcursal_fk')->references('id')->on('surcursales')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
-
 
             $table->timestamps();
         });

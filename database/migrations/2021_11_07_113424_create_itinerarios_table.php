@@ -21,15 +21,14 @@ class CreateItinerariosTable extends Migration
 
             $table->unsignedBigInteger('ruta_fk');
 
-            $table->foreign('ruta_fk')->references('id')->on('rutas');
+            $table->foreign('ruta_fk')->references('id')->on('rutas')->onUpdate('cascade')->onDelete('cascade');
 
             $table->unsignedBigInteger('nave_fk');
 
-            $table->foreign('nave_fk')->references('id')->on('naves');
+            $table->foreign('nave_fk')->references('id')->on('naves')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
-
-
+            
             $table->timestamps();
         });
     }

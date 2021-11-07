@@ -14,14 +14,14 @@ class CreateSurcursalsTable extends Migration
     public function up()
     {
         Schema::create('surcursales', function (Blueprint $table) {
+            
             $table->id();
 
             $table->string('ciudad');
-            
+
             $table->string('nombre');
 
             $table->engine = 'InnoDB';
-
 
             $table->timestamps();
         });

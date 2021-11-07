@@ -18,11 +18,10 @@ class CreateRutasTable extends Migration
             $table->id();
 
             $table->json('puertos_intermedios');
-            
+
             $table->json('duracion_recorridos');
 
             $table->engine = 'InnoDB';
-
 
             $table->timestamps();
         });
