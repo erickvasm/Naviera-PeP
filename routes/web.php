@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/sucursal/registrar',[SucursalController::class,'mostrarFormularioRegistrar']);
+
+Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal']);
+
