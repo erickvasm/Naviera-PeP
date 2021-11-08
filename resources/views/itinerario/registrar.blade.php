@@ -13,7 +13,7 @@
 			@csrf
 
 
-			Fecha de zarpado:<input type="datetime" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado">
+			Fecha de zarpado:<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado">
 
 			<br>
 			<br>
@@ -49,7 +49,11 @@
 	<script>
 		
 		obtenerRutas();
+		obtenerNaves();
 
+		$('#fecha').change(function(){
+			consultarDisponibilidad();
+		});
 
 		$.extend( $.validator.messages, {
 			required: "Este campo es requerido.",
@@ -72,9 +76,9 @@
 			cedCR: "Por favor, escriba el número de cédula válido."
 			} );
 
-		function obtenerRutas(){
+		function obtenerRutas() {
 
-				$.ajax({
+			$.ajax({
 
 			    type: 'GET',
 
@@ -82,7 +86,90 @@
 				    
 				success: function(data) {
 
-					verificarLargo(data);
+					if(data.length>0){
+
+
+						$("#ruta").html("");
+
+
+						data.forEach(function(elemento){
+
+							var option = "<option id='"+elemento.id+"'>";
+
+							var current = JSON.parse(elemento.puertos_intermedios);
+							var duracion = JSON.parse(elemento.duracion_recorridos);
+
+							for(var i= 0;i<current.length;i++) {
+							
+								if(i<=(duracion.length-1)){
+									
+									option = option.concat(current[i]+" > "+duracion[i]+" mins > ");
+								}else{
+									option = option.concat(current[i]);
+								}
+
+
+							}
+
+							option = option.concat("</option>");
+
+							$("#ruta").append(option);
+							
+
+						});
+
+					}else{
+
+						$("#registrar :input").prop("disabled",true);
+						$("#mensaje").html("No existen rutas.");
+
+					}
+				
+				},
+				    
+				error: function(data) {
+				    $('#mensaje').html('Error en elservidor');
+				    $("#registrar :input").prop("disabled",true);
+				},
+
+				timeout:5000
+
+			});
+		}
+
+
+
+		function consultarDisponibilidad(){
+
+			$.ajax({
+
+			    type: 'POST',
+
+				url: "{{url('nave/disponibilidad')}}",
+
+				data:{
+					'fecha':$("#fecha").val(),
+					"_token": "{{ csrf_token() }}"
+				},
+				    
+				success: function(data) {
+
+					if(data.length>0){
+
+
+						$("#nave").html("");
+
+						data.forEach(function(elemento){
+							$("#nave").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
+						});
+
+					}else{
+
+						$("#registrar :input").prop("disabled",true);
+						$("#fecha").prop("disabled",false);
+						$("#mensaje").html("No existen naves disponibles en la fecha indicada.");
+
+					}
 				
 				},
 				    
@@ -97,31 +184,45 @@
 
 		}
 
-		function verificarLargo(rutas) {
 
-			if(rutas.length>0){
-				desplegarRutas(rutas);
-			}else{
-				desactivarCampos();
-			}
-		
-		}
+		function obtenerNaves() {
 
-			function desplegarSucursales(rutas) {
-			
-			$("#ruta").html("");
+			$.ajax({
+
+			    type: 'GET',
+
+				url: "{{url('nave/listar')}}",
+				    
+				success: function(data) {
+
+					if(data.length>0){
 
 
-			rutas.forEach(function(elemento){
-				$("#ruta").append("<option value='"+elemento.id+"'>"+elemento.puertos_intermedios+"</option>");
-			});
+						$("#nave").html("");
+
+						data.forEach(function(elemento){
+							$("#nave").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
+						});
+
+					}else{
+
+						$("#registrar :input").prop("disabled",true);
+						$("#mensaje").html("No existen naves.");
+
+					}
 				
+				},
+				    
+				error: function(data) {
+				    $('#mensaje').html('Error en elservidor');
+				    $("#registrar :input").prop("disabled",true);
+				},
+
+				timeout:5000
+
+			});
 		}
 
-		function desactivarCampos(){
-			$("#registrar :input").prop("disabled",true);
-			$("#mensaje").html("Datos faltantes para el registro.");
-		}
 
 		function enviarPeticion() {
 				

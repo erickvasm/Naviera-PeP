@@ -8,7 +8,15 @@ use App\Models\Ruta;
 class RutaController extends Controller
 {
     public function mostrarFormularioRegistrarRuta(){
+        
         return View("ruta.registrar");
+    }
+
+
+    public function listarRutas() {
+
+        return Ruta::all();
+
     }
 
     public function registrarRuta(Request $request){
