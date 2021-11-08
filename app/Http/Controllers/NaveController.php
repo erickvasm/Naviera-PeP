@@ -11,6 +11,30 @@ class NaveController extends Controller
         return View("nave.registar");
     }
 
+    public function registrarNave(Request $request){
+
+        $nave = new Nave;
+
+        $nave->nombre=$request->nombre;
+        $nave->capasidad_pasajeros=$request->capasidad_pasajeros;
+        $nave->capasidad_carga=$request->capasidad_carga;
+
+        try{
+            $nave->save();
+
+            return true;
+        }
+        catch(\Exeption $e){
+
+            return false;
+
+        }
+
+    }
+
+
+
+
     
 
     
