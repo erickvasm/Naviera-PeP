@@ -23,9 +23,9 @@ class CreateUsuariosTable extends Migration
             
             $table->string('clave');
 
-            $table->unsignedBigInteger('surcursal_fk');
+            $table->unsignedBigInteger('sucursal_fk');
 
-            $table->foreign('surcursal_fk')->references('id')->on('surcursales')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('sucursal_fk')->references('id')->on('sucursales')->onUpdate('cascade')->onDelete('cascade');
 
             $table->engine = 'InnoDB';
 
