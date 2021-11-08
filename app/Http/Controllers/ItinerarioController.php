@@ -32,6 +32,12 @@ class ItinerarioController extends Controller
         }
     }
 
+    public function listarItinerarios(){
+
+        return Itinerario::all();
+
+    }
+
 
 
 
