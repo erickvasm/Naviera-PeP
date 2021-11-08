@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class RutaController extends Controller
 {
     public function mostrarFormularioRegistrarRuta(){
-        return View("ruta.registar");
+        return View("ruta.registrar");
     }
 
     public function registrarRuta(Request $request){

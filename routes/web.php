@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RutaController;
+use App\Http\Controllers\NaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ Route::get('/', function () {
 //Sucursal
 Route::get('/sucursal/registrar',[SucursalController::class,'mostrarFormularioRegistrar']);
 Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal']);
+Route::get('/sucursal/listar',[SucursalController::class,'listarSucursales']);
 
 
 //Informe
@@ -37,9 +40,12 @@ Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal'
 
 
 //Nave
-
+Route::get('/nave/registrar',[NaveController::class,'mostrarFormularioRegistrarNave']);
+Route::post('/nave/registrar',[NaveController::class,'registrarNave']);
 
 //Ruta
+Route::get('/ruta/registrar',[RutaController::class,'mostrarFormularioRegistrarRuta']);
+Route::post('/ruta/registrar',[RutaController::class,'registrarRuta']);
 
 
 //Usuario
