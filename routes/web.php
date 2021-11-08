@@ -43,6 +43,8 @@ Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal'
 
 
 //Usuario
+Route::get('/usuario/registrar',[UsuarioController::class,'mostrarFormularioRegistrar']);
+Route::post('/usuario/registrar',[UsuarioController::class,'registrarSucursal']);
 
 
 //Reserva
