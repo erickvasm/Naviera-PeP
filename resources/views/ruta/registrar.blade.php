@@ -41,9 +41,9 @@
 
 			var diferencia = filas-1;
 
-			var final =filas+diferencia;
+			var final =parseFloat(filas)+parseFloat(diferencia);
 
-			
+			console.log(final);
 
 			var tabla = "<table>";
 
@@ -59,6 +59,7 @@
 
 				}
 				tabla+="</tr>";
+				console.log(i);
 
 			}
 

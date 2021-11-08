@@ -13,21 +13,34 @@ class NaveController extends Controller
     }
 
     public function registrarNave(Request $request){
-     $nave = new Nave;
+     
+        try{
+
+
+
+            $nave = new Nave;
 
         $nave->nombre=$request->nombre;
         $nave->capacidad_pasajeros=$request->capacidad_pasajeros;
         $nave->capacidad_carga=$request->capacidad_carga;
 
-        try{
-            $nave->save();
 
-            return true;
+            $guardado= $nave->save();
+
+            if($guardado){
+                return true;
+            }else{
+                return false;
+            }
+
+           
         }
-        catch(\Exeption $e){
+        catch(\Exeption $f){
 
             return false;
 
+        }catch(\Throwable $e){
+            return false;
         }
 
     }
