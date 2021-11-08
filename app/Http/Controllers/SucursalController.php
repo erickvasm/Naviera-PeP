@@ -8,7 +8,7 @@ class SucursalController extends Controller
 {
     
     public function mostrarFormularioRegistrar() {
-    	return View("rutas.formulario_registrar");
+    	return View("sucursal.formulario_registrar");
     }
 
     public function registrarSucursal(Request $request) {
