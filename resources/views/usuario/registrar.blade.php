@@ -10,10 +10,15 @@
 
 	<div>
 
-		<form id="registrar">
+		<form id="registrar" action="#">
 			
 			@csrf
+				Sucursal:<select id="sucursal" name="sucursal">
+
+				</select>
 				
+				<br>
+				<br>
 
 				Rol:<select name="tipo">
 					<option value="true">Gerente</option>
@@ -23,18 +28,18 @@
 				<br>
 				<br>
 
-				Nombre:<input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+				Nombre:<input type="text" id="nombre" name="nombre" placeholder="Nombre" >
 
 
 				<br>
 				<br>
 
-				Clave:<input type="password" id="clave" name="clave" placeholder="Clave" required>
+				Clave:<input type="text" id="clave" name="clave" placeholder="Clave" >
 				
 				<br>
 				<br>
 
-				Confirmar Clave:<input type="password" id="clave-confirm" name="clave-confirm" placeholder="Clave" required>
+				Confirmar Clave:<input type="text" id="claveconf" name="claveconf" placeholder="Confirmar clave" >
 
 				<br>
 				<br>
@@ -52,33 +57,68 @@
 
 	
 	<script>
+		$(document).ready(function(){
 
 
+			$.extend( $.validator.messages, {
+			required: "Este campo es requerido.",
+			remote: "Por favor, llene este campo.",
+			email: "Por favor, escriba una dirección de correo válida.",
+			url: "Por favor, escriba una URL válida.",
+			date: "Por favor, escriba una fecha válida.",
+			dateISO: "Por favor, escriba una fecha (ISO) válida.",
+			number: "Por favor, escriba un número válido.",
+			digits: "Por favor, escriba sólo dígitos.",
+			creditcard: "Por favor, escriba un número de tarjeta válido.",
+			equalTo: "Por favor, escriba el mismo valor de nuevo.",
+			extension: "Por favor, escriba un valor con una extensión aceptada.",
+			maxlength: $.validator.format( "Por favor, no escriba más de {0} caracteres." ),
+			minlength: $.validator.format( "Por favor, no escriba menos de {0} caracteres." ),
+			rangelength: $.validator.format( "Por favor, escriba un valor entre {0} y {1} caracteres." ),
+			range: $.validator.format( "Por favor, escriba un valor entre {0} y {1}." ),
+			max: $.validator.format( "Por favor, escriba un valor menor o igual a {0}." ),
+			min: $.validator.format( "Por favor, escriba un valor mayor o igual a {0}." ),
+			cedCR: "Por favor, escriba el número de cédula válido."
+			} );
 
-		$("form[id='registrar']").validate({
 
-			rules:{
+			$("#registrar").validate({
 
-				nombre:{
-					min-length:3
-				}
+				errorPlacement: function(error, element) {
+      				
+					var nombre = '#'+element.attr('id');
+					$('#mensaje').html("Verifica el campo "+$(nombre).attr('placeholder'));
 
-				clave:{
-					min-length:5
+    			},
+
+				rules : {
+
+					nombre : {
+                		minlength : 3,
+                		required : true
+            		},
+            		clave : {
+            			required : true,
+                		minlength : 5
+            		},
+            		claveconf : {
+            			required : true,
+                		minlength : 5,
+                		equalTo:'#clave'
+            		}
+
+
 				},
-				clave-confirm:{
-					min-length:5,
-					equalTo:'[name="clave"]'
-				}
-
-			},
-			submitHandler:function(form) {
-				enviarPeticion();
-			}
-
-		});
+				submitHandler:function(form) {
+					enviarPeticion();
+				},
+		
+			});
 
 
+
+		})
+		
 
 		function enviarPeticion() {
 				
@@ -92,12 +132,12 @@
 				data: $("#registrar").serialize(),
 				    
 				success: function(data) {
-					if(data==true){
-				    	$('#mensaje').html('Se agrego exitosamente');
-				    	$('form#registrar').trigger("reset");
-				    }else{
-				    	$('#mensaje').html('Compruebe los datos ingresados');
-				    }
+						if(data==true){
+					    	$('#mensaje').html('Se agrego exitosamente');
+					    	$('form#registrar').trigger("reset");
+					    }else{
+					    	$('#mensaje').html('Compruebe los datos ingresados');
+					    }
 					},
 				    
 				   error: function(data) {
