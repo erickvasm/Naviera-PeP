@@ -50,7 +50,7 @@ Route::post('/ruta/registrar',[RutaController::class,'registrarRuta']);
 
 //Usuario
 Route::get('/usuario/registrar',[UsuarioController::class,'mostrarFormularioRegistrar']);
-Route::post('/usuario/registrar',[UsuarioController::class,'registrarSucursal']);
+Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 
 
 //Reserva

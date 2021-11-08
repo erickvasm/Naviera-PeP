@@ -57,6 +57,9 @@
 
 	
 	<script>
+
+		obtenerSucursales();
+
 		$(document).ready(function(){
 
 
@@ -118,7 +121,66 @@
 
 
 		})
+
+
 		
+
+		function obtenerSucursales() {
+
+
+
+			$.ajax({
+
+			    type: 'GET',
+
+				url: "{{url('sucursal/listar')}}",
+				    
+				success: function(data) {
+
+					verificarLargo(data);
+				
+				},
+				    
+				error: function(data) {
+				    $('#mensaje').html('Error en elservidor');
+				    $("#registrar :input").prop("disabled",true);
+				},
+
+				timeout:5000
+
+			});
+
+
+
+		}
+		
+
+		function verificarLargo(sucursales) {
+
+			if(sucursales.length>0){
+				desplegarSucursales(sucursales);
+			}else{
+				desactivarCampos();
+			}
+		
+		}
+
+		function desplegarSucursales(sucursales) {
+			
+			$("#sucursal").html("");
+
+
+			sucursales.forEach(function(elemento){
+				$("#sucursal").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
+			});
+				
+		}
+
+
+		function desactivarCampos(){
+			$("#registrar :input").prop("disabled",true);
+			$("#mensaje").html("No existen sucursales.");
+		}
 
 		function enviarPeticion() {
 				
@@ -132,12 +194,16 @@
 				data: $("#registrar").serialize(),
 				    
 				success: function(data) {
-						if(data==true){
-					    	$('#mensaje').html('Se agrego exitosamente');
-					    	$('form#registrar').trigger("reset");
-					    }else{
-					    	$('#mensaje').html('Compruebe los datos ingresados');
-					    }
+
+						if(data=="") {
+							$('#mensaje').html('Compruebe los datos ingresados');
+						}else {
+
+							$('#mensaje').html('Se agrego exitosamente');
+			    			$('form#registrar').trigger("reset");
+			    			
+						}
+
 					},
 				    
 				   error: function(data) {

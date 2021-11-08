@@ -9,28 +9,41 @@ class UsuarioController extends Controller
 {
 
     public function mostrarFormularioRegistrar() {
+
     	return View("usuario.registrar");
+    
     }
 
-    public function registrarSucursal(Request $request) {
+    public function registrarUsuario(Request $request) {
     
-    	
-    	$usuario = new Usuario;
 
-    	$usuario->tipo=$request;
+    	
 
 
     	try{
 		
-			$sucursal->save();
-			
-			return true;
+			$usuario = new Usuario;
+
+    		$usuario->tipo=($request->tipo==1)?false:true;
+    		$usuario->nombre=$request->nombre;
+    		$usuario->clave=$request->clave;
+    		$usuario->sucursal_fk=(int) $request->sucursal;
+
+    		$usuario->save();
+    		return true;
+
+    	}catch(\Exception $e){
+ 
+       		return NULL;
+    	
+    	}catch(\Throwable $f) {
+
+    		return NULL;
 
     	}
-    	catch(\Exception $e){
- 
-       		return false;
-    	}
+    	
+
+
     }
 
 
