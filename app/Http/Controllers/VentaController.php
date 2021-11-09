@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class VentaController extends Controller
 {
     public function mostrarFormularioVenta(){
-        return View("venta.registar");
+        return View("venta.registrar");
     }
 
     public function registraVenta(Request $request){
@@ -22,7 +22,7 @@ class VentaController extends Controller
 
         try{
 
-            venta->save();
+            $venta->save();
 
             return true;
 

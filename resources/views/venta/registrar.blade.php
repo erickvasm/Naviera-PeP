@@ -18,7 +18,7 @@
 			<br>
 			<br>
 
-			<input type="number" id="cantidad" name="cantidad" placeholder="Catidad">
+			<input type="number" id="cantidad" name="cantidad" placeholder="Cantidad">
 
 			<br>
 			<br>
@@ -43,6 +43,8 @@
 
 	<script>
 
+		optenerItinerario();
+
 		function cantidadDeClientes(){
 
 		var cantidad = $("#cantidad").val();
@@ -51,11 +53,11 @@
 
 			for (var i=0; i <=cantidad; i++) {
 
-				campos+="<input type="text" id="cedula" name="cedula" placehorlder="Cedula">";
+				campos+="<input type='text' id='cedula"+i+"' name='cedula' placehorlder='Cedula'>";
 				campos+="<br><br>";
-				campos+="<input type="text" id="nombre" name="nombre" placehorlder="Nombre">";
+				campos+="<input type='text' id='nombre"+i+"' name='nombre' placehorlder='Nombre'>";
 				campos+="<br><br>";
-				campos+="<input type="text" id="apellido" name="apellido" placehorlder="Apellido">";
+				campos+="<input type='text' id='apellido"+i+"' name='apellido' placehorlder='Apellido'>";
 				campos+="<br><br>";
 	
 
@@ -99,11 +101,11 @@
 		
 		}
 
-		function desplegarItinerario(){
+		function desplegarItinerario(itinerario){
 
 			$("#itinerario").html("");
 			itinerario.forEach(function(elemento){
-				$("#itinerario").append("<option value='"+elemento.id+"'>"elemento.fecha_hora_zarpado"</option>");
+				$("#itinerario").append("<option value='"+elemento.id+"'>"+elemento.fecha_hora_zarpado+"</option>");
 
 			});
 		}
@@ -143,12 +145,35 @@
 
 
 		}
+/**
+		function realizarTransaccion(){
 
-		function capturarDatosDelSistema(){
-			
+			var cantidad = $('#cantidad').val();
+
+			DB::beginTransaction();
+
+			try {
+
+				for (var i=0; i <=cantidad; i++) {
+
+					DB::insert("insert into clientes (cedula, nombre, apellido) values ($#cedula"+i+", $#nombre"+i+", $#apellido"+i+")");  
+		
+				}
+
+    			DB::commit();
+			} catch (\Exception $e) {
+    			DB::rollback();
+   				 throw $e;
+			} catch (\Throwable $e) {
+   				 DB::rollback();
+   				 throw $e;
+			}
+
+
+
 		}
 
-		
+		**/
 
 
 
