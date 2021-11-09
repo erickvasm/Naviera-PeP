@@ -8,33 +8,31 @@
 <body>
 
 	<div>
-		<form id="registrar" action="#">
+		<form id="registrar">
 			
 			@csrf
 
-
-			Fecha de zarpado:<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado">
-
-			<br>
-			<br>
-
-			Ruta:<select id="ruta" name="ruta">
 			
-			</select>
+				Fecha de zarpado:<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado">
 
-			<br>
-			<br>
+				<br>
+				<br>
 
-			Nave:<select id="nave" name="nave">
-			
-			</select>
+				Ruta:<select id="ruta" name="ruta">
+				
+				</select>
 
-			<br>
-			<br>
+				<br>
+				<br>
 
-			<input type="submit" name="registrar">
+				Nave:<select id="nave" name="nave">
+				
+				</select>
 
+				<br>
+				<br>
 
+				<input type="button"  id="bot" value ="Registrar Itinerario" onclick="enviarPeticion()">
 		</form>
 
 		<br>
@@ -47,36 +45,20 @@
 	</div>
 
 	<script>
+
+		$("#bot").prop("disabled",true);
+		$("#nave").prop("disabled",true);
 		
 		obtenerRutas();
-		obtenerNaves();
 
 		$('#fecha').change(function(){
 			consultarDisponibilidad();
 		});
 
-		$.extend( $.validator.messages, {
-			required: "Este campo es requerido.",
-			remote: "Por favor, llene este campo.",
-			email: "Por favor, escriba una dirección de correo válida.",
-			url: "Por favor, escriba una URL válida.",
-			date: "Por favor, escriba una fecha válida.",
-			dateISO: "Por favor, escriba una fecha (ISO) válida.",
-			number: "Por favor, escriba un número válido.",
-			digits: "Por favor, escriba sólo dígitos.",
-			creditcard: "Por favor, escriba un número de tarjeta válido.",
-			equalTo: "Por favor, escriba el mismo valor de nuevo.",
-			extension: "Por favor, escriba un valor con una extensión aceptada.",
-			maxlength: $.validator.format( "Por favor, no escriba más de {0} caracteres." ),
-			minlength: $.validator.format( "Por favor, no escriba menos de {0} caracteres." ),
-			rangelength: $.validator.format( "Por favor, escriba un valor entre {0} y {1} caracteres." ),
-			range: $.validator.format( "Por favor, escriba un valor entre {0} y {1}." ),
-			max: $.validator.format( "Por favor, escriba un valor menor o igual a {0}." ),
-			min: $.validator.format( "Por favor, escriba un valor mayor o igual a {0}." ),
-			cedCR: "Por favor, escriba el número de cédula válido."
-			} );
+
 
 		function obtenerRutas() {
+
 
 			$.ajax({
 
@@ -94,7 +76,7 @@
 
 						data.forEach(function(elemento){
 
-							var option = "<option id='"+elemento.id+"'>";
+							var option = "<option value='"+elemento.id+"'>";
 
 							var current = JSON.parse(elemento.puertos_intermedios);
 							var duracion = JSON.parse(elemento.duracion_recorridos);
@@ -120,21 +102,23 @@
 
 					}else{
 
-						$("#registrar :input").prop("disabled",true);
+					
+						
 						$("#mensaje").html("No existen rutas.");
 
 					}
-				
+
 				},
 				    
 				error: function(data) {
 				    $('#mensaje').html('Error en elservidor');
-				    $("#registrar :input").prop("disabled",true);
+			
 				},
 
 				timeout:5000
 
 			});
+	
 		}
 
 
@@ -153,6 +137,8 @@
 				},
 				    
 				success: function(data) {
+					
+					
 
 					if(data.length>0){
 
@@ -163,19 +149,25 @@
 							$("#nave").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
 						});
 
+						$("#bot").prop("disabled",false);
+						$("#nave").prop("disabled",false);
+
 					}else{
 
-						$("#registrar :input").prop("disabled",true);
+						
+
 						$("#fecha").prop("disabled",false);
+						$("#ruta").prop("disabled",false);
+						
 						$("#mensaje").html("No existen naves disponibles en la fecha indicada.");
-
+						
 					}
 				
 				},
 				    
 				error: function(data) {
 				    $('#mensaje').html('Error en elservidor');
-				    $("#registrar :input").prop("disabled",true);
+				 
 				},
 
 				timeout:5000
@@ -185,48 +177,10 @@
 		}
 
 
-		function obtenerNaves() {
-
-			$.ajax({
-
-			    type: 'GET',
-
-				url: "{{url('nave/listar')}}",
-				    
-				success: function(data) {
-
-					if(data.length>0){
-
-
-						$("#nave").html("");
-
-						data.forEach(function(elemento){
-							$("#nave").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
-						});
-
-					}else{
-
-						$("#registrar :input").prop("disabled",true);
-						$("#mensaje").html("No existen naves.");
-
-					}
-				
-				},
-				    
-				error: function(data) {
-				    $('#mensaje').html('Error en elservidor');
-				    $("#registrar :input").prop("disabled",true);
-				},
-
-				timeout:5000
-
-			});
-		}
 
 
 		function enviarPeticion() {
-				
-
+			
 			$.ajax({
 
 			    type: 'POST',
@@ -242,7 +196,14 @@
 						}else {
 
 							$('#mensaje').html('Se agrego exitosamente');
-			    			$('form#registrar').trigger("reset");
+
+
+			    			$('#nave').trigger("reset");
+			    			$('#fecha').trigger("reset");
+			    			$("#bot").prop("disabled",true);
+			    			$("#bot").prop("disabled",true);
+			    			
+			    			
 			    			
 						}
 
@@ -256,7 +217,7 @@
 
 				});
 
-
+				
 			}
 
 
