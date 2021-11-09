@@ -61,6 +61,10 @@ Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 
 
 //Reserva
+Route::get('/login/login',[RutaController::class,'']);
+Route::post('/login/login',[RutaController::class,'']);
 
+//Login
+//
 
 //Venta
