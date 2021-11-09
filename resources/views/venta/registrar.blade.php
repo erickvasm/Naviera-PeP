@@ -113,6 +113,41 @@
 			$("#mensaje").html("No hay itinerarios dsiponibles");
 		}
 
+		function enviarPeticion(){
+
+			$.ajax({
+
+				type: 'POST',
+
+				url: "{{url('venta/registrar')}}",
+
+				data: $("#registrar").serialize(),
+
+				success: function(data){
+					if (data=="") {
+						$('#mensaje').html('Compruebe los datos ingresados');
+					}else{
+						$('#mensaje').html('Se agrego exitosamente');
+			    		$('form#registrar').trigger("reset");
+					}
+				},
+				error: function(data){
+					$('#mensaje').html('Error en el servidor');
+				},
+
+				timeout:5000
+
+
+			});
+
+
+
+		}
+
+		function capturarDatosDelSistema(){
+			
+		}
+
 		
 
 
