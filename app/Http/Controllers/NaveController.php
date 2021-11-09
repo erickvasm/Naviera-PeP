@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Nave;
 use App\Models\Itinerario;
+use App\Models\Ruta;
 use Illuminate\Support\Collection;
 
 class NaveController extends Controller
@@ -49,26 +50,60 @@ class NaveController extends Controller
     }
 
 
-    public function obtenerDisponibilidad(Request $request){
-        
 
+
+
+    public function obtenerDisponibilidad(Request $request){
+       
+   
         $collection = collect();
 
         foreach (Nave::all() as $nave) {
 
-           //$collection->add($nave);
-            //array_reverse($mensajes, true);
+            try{
 
-            $bool = false;
-
-            $list =Itinerario::where('nave_fk','=',$nave->id)->order_by('fecha_hora_zarpado','asc')->first();
-            error_log($list->count());
-
+                $itinerario =Itinerario::where('nave_fk','=',$nave->id)->orderBy('fecha_hora_zarpado','DESC')->first();
             
-           
+
+                if($itinerario!=NULL){
+
+                    $ruta = Ruta::where('id','=',$itinerario->ruta_fk)->firstOrFail();
+                    
+                    $duraciones = 0;
+
+                    foreach (json_decode($ruta->duracion_recorridos) as $duracion) {
+                        $duraciones+=$duracion;
+                    }
+                    
+
+                    $fecha_zarpado =strtotime($itinerario->fecha_hora_zarpado);
+                    $zarpado = date('Y/m/d H:i', strtotime('+'.$duraciones.' minutes', $fecha_zarpado)); 
+
+
+                    $date_input =strtotime($request->fecha); 
+                    $provided_date = date('Y/m/d H:i', strtotime('+0 year, +0 days', $date_input));
+
+               
+
+                    if($provided_date>=$zarpado){
+                        $collection->add($nave);
+                    }
+
+
+                }else{
+                    $collection->add($nave);
+                }
+
+
+            }catch(\Exeption $f){
+
+            }catch(\Throwable $j){
+
+            }
+
         }
 
-      
+        return $collection;   
 
     }
 
