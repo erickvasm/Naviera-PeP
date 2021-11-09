@@ -39,6 +39,7 @@ Route::get('/sucursal/listar',[SucursalController::class,'listarSucursales']);
 Route::get('/itinerario/registrar',[ItinerarioController::class,'mostrarFormularioRegistrarItinerario']);
 Route::post('/itinerario/registrar',[ItinerarioController::class,'registrarItinerario']);
 Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
+Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
 
 
 
@@ -64,6 +65,8 @@ Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 
 
 //Reserva
+Route::get('/reserva/pasajero',[LoginController::class,'formularioPasajero']);
+Route::post('/reserva/pasajero',[LoginController::class,'registrarReservaPasajero']);
 
 
 //Login

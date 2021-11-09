@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Itinerario;
+use App\Models\Ruta;
+use Illuminate\Support\Collection;
+
 
 class ItinerarioController extends Controller
 {
@@ -49,6 +52,35 @@ class ItinerarioController extends Controller
 
     }
 
+
+    public function listarConRutas() {
+
+        date_default_timezone_set('America/Costa_Rica');
+        $fechaActual = date('Y-m-d H:i:s');
+
+        $itinearios = collect();
+
+        $itinerario =Itinerario::all()->where('fecha_hora_zarpado','>',$fechaActual);
+
+        foreach ($itinerario as $it) {
+             
+            $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        
+            $duraciones = 0;
+
+            foreach (json_decode($ruta->duracion_recorridos) as $duracion) {
+                $duraciones+=$duracion;
+            }
+               
+
+            error_log($duraciones);
+
+        }
+
+
+
+        echo 'ok';
+
+    }
 
 
 
