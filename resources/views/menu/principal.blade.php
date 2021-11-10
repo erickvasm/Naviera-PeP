@@ -3,10 +3,12 @@
 
 <head>
     <title>Naviera PeP</title>
-    <link rel="stylesheet" href={{ asset('css/template') }} >
-    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="{{ asset('css/template.css') }}" >
+    <!--link rel="stylesheet" href="template.css"-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@300;500&display=swap"/>
+
+    <script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
     <nav class="main-menu">
         <ul> 
             <li class="main-menu__menu">    
-                <a href="#">   
+                <a onclick="desplegarPagina('xD')">   
                     <i class="bi bi-house-door-fill"></i>
                 <span class="nav-text">
                    <b>Menu</b>
@@ -26,7 +28,7 @@
                 </a>     
             </li>  
             <li>
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-clipboard-data"></i>
                     <span class="nav-text">
                         Informes
@@ -34,7 +36,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="http://127.0.0.1:8000/nave/registrar" target="iframe_a">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-plus-square-fill"></i>
                     <span class="nav-text">
                         Ingresar Nave
@@ -42,7 +44,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-person-plus-fill"></i>
                     <span class="nav-text">
                         Ingresar Usuario
@@ -50,7 +52,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-building"></i>
                     <span class="nav-text">
                         Ingresar Surcursal
@@ -58,7 +60,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-file-earmark-plus-fill"></i>
                     <span class="nav-text">
                         Itinerario
@@ -66,7 +68,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-calendar2-week-fill"></i>
                     <span class="nav-text">
                         Disponibilidad
@@ -74,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
                         Reservar Tiquetes
@@ -82,7 +84,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a onclick="desplegarPagina('xD')">
                     <i class="bi bi-cash-stack"></i>
                     <span class="nav-text">
                         Ventas & Contabilidad
@@ -108,10 +110,22 @@
                     <i class="bi bi-wallet-fill"></i>  
             </article>
         </section>
-        <section class="main-main">
-            <iframe src="" width="1500" height="600" style="border: none;" name="iframe_a" title="Iframe Example"></iframe>
+        <section id='main_container' class="main-main">
+           
         </section>
     </main>
+
+
+
+    <script>
+        
+
+        function desplegarPagina(ruta){
+            console.log(ruta);
+        }
+
+    </script>
+
 </body>
 
 </html>

@@ -16,6 +16,11 @@ class ReservaController extends Controller
 	}
 
 
+	public function formularioPasajero() {
+		return View("reserva.registrar_carga");
+	}
+
+
 	public function registrarReservaPasajero(Request $request) {
 
 		DB::beginTransaction();
