@@ -80,11 +80,7 @@ class ReservaController extends Controller
 			return NULL;
 
 		}catch(\Throwable $h){
-<<<<<<< HEAD
-			error_log($a);
-=======
 			error_log($h);
->>>>>>> e8dbdc3832696f0b60ef4fe007b0070d90d9379a
 			DB::rollback();
 
 			return NULL;
