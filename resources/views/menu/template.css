@@ -49,8 +49,9 @@ body {
     position: absolute;
     width: 1668.28px;
     height: 1130px;
-    left: 239px;
-    top: 3px;
+    left: 250px;
+    top: 170px;
+    border: none;
 }
 .cards {
     position: absolute;
