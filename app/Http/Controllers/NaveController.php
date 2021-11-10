@@ -114,6 +114,14 @@ class NaveController extends Controller
 
 
 
+    public function disponibilidadPasajes(String $id_nave) {
+
+        error_log($id_nave);
+
+        return $true;
+
+    }
+
     
 
     
