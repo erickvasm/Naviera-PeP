@@ -9,6 +9,7 @@ use App\Http\Controllers\ItinerarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +75,10 @@ Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasaj
 //Login
 Route::get('/login/login',[LoginController::class,'mostrarFormularioLogin']);
 Route::post('/login/login',[LoginController::class,'']);
+
+//Menu
+Route::get('/menu/menu',[MenuController::class,'mostrarMenu']);
+Route::post('/menu/menu',[MenuController::class,'']);
 
 //Venta
 
