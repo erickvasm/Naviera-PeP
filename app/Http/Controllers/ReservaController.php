@@ -73,7 +73,7 @@ class ReservaController extends Controller
 
 			return true;
 
-		}catch(\Exceptio $a){
+		}catch(\Exception $a){
 			error_log($a);
 			DB::rollback();
 			
