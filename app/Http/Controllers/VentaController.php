@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Venta;
+use Illuminate\Support\Facades\DB;
+use App\Models\Reserva;
+use App\Models\Servicio;
+use App\Models\Cliente;
+use App\Models\Pasaje;
+use App\Models\Carga;
 
 class VentaController extends Controller
 {
@@ -15,7 +22,7 @@ class VentaController extends Controller
         return View("venta.registrar_carga");
     }
 
-    public function registrarVentaCarga(Request $request){
+    public function registrarCarga(Request $request){
 
         DB::beginTransaction();
 
@@ -50,9 +57,8 @@ class VentaController extends Controller
 
             //REGISTRAR Reserva
             date_default_timezone_set('America/Costa_Rica');
-            $reserva = new Reserva;
-            $reserva->fecha_compra=date('Y-m-d H:i:s');
-            $reserva->fecha_vencimiento=date('Y-m-d H:i:s');
+            $reserva = new Venta;
+            $reserva->fecha=date('Y-m-d H:i:s');
             $reserva->monto=$request->monto;
             $reserva->cliente_fk=$cliente->id;
             $reserva->servicio_fk=$servicio->id;
@@ -79,7 +85,7 @@ class VentaController extends Controller
     }
 
 
-    public function registrarVentaPasajero(Request $request) {
+    public function registrarPasajero(Request $request) {
 
         DB::beginTransaction();
 
@@ -118,9 +124,8 @@ class VentaController extends Controller
 
             //REGISTRAR Reserva
             date_default_timezone_set('America/Costa_Rica');
-            $reserva = new Reserva;
-            $reserva->fecha_compra=date('Y-m-d H:i:s');
-            $reserva->fecha_vencimiento=date('Y-m-d H:i:s');
+            $reserva = new Venta;
+            $reserva->fecha=date('Y-m-d H:i:s');
             $reserva->monto=$request->monto*$request->cantidad;
             $reserva->cliente_fk=$cliente->id;
             $reserva->servicio_fk=$servicio->id;

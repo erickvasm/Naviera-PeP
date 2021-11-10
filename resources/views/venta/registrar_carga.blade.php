@@ -69,7 +69,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button">
+			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Venta' class="button">
 			
 			<br>
 			<br>
@@ -108,7 +108,7 @@
 
 			    type: 'POST',
 
-				url: "{{url('reserva/carga')}}",
+				url: "{{url('venta/carga')}}",
 				    
 				data: $("#registrar").serialize(),
 				    

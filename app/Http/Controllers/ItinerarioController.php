@@ -193,6 +193,8 @@ class ItinerarioController extends Controller
         $capacidadesCarga = collect();
         $capacidadesPasaje = collect();
 
+        error_log(count($vigente));
+
         foreach ($vigente as $it) {
              
             $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        

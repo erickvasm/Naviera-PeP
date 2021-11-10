@@ -89,8 +89,10 @@ Route::post('/menu/menu',[MenuController::class,'']);
 
 //Venta
 
-Route::get('/venta/registrar',[VentaController::class,'mostrarFormularioVenta']);
-Route::post('/venta/registrar',[VentaController::class,'registraVenta']);
+Route::get('/venta/pasajero',[VentaController::class,'formularioPasajero']);
+Route::post('/venta/pasajero',[VentaController::class,'registrarPasajero']);
+Route::get('/venta/carga',[VentaController::class,'formularioCarga']);
+Route::post('/venta/carga',[VentaController::class,'registrarCarga']);
 
 //bienvenida
 Route::get('/bienvenida/bienvenida',[BienvenidaController::class,'mostrarFormularioBienvenida']);

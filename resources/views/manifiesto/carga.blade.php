@@ -60,7 +60,7 @@
 					if(data!=''){
 
 						if(data['mensajes']!='') {
-
+								console.log(data['ident']);
 
 							for(var i=0;i<data['mensajes'].length;i++) {
 								$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
@@ -106,7 +106,27 @@
 
 				success:function(data){
 					
-					console.log(data);
+					$('#tabla').html('')
+
+					var tabla ="<tr><th>Indice</th><th>Peso</th><th>Detalles</th></tr>";
+
+
+					for(var i=0;i<data['compra'].length;i++){
+							tabla = tabla + "<tr><th>"+(i+1)+"</th><th>"+data['compra'][i]['peso']+"</th><th>"+data['compra'][i]['detalle']+"</th></tr>";
+					}
+
+
+					for(var i=0;i<data['venta'].length;i++){
+							tabla = tabla + "<tr><th>"+(i+1)+"</th><th>"+data['venta'][i]['peso']+"</th><th>"+data['venta'][i]['detalle']+"</th></tr>";
+					}
+
+
+					tabla = tabla + "</table>";
+
+
+					$('#tabla').html(tabla);
+
+
 
 
 					mensaje('');
