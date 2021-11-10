@@ -4,7 +4,6 @@
 <head>
     <title>Naviera PeP</title>
     <link rel="stylesheet" href="{{ asset('css/template.css') }}" >
-    <!--link rel="stylesheet" href="template.css"-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@300;500&display=swap"/>
 
@@ -20,7 +19,7 @@
     <nav class="main-menu">
         <ul> 
             <li class="main-menu__menu">    
-                <a onclick="desplegarPagina('xD')">   
+                <a href="http://127.0.0.1:8000/menu/menu" target="iframe_a">   
                     <i class="bi bi-house-door-fill"></i>
                 <span class="nav-text">
                    <b>Menu</b>
@@ -28,7 +27,7 @@
                 </a>     
             </li>  
             <li>
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000" target="iframe_a">
                     <i class="bi bi-clipboard-data"></i>
                     <span class="nav-text">
                         Informes
@@ -36,7 +35,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000/nave/registrar" target="iframe_a">
                     <i class="bi bi-plus-square-fill"></i>
                     <span class="nav-text">
                         Ingresar Nave
@@ -44,7 +43,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000/usuario/registrar" target="iframe_a">
                     <i class="bi bi-person-plus-fill"></i>
                     <span class="nav-text">
                         Ingresar Usuario
@@ -52,7 +51,7 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000/sucursal/registrar" target="iframe_a">
                     <i class="bi bi-building"></i>
                     <span class="nav-text">
                         Ingresar Surcursal
@@ -60,21 +59,13 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000/itinerario/registrar" target="iframe_a">
                     <i class="bi bi-file-earmark-plus-fill"></i>
                     <span class="nav-text">
                         Itinerario
                     </span>
                 </a>
-            </li>
-            <li class="has-subnav">
-                <a onclick="desplegarPagina('xD')">
-                    <i class="bi bi-calendar2-week-fill"></i>
-                    <span class="nav-text">
-                        Disponibilidad
-                    </span>
-                </a>
-            </li>
+            </li>      
             <li>
                 <a href="http://127.0.0.1:8000/reserva/pasajero" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
@@ -84,7 +75,7 @@
                 </a>
             </li>
             <li>
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000 target="iframe_a">
                     <i class="bi bi-cash-stack"></i>
                     <span class="nav-text">
                         Ventas & Contabilidad
@@ -111,7 +102,7 @@
             </article>
         </section>
         <section id='main_container' class="main-main">
-        <iframe src="" width="1500" height="600" style="border: none;" name="iframe_a" title="Iframe Example"></iframe>
+        <iframe src="" width="1500" height="800" style="border: none; overflow: hidden;" name="iframe_a" title="Iframe Example"></iframe>
         </section>
     </main>
 

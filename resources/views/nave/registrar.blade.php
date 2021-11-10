@@ -2,33 +2,39 @@
 <html>
 <head>
 	<title>Naviera PeP - Registrar Nave</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
 
 	<div>
 
-			<form id=registrar>
+			<form id=registrar class="form-imputs">
 				
  				@csrf
- 				<input type="text" name="nombre" placeholder="Nombre" required>
+				 <h2 class="title" >Registro de naves</h2>
+				
+ 				<input type="text" name="nombre" placeholder="Nombre" required class="input"> 
  				<br>
  				<br>
- 				<input type="number" name="capacidad_pasajeros" placeholder="Capacidad de pasajeros" required>
+	
+ 				<input type="number" name="capacidad_pasajeros" min="1" placeholder="Capacidad de pasajeros" class="input" required>
  				<br>
  				<br>
- 				<input type="number" name="capacidad_carga" placeholder="Capacidad de cargar" required>
- 				<br>
- 				<br>
- 				<input type="button" onclick="registrar()" value="Registrar">
 
-			
+ 				<input type="number" name="capacidad_carga" min="1" placeholder="Capacidad de cargar" class="input" required>
+ 				<br>
+ 				<br>
+ 				<input type="button" onclick="registrar()" value="Registrar" class="button">
+
+				 <br>
+				 <br>
+
+				 <label id="mensaje" class="labels"></label>
 			</form>
 
-			    <br>
- 				<br>
 
- 			<label id="mensaje"></label>
+ 			
 		
 
 	</div>
