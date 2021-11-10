@@ -157,14 +157,17 @@
 				success:function(data){
 					
 
-					if(data!='') {
+					if(data!=''){
+
+
+						if(data['pasaje']!='') {
 
 						itinerario=data;
 
 						
 
 						$('#itinerario').html('');
-						mensajeCapacidad('Pasajes disponibles:'+data['capacidades'][0]);
+						mensajeCapacidad('Pasajes disponibles:'+data['pasaje'][0]);
 
 						for(var i=0;i<data['mensajes'].length;i++) {
 							$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
@@ -172,6 +175,12 @@
 
 						setDisabledAll(false);
 						mensaje('');
+
+						}else{
+							mensaje('No existen itinearios');
+							setDisabledAll(true);
+						}
+
 
 					}else{
 						mensaje('No existen itinearios');
@@ -224,7 +233,7 @@
 
 					selectedInd=it;
 
-					mensajeCapacidad('Pasajes disponibles:'+itinerario['capacidades'][it]);
+					mensajeCapacidad('Pasajes disponibles:'+itinerario['pasaje'][it]);
 				}
 
 			})
@@ -282,7 +291,7 @@
 
 				if(cantidad>0){
 
-					if(cantidad<=itinerario['capacidades'][selectedInd]){
+					if(cantidad<=itinerario['pasaje'][selectedInd]){
 						desplegarFormularioPasajeros(cantidad);
 					}else{
 						mensaje('No existen cupos para la cantidad indicada');

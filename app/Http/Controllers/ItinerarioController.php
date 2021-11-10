@@ -63,7 +63,8 @@ class ItinerarioController extends Controller
 
         $textos = collect();
         $identificadores = collect();
-        $capacidades = collect();
+        $capacidadesCarga = collect();
+        $capacidadesPasaje = collect();
 
         $itinerario =Itinerario::all()->where('fecha_hora_zarpado','>',$fechaActual);
 
@@ -75,8 +76,8 @@ class ItinerarioController extends Controller
             $puertos = json_decode($ruta->puertos_intermedios);
             $duraciones = json_decode($ruta->duracion_recorridos);
 
-            $capacidad = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
-
+            $pasaje = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
+            $carga = Nave::disponibilidadCargas($it->nave_fk,$it->servicio_fk);
 
             $mensaje = "";
 
@@ -93,12 +94,13 @@ class ItinerarioController extends Controller
 
             $textos->add($mensaje);
             $identificadores->add($it->id);
-            $capacidades->add($capacidad);
+            $capacidadesCarga->add($carga);
+            $capacidadesPasaje->add($pasaje);
 
         }
 
 
-        $response = array('mensajes'=>$textos,'ident'=>$identificadores,'capacidades'=>$capacidades);
+        $response = array('mensajes'=>$textos,'ident'=>$identificadores,'carga'=>$capacidadesCarga,'pasaje'=>$capacidadesPasaje);
 
         return $response;
 

@@ -26,15 +26,8 @@
 			<br>
 
 
-			Cantidad Pasajes:<input type="number" name="cantidad" value="0" min="1" id="cantidad">
+			Monto por espacio de carga:<input type="number" value="0" min="1" id="monto" name="monto">
 
-			<br>
-			<br>
-
-			Monto por pasajes:<input type="number" value="0" min="1" id="monto" name="monto">
-
-			<br>
-			<br>
 
 			<div>
 				<ul>
@@ -42,13 +35,13 @@
 						<label>Cliente:</label>
 						<br>
 						<br>
-						Cedula:<input type="text" name="cedula">
+						Cedula:<input type="text" id='cedula' name="cedula">
 						<br>
 						<br>
-						Nombre:<input type="text" name="nombre">
+						Nombre:<input type="text" id='nombre' name="nombre">
 						<br>
 						<br>
-						Apellido:<input type="text" name="apellido">
+						Apellido:<input type="text" id='apellido' name="apellido">
 					</li>
 				</ul>
 			</div>
@@ -56,17 +49,21 @@
 			<br>
 			<br>
 
-			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros'>
 
-			<br>
-			<br>
-
-		
-			<div id ='pasajeros' name='pasajeros'>
-			
-
+			<div>
+				<ul>
+					<li>
+						<label>Carga:</label>
+						<br>
+						<br>
+						Detalles:<input type="text" id='detalles' name="detalles">
+						<br>
+						<br>
+						Peso:<input type="text" id='peso' name="peso">
+					</li>
+				</ul>
 			</div>
-			
+	
 
 			<br>
 			<br>
@@ -109,7 +106,7 @@
 
 			    type: 'POST',
 
-				url: "{{url('reserva/pasajero')}}",
+				url: "{{url('reserva/carga')}}",
 				    
 				data: $("#registrar").serialize(),
 				    
@@ -142,6 +139,8 @@
 		}
 
 
+
+
 		function obtenerItinerarios() {
 
 
@@ -157,14 +156,17 @@
 				success:function(data){
 					
 
-					if(data!='') {
+					if(data!=''){
+
+
+						if(data['carga']!='') {
 
 						itinerario=data;
 
 						
 
 						$('#itinerario').html('');
-						mensajeCapacidad('Pasajes disponibles:'+data['capacidades'][0]);
+						mensajeCapacidad('Pasajes disponibles:'+data['carga'][0]);
 
 						for(var i=0;i<data['mensajes'].length;i++) {
 							$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
@@ -172,6 +174,12 @@
 
 						setDisabledAll(false);
 						mensaje('');
+
+						}else{
+							mensaje('No existen itinearios');
+							setDisabledAll(true);
+						}
+
 
 					}else{
 						mensaje('No existen itinearios');
@@ -197,14 +205,23 @@
 
 
 		function setDisabled(boole) {
-			$('#boton').prop('disabled',boole);
-			$('#cantidad').prop('disabled',boole);
+			$('#cedula').prop('disabled',boole);
+			$('#nombre').prop('disabled',boole);
+			$('#apellido').prop('disabled',boole);
+			$('#monto').prop('disabled',boole);
+			$('#detalles').prop('disabled',boole);
+			$('#peso').prop('disabled',boole);
 			$('#bot').prop('disabled',boole);
 		}
 
 		function setDisabledAll(boole) {
 			$('#itineario').prop('disabled',boole);
-			$('#cantidad').prop('disabled',boole);
+			$('#cedula').prop('disabled',boole);
+			$('#nombre').prop('disabled',boole);
+			$('#apellido').prop('disabled',boole);
+			$('#monto').prop('disabled',boole);
+			$('#detalles').prop('disabled',boole);
+			$('#peso').prop('disabled',boole);
 			$('#bot').prop('disabled',boole);
 		}
 
@@ -224,7 +241,7 @@
 
 					selectedInd=it;
 
-					mensajeCapacidad('Pasajes disponibles:'+itinerario['capacidades'][it]);
+					mensajeCapacidad('Pasajes disponibles:'+itinerario['carga'][it]);
 				}
 
 			})
@@ -233,68 +250,7 @@
 		}
 
 
-		function desplegarFormularioPasajeros(cantidad){
 
-			$('#pasajeros').html('');
-
-			var formulario="<ul>";
-
-			for(var i=0;i<cantidad;i++){
-				formulario = formulario + formularioForma(i);
-			}
-
-			formulario = formulario + "</ul>";
-
-			$('#pasajeros').html(formulario);
-
-		}
-
-
-
-	
-
-		function formularioForma(parametro){
-
-
-			var formulario="<li>"+
-					"<label>Pasaje "+(parametro+1)+"</label>"+
-					"<br><br>"+
-					"Cedula:<input type='text' name='cedula_pasajero[]'>"+
-					"<br><br>"+
-					"Nombre:<input type='text' name='nombre_pasajero[]'>"+
-					"<br><br>"+
-					"Apellido:<input type='text' name='apellido_pasajero[]'><br><br>"+
-				"</li>";
-
-			return formulario;
-
-		}
-
-
-		function ingresarPasajeros() {
-
-			mensaje('');
-			$('#pasajeros').html('');
-
-			var cantidad =$('#cantidad').val();
-
-			if(selectedInd!=-1){
-
-				if(cantidad>0){
-
-					if(cantidad<=itinerario['capacidades'][selectedInd]){
-						desplegarFormularioPasajeros(cantidad);
-					}else{
-						mensaje('No existen cupos para la cantidad indicada');
-					}
-
-				}else{
-					mensaje('Ingrese una cantidad mayor a 0');
-				}
-
-			}
-
-		}
 
 
 	</script>

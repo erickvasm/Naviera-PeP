@@ -70,6 +70,8 @@ Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 //Reserva
 Route::get('/reserva/pasajero',[ReservaController::class,'formularioPasajero']);
 Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasajero']);
+Route::get('/reserva/carga',[ReservaController::class,'formularioCarga']);
+Route::post('/reserva/carga',[ReservaController::class,'registrarReservaCarga']);
 
 
 //Login

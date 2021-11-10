@@ -23,4 +23,16 @@ class Nave extends Model
     }
 
 
+    public function disponibilidadCargas(String $nave,$servicio) {
+
+    	$nave = Nave::where('id','=',$nave)->firstOrFail();
+    	$ventaDeEspacios = Servicio::where('id','=',$servicio)->where('tipo_servicio','=',false);
+
+    	$espacios = $nave->capacidad_pasajeros-$ventaDeEspacios->count();
+
+    	return $espacios;
+
+    }
+
+
 }
