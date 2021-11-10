@@ -27,12 +27,12 @@
 			<br>
 
 
-			<input type="number" name="cantidad" value="0" min="1" id="cantidad" class="input">
+			<input type="number" name="cantidad" min="1" id="cantidad" placeholder="Cantidad" class="input">
 
 			<br>
 			<br>
 
-			<input type="number" value="0" min="1" id="monto" name="monto" class="input">
+			<input type="number" min="1" id="monto" name="monto" placeholder="Monto" class="input">
 
 			<br>
 			<br>
@@ -43,13 +43,13 @@
 						<label class="labels">Cliente:</label>
 						<br>
 						<br>
-						<input type="text" name="cedula" class="input">
+						<input type="text" name="cedula" placeholder="Cedula" class="input">
 						<br>
 						<br>
-						<input type="text" name="nombre" class="input">
+						<input type="text" name="nombre" placeholder="Nombre" class="input">
 						<br>
 						<br>
-						<input type="text" name="apellido" class="input">
+						<input type="text" name="apellido" placeholder="Apellido" class="input">
 					</li>
 				</ul>
 			</div>

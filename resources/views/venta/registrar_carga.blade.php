@@ -27,7 +27,7 @@
 			<br>
 
 
-			<input type="number" value="0" min="1" id="monto" name="monto" class="input">
+			<input type="number" min="1" id="monto" name="monto" placeholder="Monto" class="input">
 
 
 			<div>
@@ -36,13 +36,13 @@
 						<label class="labels">Cliente:</label>
 						<br>
 						<br>
-						<input type="text" id='cedula' name="cedula"class="input">
+						<input type="text" id='cedula' name="cedula" placeholder="Cedula" class="input">
 						<br>
 						<br>
-						<input type="text" id='nombre' name="nombre"class="input">
+						<input type="text" id='nombre' name="nombre" placeholder="Nombre" class="input">
 						<br>
 						<br>
-						<input type="text" id='apellido' name="apellido"class="input">
+						<input type="text" id='apellido' name="apellido" placeholder="Apellido" class="input">
 					</li>
 				</ul>
 			</div>
