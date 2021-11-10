@@ -47,7 +47,7 @@
 			    success: function(data) {
 			    	if(data==true){
 			    		$('#mensaje').html('Se agrego exitosamente');
-			    		$('form#registrar').trigger("reset");
+			    		//$('form#registrar').trigger("reset");
 			    	}else{
 			    		$('#mensaje').html('Compruebe los datos ingresados');
 			    	}
