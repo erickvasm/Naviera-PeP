@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a onclick="desplegarPagina('xD')">
+                <a href="http://127.0.0.1:8000/reserva/pasajero" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
                         Reservar Tiquetes
@@ -111,7 +111,7 @@
             </article>
         </section>
         <section id='main_container' class="main-main">
-           
+        <iframe src="" width="1500" height="600" style="border: none;" name="iframe_a" title="Iframe Example"></iframe>
         </section>
     </main>
 
