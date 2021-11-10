@@ -42,7 +42,7 @@ Route::get('/itinerario/registrar',[ItinerarioController::class,'mostrarFormular
 Route::post('/itinerario/registrar',[ItinerarioController::class,'registrarItinerario']);
 Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
 Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
-
+Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
 
 
 
