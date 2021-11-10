@@ -16,7 +16,7 @@ class ReservaController extends Controller
 	}
 
 
-	public function formularioPasajero() {
+	public function formularioCarga() {
 		return View("reserva.registrar_carga");
 	}
 
