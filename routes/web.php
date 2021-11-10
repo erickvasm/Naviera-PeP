@@ -25,7 +25,7 @@ use App\Http\Controllers\ManifiestoController;
 
 //Index
 Route::get('/', function () {
-    return view('welcome');
+    return view('login/index');
 });
 
 
@@ -91,3 +91,7 @@ Route::post('/menu/menu',[MenuController::class,'']);
 
 Route::get('/venta/registrar',[VentaController::class,'mostrarFormularioVenta']);
 Route::post('/venta/registrar',[VentaController::class,'registraVenta']);
+
+//bienvenida
+Route::get('/bienvenida/bienvenida',[BienvenidaController::class,'mostrarFormularioBienvenida']);
+Route::post('/bienvenida/bienvenida',[BienvenidaController::class,'']);

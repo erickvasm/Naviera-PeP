@@ -63,7 +63,7 @@
 								No tiene un usuario?
 							</span>
 
-							<a href="#" class="txt2">
+							<a href="http://127.0.0.1:8000/usuario/registrar" class="txt2">
 								Crear Usuario
 							</a>
 						</li>
