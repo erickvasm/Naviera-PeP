@@ -2,21 +2,23 @@
 <html>
 <head>
 	<title>Naviera PeP - Registrar Ruta</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
 
 	<div>
 
-			<form id='registrar' action='#'>
+			<form id='registrar' action='#' class="form-imputs">
 				
  				@csrf
- 				<input type="number" id="cantidad" min="2" name="puertos_intermedios" placeholder="Catidad de puertos intermedios">
+				 <h2 class="title" >Registro Ruta</h2>
+ 				<input type="number" id="cantidad" min="2" name="puertos_intermedios" placeholder="Catidad de puertos intermedios" class="input">
  				
  				<br>
  				<br>
  				
- 				<input type="button" value="Ingresar Puertos Intermedios" onclick="generarTabla()">
+ 				<input type="button" value="Ingresar Puertos Intermedios" onclick="generarTabla()" class="input">
 
  				<br>
  				<br>
@@ -27,14 +29,15 @@
  				<br>
  				<br>
 
- 				<input type="button" value="Registrar Ruta" onclick="enviarPeticion()">
-			
-			</form>
-
-			    <br>
+ 				<input type="button" value="Registrar Ruta" onclick="enviarPeticion()" class="button">
+				 
+				<br>
  				<br>
 
- 			<label id="mensaje"></label>
+ 				<label id="mensaje" class="labels"></label>
+			</form>
+
+			   
 		
 
 	</div>

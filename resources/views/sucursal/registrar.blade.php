@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Naviera PeP - Registrar Sucursal</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
@@ -9,23 +10,25 @@
 
 	<div>
 
-		<form id="registrar">
+		<form id="registrar" class="form-imputs">
 			
 			@csrf
-				<input type="text" name="nombre" placeholder="Nombre" required>
+			<h2 class="title" >Registro Sucursal</h2>
+				<input type="text" name="nombre" placeholder="Nombre" required class="input">
 				<br>
 				<br>
-				<input type="text" name="ciudad" placeholder="Ciudad" required>
+				<input type="text" name="ciudad" placeholder="Ciudad" required class="input">
 				<br>
 				<br>
-				<input type="button" onclick="registrar()" value ="Registrar"/>
+				<input type="button" onclick="registrar()" value ="Registrar"/ class="button">
 
+				<br>
+				<br>
+		
+				<label id="mensaje" class="labels"></label>
 		</form>
 
-		<br>
-		<br>
 		
-		<label id="mensaje"></label>
 
 	</div>
 

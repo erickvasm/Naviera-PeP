@@ -2,43 +2,46 @@
 <html>
 <head>
 	<title>Naviera PeP - Registrar Itinerario</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 	<script src="{{ asset('js/jquery.validate.js') }}"></script>
 </head>
 <body>
 
 	<div>
-		<form id="registrar">
+		<form id="registrar" class="form-imputs">
 			
 			@csrf
-
+			<h2 class="title" >Registro de itinerarios</h2>
 			
-				Fecha de zarpado:<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado">
+				<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado" class="input">
 
 				<br>
 				<br>
 
-				Ruta:<select id="ruta" name="ruta">
+				Ruta:<select id="ruta" name="ruta" class="select-content">
 				
 				</select>
 
 				<br>
 				<br>
 
-				Nave:<select id="nave" name="nave">
+				Nave:<select id="nave" name="nave" class="select-content">
 				
 				</select>
 
 				<br>
 				<br>
 
-				<input type="button"  id="bot" value ="Registrar Itinerario" onclick="enviarPeticion()">
+				<input type="button"  id="bot" value ="Registrar Itinerario" onclick="enviarPeticion()" class="input" class="button">
+
+				<br>
+				<br>
+		
+				<label id="mensaje" class="labels"></label>
 		</form>
 
-		<br>
-		<br>
 		
-		<label id="mensaje"></label>
 
 
 

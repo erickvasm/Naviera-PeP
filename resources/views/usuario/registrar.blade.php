@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Naviera PeP - Registrar Usuario</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 	<script src="{{ asset('js/jquery.validate.js') }}"></script>
 </head>
@@ -10,17 +11,18 @@
 
 	<div>
 
-		<form id="registrar" action="#">
+		<form id="registrar" action="#" class="form-imputs">
 			
 			@csrf
-				Sucursal:<select id="sucursal" name="sucursal">
+			<h2 class="title" >Registro Usuario</h2>
+				Sucursal:<select id="sucursal" name="sucursal" class="select-content">
 
 				</select>
 				
 				<br>
 				<br>
 
-				Rol:<select name="tipo">
+				Rol:<select name="tipo" class="select-content">
 					<option value="true">Gerente</option>
 					<option value="false">Cajero</option>
 				</select>
@@ -28,30 +30,31 @@
 				<br>
 				<br>
 
-				Nombre:<input type="text" id="nombre" name="nombre" placeholder="Nombre" >
+				<input type="text" id="nombre" name="nombre" placeholder="Nombre" class="input">
 
 
 				<br>
 				<br>
 
-				Clave:<input type="text" id="clave" name="clave" placeholder="Clave" >
+				<input type="text" id="clave" name="clave" placeholder="Clave" class="input">
 				
 				<br>
 				<br>
 
-				Confirmar Clave:<input type="text" id="claveconf" name="claveconf" placeholder="Confirmar clave" >
+				<input type="text" id="claveconf" name="claveconf" placeholder="Confirmar clave" class="input">
 
 				<br>
 				<br>
 				
-				<input type="submit" value ="Registrar"/>
-
+				<input type="submit" value ="Registrar" class="button"/>
+				
+				<br>
+				<br>
+		
+				<label id="mensaje" class="labels"></label>
 		</form>
 
-		<br>
-		<br>
 		
-		<label id="mensaje"></label>
 
 	</div>
 

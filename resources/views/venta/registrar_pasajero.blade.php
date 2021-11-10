@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Naviera PeP - Compra de Pasajes</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
@@ -14,24 +15,24 @@
 
 			@csrf
 
-
-			Itinerario: <select id='itinerario' name='itinerario'></select>
-
-			<br>
-			<br>
-
-			<label id='capacidad'></label>
+			<h2 class="title" >Registro Venta Pasajero</h2>
+			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
 			<br>
 
-
-			Cantidad Pasajes:<input type="number" name="cantidad" value="0" min="1" id="cantidad">
+			<label id='capacidad' class="labels"></label>
 
 			<br>
 			<br>
 
-			Monto por pasajes:<input type="number" value="0" min="1" id="monto" name="monto">
+
+			<input type="number" name="cantidad" value="0" min="1" id="cantidad" class="input">
+
+			<br>
+			<br>
+
+			<input type="number" value="0" min="1" id="monto" name="monto" class="input">
 
 			<br>
 			<br>
@@ -39,16 +40,16 @@
 			<div>
 				<ul>
 					<li>
-						<label>Cliente:</label>
+						<label class="labels">Cliente:</label>
 						<br>
 						<br>
-						Cedula:<input type="text" name="cedula">
+						<input type="text" name="cedula" class="input">
 						<br>
 						<br>
-						Nombre:<input type="text" name="nombre">
+						<input type="text" name="nombre" class="input">
 						<br>
 						<br>
-						Apellido:<input type="text" name="apellido">
+						<input type="text" name="apellido" class="input">
 					</li>
 				</ul>
 			</div>
@@ -56,7 +57,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros'>
+			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros' class="button">
 
 			<br>
 			<br>
@@ -71,14 +72,16 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva'>
+			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button">
 
+			<br>
+			<br>
+
+			<label id='mensaje' class="labels"></label>
+		
 		</form>
 
-		<br>
-		<br>
-
-		<label id='mensaje'></label>
+		
 
 
 

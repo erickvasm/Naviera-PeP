@@ -19,7 +19,7 @@
     <nav class="main-menu">
         <ul> 
             <li class="main-menu__menu">    
-                <a href="http://127.0.0.1:8000/menu/menu" target="iframe_a">   
+                <a href="http://127.0.0.1:8000/bienvenida" target="iframe_a">   
                     <i class="bi bi-house-door-fill"></i>
                 <span class="nav-text">
                    <b>Menu</b>
@@ -27,7 +27,7 @@
                 </a>     
             </li>  
             <li>
-                <a href="http://127.0.0.1:8000" target="iframe_a">
+                <a href="http://127.0.0.1:8000/informes/informes" target="iframe_a">
                     <i class="bi bi-clipboard-data"></i>
                     <span class="nav-text">
                         Informes
@@ -70,12 +70,44 @@
                 <a href="http://127.0.0.1:8000/reserva/pasajero" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Reservar Tiquetes
+                        Reservar Pasajero
                     </span>
                 </a>
             </li>
             <li>
-                <a href="http://127.0.0.1:8000 target="iframe_a">
+                <a href="http://127.0.0.1:8000/reserva/carga" target="iframe_a">
+                    <i class="bi bi-calendar-plus-fill"></i>
+                    <span class="nav-text">
+                        Reservar Carga
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8000/venta/pasajero" target="iframe_a">
+                    <i class="bi bi-calendar-plus-fill"></i>
+                    <span class="nav-text">
+                        Venta Pasajero
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8000/venta/carga" target="iframe_a">
+                    <i class="bi bi-calendar-plus-fill"></i>
+                    <span class="nav-text">
+                        Venta Carga
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8000/manifiesto/manifiesto" target="iframe_a">
+                    <i class="bi bi-calendar-plus-fill"></i>
+                    <span class="nav-text">
+                        Generar Manifiestos
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8000/contabilidad/contabilidad" target="iframe_a">
                     <i class="bi bi-cash-stack"></i>
                     <span class="nav-text">
                         Ventas & Contabilidad

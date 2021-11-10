@@ -61,3 +61,56 @@ body {
     font-size: 38px;
     margin: 50px;
 }
+.select-content{
+    width: 178px;
+    height: 42px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border-color: #FFFFFF;
+    margin: 10px;
+}
+.bienvenido-h1{
+    position: absolute;
+    width: 700px;
+    height: 394px;
+    left: 350px;
+    top: 0px;
+    font-size: 96px;
+    line-height: 112px;
+
+    color: #4FD1C5;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.bienvenido-cards{
+    position: absolute;
+    width: 1614.3px;
+    height: 208.12px;
+    left: 259px;
+    top: 360px;
+}
+.cards-cierre{
+    position: absolute;
+    width: 930.24px;
+    height: 207.76px;
+    left: 259px;
+    top: 360px;
+    
+    /* Black&amp;White/White */
+    
+    background: #FFFFFF;
+    box-shadow: 0px 3.5px 5.5px rgba(0, 0, 0, 0.02);
+    border-radius: 15px;
+}
+.cards-salir{
+    position: absolute;
+    width: 659.85px;
+    height: 207.76px;
+    left: 1213.46px;
+    top: 360.36px;
+    
+    /* Black&amp;White/White */
+    
+    background: #FFFFFF;
+    box-shadow: 0px 3.5px 5.5px rgba(0, 0, 0, 0.02);
+    border-radius: 15px;
+}

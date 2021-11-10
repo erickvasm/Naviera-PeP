@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Naviera PeP - Reservar Pasajes</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
@@ -10,28 +11,28 @@
 
 	<div>
 
-		<form id='registrar' name='registrar' action='#'>
+		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
+			<h2 class="title" >Registro Pasajero</h2>
 
-
-			Itinerario: <select id='itinerario' name='itinerario'></select>
-
-			<br>
-			<br>
-
-			<label id='capacidad'></label>
+			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
 			<br>
 
-
-			Cantidad Pasajes:<input type="number" name="cantidad" value="0" min="1" id="cantidad">
+			<label id='capacidad' class="labels"></label>
 
 			<br>
 			<br>
 
-			Monto por pasajes:<input type="number" value="0" min="1" id="monto" name="monto">
+
+			<input type="number" name="cantidad"  min="1" id="cantidad" class="input" placeholder="Cantidad">
+
+			<br>
+			<br>
+
+			<input type="number"  min="1" id="monto" name="monto" class="input" placeholder="Monto">
 
 			<br>
 			<br>
@@ -42,13 +43,13 @@
 						<label>Cliente:</label>
 						<br>
 						<br>
-						Cedula:<input type="text" name="cedula">
+						<input type="text" name="cedula" class="input" placeholder="Cedula">
 						<br>
 						<br>
-						Nombre:<input type="text" name="nombre">
+						<input type="text" name="nombre" class="input" placeholder="Nombre">
 						<br>
 						<br>
-						Apellido:<input type="text" name="apellido">
+						<input type="text" name="apellido" class="input" placeholder="Apellido">
 					</li>
 				</ul>
 			</div>
@@ -56,7 +57,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros'>
+			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros' class="button">
 
 			<br>
 			<br>
@@ -71,14 +72,15 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva'>
-
-		</form>
-
-		<br>
-		<br>
+			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button"> 
+		
+			<br>
+			<br>
 
 		<label id='mensaje'></label>
+		</form>
+
+		
 
 
 

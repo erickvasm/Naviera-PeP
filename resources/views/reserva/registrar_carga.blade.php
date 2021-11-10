@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Naviera PeP - Reservar Carga</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
@@ -10,38 +11,38 @@
 
 	<div>
 
-		<form id='registrar' name='registrar' action='#'>
+		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
+			<h2 class="title" >Registro Carga</h2>
 
-
-			Itinerario: <select id='itinerario' name='itinerario'></select>
-
-			<br>
-			<br>
-
-			<label id='capacidad'></label>
+			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
 			<br>
 
+			<label id='capacidad' class="labels"></label>
 
-			Monto por espacio de carga:<input type="number" value="0" min="1" id="monto" name="monto">
+			<br>
+			<br>
+
+
+			<input type="number" value="0" min="1" id="monto" name="monto" class="input">
 
 
 			<div>
 				<ul>
 					<li>
-						<label>Cliente:</label>
+						<label class="labels">Cliente:</label>
 						<br>
 						<br>
-						Cedula:<input type="text" id='cedula' name="cedula">
+						<input type="text" id='cedula' name="cedula" class="input" placeholder="Cedula">
 						<br>
 						<br>
-						Nombre:<input type="text" id='nombre' name="nombre">
+						<input type="text" id='nombre' name="nombre" class="input" placeholder="Nombre">
 						<br>
 						<br>
-						Apellido:<input type="text" id='apellido' name="apellido">
+						<input type="text" id='apellido' name="apellido" class="input" placeholder="Apellido">
 					</li>
 				</ul>
 			</div>
@@ -53,13 +54,13 @@
 			<div>
 				<ul>
 					<li>
-						<label>Carga:</label>
+						<label class="labels">Carga:</label>
 						<br>
 						<br>
-						Detalles:<input type="text" id='detalles' name="detalles">
+						<input type="text" id='detalles' name="detalles" class="input" placeholder="Detalles">
 						<br>
 						<br>
-						Peso:<input type="text" id='peso' name="peso">
+						<input type="text" id='peso' name="peso" class="input" placeholder="Peso">
 					</li>
 				</ul>
 			</div>
@@ -68,14 +69,16 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva'>
+			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button">
+
+			<br>
+			<br>
+
+			<label id='mensaje' class="labels"></label>
 
 		</form>
 
-		<br>
-		<br>
-
-		<label id='mensaje'></label>
+		
 
 
 
