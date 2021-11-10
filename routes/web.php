@@ -8,6 +8,7 @@ use App\Http\Controllers\NaveController;
 use App\Http\Controllers\ItinerarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ReservaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,7 @@ Route::get('/nave/registrar',[NaveController::class,'mostrarFormularioRegistrarN
 Route::post('/nave/registrar',[NaveController::class,'registrarNave']);
 Route::post('/nave/disponibilidad',[NaveController::class,'obtenerDisponibilidad']);
 Route::get('/nave/listar',[NaveController::class,'listarNaves']);
+Route::get('/nave/disponibilidad_pasajes',[NaveController::class,'disponibilidadPasajes']);
 
 //Ruta
 Route::get('/ruta/registrar',[RutaController::class,'mostrarFormularioRegistrarRuta']);
@@ -65,8 +67,8 @@ Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 
 
 //Reserva
-Route::get('/reserva/pasajero',[LoginController::class,'formularioPasajero']);
-Route::post('/reserva/pasajero',[LoginController::class,'registrarReservaPasajero']);
+Route::get('/reserva/pasajero',[ReservaController::class,'formularioPasajero']);
+Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasajero']);
 
 
 //Login

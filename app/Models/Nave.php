@@ -4,17 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Servicio;
 
 class Nave extends Model
 {
     use HasFactory;
 
 
-    public function obtenerNavesDisponiblesEnLaFechaIndicada(DateTime $fechaAConsultar) {
+    public function disponibilidadPasajes(String $nave,$servicio) {
 
-    	$entrada = "Hola";
+    	$nave = Nave::where('id','=',$nave)->firstOrFail();
+    	$ventasDePasajes = Servicio::where('id','=',$servicio)->where('tipo_servicio','=',true);
 
-    	error_log($entrada);
+    	$pasajes = $nave->capacidad_pasajeros-$ventasDePasajes->count();
+
+    	return $pasajes;
 
     }
 

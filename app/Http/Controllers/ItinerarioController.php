@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Itinerario;
 use App\Models\Ruta;
+use App\Models\Nave;
 use Illuminate\Support\Collection;
 
 
@@ -55,30 +56,51 @@ class ItinerarioController extends Controller
 
     public function listarConRutas() {
 
+
         date_default_timezone_set('America/Costa_Rica');
         $fechaActual = date('Y-m-d H:i:s');
 
-        $itinearios = collect();
+
+        $textos = collect();
+        $identificadores = collect();
+        $capacidades = collect();
 
         $itinerario =Itinerario::all()->where('fecha_hora_zarpado','>',$fechaActual);
+
 
         foreach ($itinerario as $it) {
              
             $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        
-            $duraciones = 0;
 
-            foreach (json_decode($ruta->duracion_recorridos) as $duracion) {
-                $duraciones+=$duracion;
+            $puertos = json_decode($ruta->puertos_intermedios);
+            $duraciones = json_decode($ruta->duracion_recorridos);
+
+            $capacidad = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
+
+
+            $mensaje = "";
+
+            for ($i=0; $i < count($puertos); $i++) { 
+
+                $mensaje .=$puertos[$i];
+
+
+                if($i<=(count($duraciones)-1)) {
+                    $mensaje .= "  >$duraciones[$i] mins>  ";
+                }
+
             }
-               
 
-            error_log($duraciones);
+            $textos->add($mensaje);
+            $identificadores->add($it->id);
+            $capacidades->add($capacidad);
 
         }
 
 
+        $response = array('mensajes'=>$textos,'ident'=>$identificadores,'capacidades'=>$capacidades);
 
-        echo 'ok';
+        return $response;
 
     }
 
