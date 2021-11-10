@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ManifiestoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,10 @@ Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'list
 
 
 //Manifiesto
+Route::get('/manifiesto/carga',[ManifiestoController::class,'obtenerCarga']);
+Route::get('/manifiesto/pasajero',[ManifiestoController::class,'obtenerPasajero']);
+Route::get('/manifiesto/carga_v',[ManifiestoController::class,'obtenerCargaV']);
+Route::get('/manifiesto/pasajero_v',[ManifiestoController::class,'obtenerPasajeroV']);
 
 
 //Nave

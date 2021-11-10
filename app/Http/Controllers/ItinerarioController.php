@@ -49,7 +49,48 @@ class ItinerarioController extends Controller
 
     public function listarItinerarios(){
 
-        return Itinerario::all();
+        $textos = collect();
+        $identificadores = collect();
+        $capacidadesCarga = collect();
+        $capacidadesPasaje = collect();
+
+        $itinerario =Itinerario::all();
+
+
+        foreach ($itinerario as $it) {
+             
+            $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        
+
+            $puertos = json_decode($ruta->puertos_intermedios);
+            $duraciones = json_decode($ruta->duracion_recorridos);
+
+            $pasaje = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
+            $carga = Nave::disponibilidadCargas($it->nave_fk,$it->servicio_fk);
+
+            $mensaje = "";
+
+            for ($i=0; $i < count($puertos); $i++) { 
+
+                $mensaje .=$puertos[$i];
+
+
+                if($i<=(count($duraciones)-1)) {
+                    $mensaje .= "  >$duraciones[$i] mins>  ";
+                }
+
+            }
+
+            $textos->add($mensaje);
+            $identificadores->add($it->id);
+            $capacidadesCarga->add($carga);
+            $capacidadesPasaje->add($pasaje);
+
+        }
+
+
+        $response = array('mensajes'=>$textos,'ident'=>$identificadores,'carga'=>$capacidadesCarga,'pasaje'=>$capacidadesPasaje);
+
+        return $response;
 
     }
 
@@ -105,8 +146,6 @@ class ItinerarioController extends Controller
         return $response;
 
     }
-
-
 
 
 
