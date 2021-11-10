@@ -9,4 +9,10 @@ class Sucursal extends Model
 {
     use HasFactory;
     protected $table ='sucursales';
+
+
+public function usuarios(){
+    return $this->hasMany(Usuario::class);
+}
+
 }

@@ -11,8 +11,11 @@ class NaveTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_a_disponibilidad_de_pasajes()
     {
+
+
+        
         $this->assertTrue(true);
     }
 }
