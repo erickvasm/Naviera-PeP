@@ -34,7 +34,7 @@ class ReservaController extends Controller
 			//REGISTRAR SERVICIO->id
 			$servicio = new Servicio;
 			$servicio->tipo_servicio=true;
-			$servicio->usuario_fk=8;//ESTE DEBE SER DE LA SESION
+			$servicio->usuario_fk=1;//ESTE DEBE SER DE LA SESION
 			$servicio->save();
 
 
@@ -68,12 +68,13 @@ class ReservaController extends Controller
 
 			return true;
 
-		}catch(\Exceptio $a){
+		}catch(\Exception $a){
+			error_log($a);
 			DB::rollback();
 			return NULL;
 
 		}catch(\Throwable $h){
-			
+			error_log($a);
 			DB::rollback();
 			return NULL;
 		}
