@@ -12,7 +12,7 @@ class Sucursal extends Model
 
 
 public function usuarios(){
-    return $this->hasMany(Usuario::class);
+    return $this->hasMany(Usuario::class,"sucursal_fk");
 }
 
 }
