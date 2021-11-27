@@ -26,6 +26,9 @@
 	<link rel="stylesheet" type="text/css" href={{ asset('css/util.css') }}>
 	<link rel="stylesheet" type="text/css" href={{ asset('css/main.css') }}>
 <!--===============================================================================================-->
+
+
+
 </head>
 <body>
 	<header>
@@ -36,7 +39,11 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form">
+
+				<form action="{{url('login/login')}}" method ="POST" class="login100-form validate-form">
+
+					@csrf
+
 					<span class="login100-form-title p-b-70">
 						Bienvenido
 					</span>
@@ -68,13 +75,25 @@
 							</a>
 						</li>
 					</ul>
+
+
+
+
 				</form>
+
+
 			</div>
 		</div>
 	</div>
 	
 
 	<div id="dropDownSelect1"></div>
+
+	@if(isset($_GET['error']))
+
+		<center style='color:red;'><label>Verifique sus credenciales</label></center>
+		<br><br>
+	@endif
 	
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
@@ -92,6 +111,19 @@
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js') }}"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+
+
+
+	<script type="text/javascript">
+		
+
+
+
+
+
+	</script>
+
+
 
 </body>
 </html>

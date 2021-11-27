@@ -114,6 +114,17 @@
                     </span>
                 </a>
             </li>
+
+             <li>
+                <a href="{{url('/login/logout')}}">
+                    <i class="bi bi-cash-stack"></i>
+                    <span class="nav-text">
+                        Cerrar Sesion
+                    </span>
+                </a>
+            </li>
+
+
         </ul>
     </nav>
     <main>

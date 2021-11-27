@@ -11,6 +11,8 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ManifiestoController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +25,88 @@ use App\Http\Controllers\ManifiestoController;
 */
 
 
-//Index
-Route::get('/', function () {
-    return view('login/index');
+
+
+Route::middleware(['authsession'])->group(function(){
+
+
+	//Index
+	Route::get('/', function () {
+		return view('menu.principal');
+	});
+
+
+
+
+
+	//Informe
+
+
+
+	//Itineario
+	Route::get('/itinerario/registrar',[ItinerarioController::class,'mostrarFormularioRegistrarItinerario']);
+	Route::post('/itinerario/registrar',[ItinerarioController::class,'registrarItinerario']);
+	Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
+	Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
+	Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
+
+
+
+
+	//Manifiesto
+	Route::get('/manifiesto/carga',[ManifiestoController::class,'obtenerCarga']);
+	Route::get('/manifiesto/pasajero',[ManifiestoController::class,'obtenerPasajero']);
+	Route::get('/manifiesto/carga_v',[ManifiestoController::class,'obtenerCargaV']);
+	Route::get('/manifiesto/pasajero_v',[ManifiestoController::class,'obtenerPasajeroV']);
+
+
+
+
+	//Nave
+	Route::get('/nave/registrar',[NaveController::class,'mostrarFormularioRegistrarNave']);
+	Route::post('/nave/registrar',[NaveController::class,'registrarNave']);
+	Route::post('/nave/disponibilidad',[NaveController::class,'obtenerDisponibilidad']);
+	Route::get('/nave/listar',[NaveController::class,'listarNaves']);
+	Route::get('/nave/disponibilidad_pasajes',[NaveController::class,'disponibilidadPasajes']);
+
+
+
+
+	//Ruta
+	Route::get('/ruta/registrar',[RutaController::class,'mostrarFormularioRegistrarRuta']);
+	Route::post('/ruta/registrar',[RutaController::class,'registrarRuta']);
+	Route::get('/ruta/listar',[RutaController::class,'listarRutas']);
+
+
+
+	//Reserva
+	Route::get('/reserva/pasajero',[ReservaController::class,'formularioPasajero']);
+	Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasajero']);
+	Route::get('/reserva/carga',[ReservaController::class,'formularioCarga']);
+	Route::post('/reserva/carga',[ReservaController::class,'registrarReservaCarga']);
+
+
+
+
+
+	//Venta
+
+	Route::get('/venta/pasajero',[VentaController::class,'formularioPasajero']);
+	Route::post('/venta/pasajero',[VentaController::class,'registrarPasajero']);
+	Route::get('/venta/carga',[VentaController::class,'formularioCarga']);
+	Route::post('/venta/carga',[VentaController::class,'registrarCarga']);
+
+
+
+
 });
 
+
+
+//Login
+Route::get('/login/login',[LoginController::class,'mostrarFormularioLogin'])->name('login');
+Route::post('/login/login',[LoginController::class,'intentarIniciarSesion']);
+Route::get('/login/logout',[LoginController::class,'intentarCerrarSesion']);
 
 //Sucursal
 Route::get('/sucursal/registrar',[SucursalController::class,'mostrarFormularioRegistrar']);
@@ -35,65 +114,9 @@ Route::post('/sucursal/registrar',[SucursalController::class,'registrarSucursal'
 Route::get('/sucursal/listar',[SucursalController::class,'listarSucursales']);
 
 
-//Informe
-
-
-//Itineario
-Route::get('/itinerario/registrar',[ItinerarioController::class,'mostrarFormularioRegistrarItinerario']);
-Route::post('/itinerario/registrar',[ItinerarioController::class,'registrarItinerario']);
-Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
-Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
-Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
-
-
-
-//Manifiesto
-Route::get('/manifiesto/carga',[ManifiestoController::class,'obtenerCarga']);
-Route::get('/manifiesto/pasajero',[ManifiestoController::class,'obtenerPasajero']);
-Route::get('/manifiesto/carga_v',[ManifiestoController::class,'obtenerCargaV']);
-Route::get('/manifiesto/pasajero_v',[ManifiestoController::class,'obtenerPasajeroV']);
-
-
-//Nave
-Route::get('/nave/registrar',[NaveController::class,'mostrarFormularioRegistrarNave']);
-Route::post('/nave/registrar',[NaveController::class,'registrarNave']);
-Route::post('/nave/disponibilidad',[NaveController::class,'obtenerDisponibilidad']);
-Route::get('/nave/listar',[NaveController::class,'listarNaves']);
-Route::get('/nave/disponibilidad_pasajes',[NaveController::class,'disponibilidadPasajes']);
-
-//Ruta
-Route::get('/ruta/registrar',[RutaController::class,'mostrarFormularioRegistrarRuta']);
-Route::post('/ruta/registrar',[RutaController::class,'registrarRuta']);
-Route::get('/ruta/listar',[RutaController::class,'listarRutas']);
-
 
 //Usuario
 Route::get('/usuario/registrar',[UsuarioController::class,'mostrarFormularioRegistrar']);
 Route::post('/usuario/registrar',[UsuarioController::class,'registrarUsuario']);
 
 
-//Reserva
-Route::get('/reserva/pasajero',[ReservaController::class,'formularioPasajero']);
-Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasajero']);
-Route::get('/reserva/carga',[ReservaController::class,'formularioCarga']);
-Route::post('/reserva/carga',[ReservaController::class,'registrarReservaCarga']);
-
-
-//Login
-Route::get('/login/login',[LoginController::class,'mostrarFormularioLogin']);
-Route::post('/login/login',[LoginController::class,'']);
-
-//Menu
-Route::get('/menu/menu',[MenuController::class,'mostrarMenu']);
-Route::post('/menu/menu',[MenuController::class,'']);
-
-//Venta
-
-Route::get('/venta/pasajero',[VentaController::class,'formularioPasajero']);
-Route::post('/venta/pasajero',[VentaController::class,'registrarPasajero']);
-Route::get('/venta/carga',[VentaController::class,'formularioCarga']);
-Route::post('/venta/carga',[VentaController::class,'registrarCarga']);
-
-//bienvenida
-Route::get('/bienvenida/bienvenida',[BienvenidaController::class,'mostrarFormularioBienvenida']);
-Route::post('/bienvenida/bienvenida',[BienvenidaController::class,'']);
