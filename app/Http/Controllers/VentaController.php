@@ -28,6 +28,8 @@ class VentaController extends Controller
 
         try{
 
+            $usuario = json_decode($_SESSION['user']);
+
             //REGISTRAR CLIENTES->id
             $cliente = new Cliente;
             $cliente->cedula=$request->cedula;
@@ -40,7 +42,7 @@ class VentaController extends Controller
             //REGISTRAR SERVICIO->id
             $servicio = new Servicio;
             $servicio->tipo_servicio=false;
-            $servicio->usuario_fk=1;//ESTE DEBE SER DE LA SESION
+            $servicio->usuario_fk=$usuario->id;
             $servicio->save();
 
 
@@ -57,26 +59,26 @@ class VentaController extends Controller
 
             //REGISTRAR Reserva
             date_default_timezone_set('America/Costa_Rica');
-            $reserva = new Venta;
-            $reserva->fecha=date('Y-m-d H:i:s');
-            $reserva->monto=$request->monto;
-            $reserva->cliente_fk=$cliente->id;
-            $reserva->servicio_fk=$servicio->id;
-            $reserva->itinerario_fk=$request->itinerario;
-            $reserva->save();
+            $venta = new Venta;
+            $venta->fecha=date('Y-m-d H:i:s');
+            $venta->monto=$request->monto;
+            $venta->cliente_fk=$cliente->id;
+            $venta->servicio_fk=$servicio->id;
+            $venta->itinerario_fk=$request->itinerario;
+            $venta->save();
 
             DB::commit();
 
             return true;
 
         }catch(\Exception $a){
-            error_log($a);
+         
             DB::rollback();
             
             return NULL;
 
         }catch(\Throwable $h){
-            error_log($h);
+         
             DB::rollback();
 
             return NULL;
@@ -91,6 +93,8 @@ class VentaController extends Controller
 
         try{
 
+            $usuario = json_decode($_SESSION['user']);
+
             //REGISTRAR CLIENTES->id
             $cliente = new Cliente;
             $cliente->cedula=$request->cedula;
@@ -99,11 +103,12 @@ class VentaController extends Controller
             $cliente->save();
 
 
+   
 
             //REGISTRAR SERVICIO->id
             $servicio = new Servicio;
             $servicio->tipo_servicio=true;
-            $servicio->usuario_fk=1;//ESTE DEBE SER DE LA SESION
+            $servicio->usuario_fk=$usuario->id;
             $servicio->save();
 
 
@@ -124,26 +129,26 @@ class VentaController extends Controller
 
             //REGISTRAR Reserva
             date_default_timezone_set('America/Costa_Rica');
-            $reserva = new Venta;
-            $reserva->fecha=date('Y-m-d H:i:s');
-            $reserva->monto=$request->monto*$request->cantidad;
-            $reserva->cliente_fk=$cliente->id;
-            $reserva->servicio_fk=$servicio->id;
-            $reserva->itinerario_fk=$request->itinerario;
-            $reserva->save();
+            $venta = new Venta;
+            $venta->fecha=date('Y-m-d H:i:s');
+            $venta->monto=$request->monto*$request->cantidad;
+            $venta->cliente_fk=$cliente->id;
+            $venta->servicio_fk=$servicio->id;
+            $venta->itinerario_fk=$request->itinerario;
+            $venta->save();
 
             DB::commit();
 
             return true;
 
         }catch(\Exception $a){
-            error_log($a);
+            
             DB::rollback();
             
             return NULL;
 
         }catch(\Throwable $h){
-            error_log($h);
+            
             DB::rollback();
 
             return NULL;

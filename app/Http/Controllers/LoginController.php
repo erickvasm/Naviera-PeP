@@ -59,8 +59,6 @@ class LoginController extends Controller
 
                 $usuario =Usuario::where('nombre', '=', $request->user)->firstOrFail();
 
-                error_log("Existe");
-
                 if($usuario->clave===$request->pass){
                    
                     //Claves iguales
@@ -71,22 +69,19 @@ class LoginController extends Controller
 
                 }else{
 
-                    return Redirect::route('login',array('error'=>'errorr'));
+                    return Redirect::route('login',array('error'=>'error'));
                 }
 
 
             }catch(\Exception $f){
 
-                return Redirect::route('login',array('error'=>'errorr'));
+                return Redirect::route('login',array('error'=>'error'));
 
-                //return redirect('/login/login');
 
             }catch(\Throwable $e){
 
-            
-
-//                return redirect('/login/login');
-                return Redirect::route('login',array('error'=>'errorr'));
+        
+                return Redirect::route('login',array('error'=>'error'));
 
             }
 

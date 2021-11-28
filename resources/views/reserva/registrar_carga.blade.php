@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Naviera PeP - Reservar Carga</title>
+	<title>Naviera PeP - Reserva de carga</title>
 	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
@@ -14,7 +14,7 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
-			<h2 class="title" >Registro Carga</h2>
+			<h2 class="title" >Reservar Carga</h2>
 
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
@@ -69,7 +69,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button">
+			<input type="button" id='bot' onclick='registrarReserva()' value='Reservar' class="button">
 
 			<br>
 			<br>
@@ -169,7 +169,7 @@
 						
 
 						$('#itinerario').html('');
-						mensajeCapacidad('Pasajes disponibles:'+data['carga'][0]);
+						mensajeCapacidad('Espacios disponibles:'+data['carga'][0]);
 
 						for(var i=0;i<data['mensajes'].length;i++) {
 							$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");

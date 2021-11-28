@@ -11,6 +11,7 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ManifiestoController;
+use App\Http\Controllers\InformeController;
 
 
 /*
@@ -36,10 +37,15 @@ Route::middleware(['authsession'])->group(function(){
 	});
 
 
+	//Bievenida
+	Route::get("/bienvenida",function(){
+		return View("bienvenida.bienvenida");
+	});
 
 
 
 	//Informe
+	Route::get('/informe/total',[InformeController::class,'obtenerTotalVendido']);
 
 
 

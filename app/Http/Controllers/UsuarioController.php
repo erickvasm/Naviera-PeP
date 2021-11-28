@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\Sucursal;
 
 class UsuarioController extends Controller
 {
 
     public function mostrarFormularioRegistrar() {
 
+        Sucursal::siNoExisteSucursal();
+        
     	return View("usuario.registrar");
     
     }
@@ -45,6 +48,7 @@ class UsuarioController extends Controller
 
 
     }
+
 
 
 }

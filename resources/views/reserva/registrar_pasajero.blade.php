@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Naviera PeP - Reservar Pasajes</title>
+	<title>Naviera PeP - Reserva de pasajes</title>
 	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
@@ -14,7 +14,7 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
-			<h2 class="title" >Registro Pasajero</h2>
+			<h2 class="title" >Reservar Pasajes</h2>
 
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
@@ -72,7 +72,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Reserva' class="button"> 
+			<input type="button" id='bot' onclick='registrarReserva()' value='Reservar' class="button"> 
 		
 			<br>
 			<br>

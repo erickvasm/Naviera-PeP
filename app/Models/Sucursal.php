@@ -11,8 +11,26 @@ class Sucursal extends Model
     protected $table ='sucursales';
 
 
-public function usuarios(){
-    return $this->hasMany(Usuario::class,"sucursal_fk");
-}
+	public function usuarios(){
+	    return $this->hasMany(Usuario::class,"sucursal_fk");
+	}
+
+
+	public function siNoExisteSucursal(){
+
+
+		if(!Sucursal::exists()) {
+
+			$sucursal = new Sucursal;
+			$sucursal->ciudad = "Base";
+			$sucursal->nombre = "Naviera PEP";
+
+			$sucursal->save();
+
+		}
+
+
+	}
+
 
 }

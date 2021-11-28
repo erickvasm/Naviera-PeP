@@ -18,6 +18,9 @@
     </head>
     <nav class="main-menu">
         <ul> 
+
+
+
             <li class="main-menu__menu">    
                 <a href="http://127.0.0.1:8000/bienvenida" target="iframe_a">   
                     <i class="bi bi-house-door-fill"></i>
@@ -26,88 +29,117 @@
                 </span>  
                 </a>     
             </li>  
+            
+
             <li>
-                <a href="http://127.0.0.1:8000/informes/informes" target="iframe_a">
+                <a href="informe/informe" target="iframe_a">
                     <i class="bi bi-clipboard-data"></i>
                     <span class="nav-text">
                         Informes
                     </span>
                 </a>
             </li>
+
+
             <li class="has-subnav">
-                <a href="http://127.0.0.1:8000/nave/registrar" target="iframe_a">
+                <a href="nave/registrar" target="iframe_a">
                     <i class="bi bi-plus-square-fill"></i>
                     <span class="nav-text">
                         Ingresar Nave
                     </span>
                 </a>
             </li>
+
+
+
             <li class="has-subnav">
-                <a href="http://127.0.0.1:8000/usuario/registrar" target="iframe_a">
+                <a href="usuario/registrar" target="iframe_a">
                     <i class="bi bi-person-plus-fill"></i>
                     <span class="nav-text">
                         Ingresar Usuario
                     </span>
                 </a>
             </li>
+            
+
+
             <li class="has-subnav">
-                <a href="http://127.0.0.1:8000/sucursal/registrar" target="iframe_a">
+                <a href="sucursal/registrar" target="iframe_a">
                     <i class="bi bi-building"></i>
                     <span class="nav-text">
                         Ingresar Surcursal
                     </span>
                 </a>
             </li>
+
+
+
+
             <li class="has-subnav">
-                <a href="http://127.0.0.1:8000/itinerario/registrar" target="iframe_a">
+                <a href="itinerario/registrar" target="iframe_a">
                     <i class="bi bi-file-earmark-plus-fill"></i>
                     <span class="nav-text">
                         Itinerario
                     </span>
                 </a>
             </li>      
+
+
+
             <li>
-                <a href="http://127.0.0.1:8000/reserva/pasajero" target="iframe_a">
+                <a href="reserva/pasajero" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Reservar Pasajero
+                        Reservar Pasajes
                     </span>
                 </a>
             </li>
+
+
+
             <li>
-                <a href="http://127.0.0.1:8000/reserva/carga" target="iframe_a">
+                <a href="reserva/carga" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Reservar Carga
+                        Reservar Espacios de Carga
                     </span>
                 </a>
             </li>
+
+
+
             <li>
-                <a href="http://127.0.0.1:8000/venta/pasajero" target="iframe_a">
+                <a href="venta/pasajero" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Venta Pasajero
+                        Venta de Pasajes
                     </span>
                 </a>
             </li>
+
+
             <li>
-                <a href="http://127.0.0.1:8000/venta/carga" target="iframe_a">
+                <a href="venta/carga" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Venta Carga
+                        Venta de Espacios de Carga
                     </span>
                 </a>
             </li>
+
+
             <li>
-                <a href="http://127.0.0.1:8000/manifiesto/manifiesto" target="iframe_a">
+                <a href="manifiesto/manifiesto" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
                         Generar Manifiestos
                     </span>
                 </a>
             </li>
+
+
             <li>
-                <a href="http://127.0.0.1:8000/contabilidad/contabilidad" target="iframe_a">
+                <a href="contabilidad/contabilidad" target="iframe_a">
                     <i class="bi bi-cash-stack"></i>
                     <span class="nav-text">
                         Ventas & Contabilidad
@@ -116,7 +148,7 @@
             </li>
 
              <li>
-                <a href="{{url('/login/logout')}}">
+                <a href="login/logout">
                     <i class="bi bi-cash-stack"></i>
                     <span class="nav-text">
                         Cerrar Sesion
@@ -131,22 +163,29 @@
         <section class="anality-cards">
             <article class="cards">
                 <h5>Total Vendido</h5>
-                <h5>$20500<h2/>
+                <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i> 
             </article><article class="cards-b1">
                 <h5>Total Vendido</h5>
-                <h5>$20500<h2/>
+                <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
             <article class="cards-b2">
                 <h5>Total Vendido</h5>
-                <h5>$20500<h2/>
+                <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
         </section>
+
+
         <section id='main_container' class="main-main">
-        <iframe src="" width="1500" height="800" style="border: none; overflow: hidden;" name="iframe_a" title="Iframe Example"></iframe>
+
+            <iframe src="" width="1500" height="800" style="border: none; overflow: hidden;" name="iframe_a" title="Iframe Example" id="iframe_a">
+                
+            </iframe>
+        
         </section>
+    
     </main>
 
 
@@ -154,8 +193,39 @@
     <script>
         
 
-        function desplegarPagina(ruta){
-            console.log(ruta);
+        desplegarTotal();
+        desplegarBienvenida();
+
+        function desplegarBienvenida(){
+
+           $("#iframe_a").attr("src", "{{url('/bienvenida')}}");
+
+        }
+
+
+        function desplegarTotal(){
+
+
+
+            $.ajax({
+
+                type: 'GET',
+
+                url: "{{url('informe/total')}}",
+                    
+                success: function(data) {
+
+                    $('.totalmoney').html("$"+data);
+                       
+
+                },
+
+                timeout:5000
+
+            });
+            
+            
+            
         }
 
     </script>

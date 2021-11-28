@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Naviera PeP - Compra de Pasajes</title>
+	<title>Naviera PeP - Venta de pasajes</title>
 	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
@@ -15,7 +15,7 @@
 
 			@csrf
 
-			<h2 class="title" >Registro Venta Pasajero</h2>
+			<h2 class="title" >Venta de Pasajes</h2>
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
