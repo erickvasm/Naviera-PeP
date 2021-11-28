@@ -23,8 +23,8 @@
 				<br>
 
 				Rol:<select name="tipo" class="select-content">
-					<option value="true">Gerente</option>
-					<option value="false">Cajero</option>
+					<option value="1">Gerente</option>
+					<option value="0">Cajero</option>
 				</select>
 
 				<br>

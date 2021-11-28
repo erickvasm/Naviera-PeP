@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 		
 			$usuario = new Usuario;
 
-    		$usuario->tipo=($request->tipo==1)?false:true;
+    		$usuario->tipo=$request->tipo;
     		$usuario->nombre=$request->nombre;
     		$usuario->clave=$request->clave;
     		$usuario->sucursal_fk=(int) $request->sucursal;
@@ -37,10 +37,13 @@ class UsuarioController extends Controller
 
     	}catch(\Exception $e){
  
+            error_log($e);
+
        		return NULL;
     	
     	}catch(\Throwable $f) {
 
+            error_log($f);
     		return NULL;
 
     	}

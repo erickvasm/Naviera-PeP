@@ -25,66 +25,122 @@
                 <a href="http://127.0.0.1:8000/bienvenida" target="iframe_a">   
                     <i class="bi bi-house-door-fill"></i>
                 <span class="nav-text">
-                   <b>Menu</b>
+
+                    <b>Hola!
+
+                    @isset($_SESSION['user'])
+
+                        {{json_decode($_SESSION['user'])->nombre}}
+
+                    @endisset
+
+                   </b>
                 </span>  
                 </a>     
             </li>  
             
 
-            <li>
-                <a href="informe/informe" target="iframe_a">
-                    <i class="bi bi-clipboard-data"></i>
-                    <span class="nav-text">
-                        Informes
-                    </span>
-                </a>
-            </li>
+
+            @isset($_SESSION['user'])
+
+                @if(json_decode($_SESSION['user'])->tipo)
+
+                    <!---Solo gerente--->
+
+                    <li>
+                        <a href="informe/informe" target="iframe_a">
+                            <i class="bi bi-clipboard-data"></i>
+                            <span class="nav-text">
+                                Informes
+                            </span>
+                        </a>
+                    </li>
 
 
-            <li class="has-subnav">
-                <a href="nave/registrar" target="iframe_a">
-                    <i class="bi bi-plus-square-fill"></i>
-                    <span class="nav-text">
-                        Ingresar Nave
-                    </span>
-                </a>
-            </li>
+                    <li class="has-subnav">
+                        <a href="nave/registrar" target="iframe_a">
+                            <i class="bi bi-plus-square-fill"></i>
+                            <span class="nav-text">
+                                Ingresar Nave
+                            </span>
+                        </a>
+                    </li>
+
+
+                    <li class="has-subnav">
+                        <a href="ruta/registrar" target="iframe_a">
+                            <i class="bi bi-plus-square-fill"></i>
+                            <span class="nav-text">
+                                Ingresar Ruta
+                            </span>
+                        </a>
+                    </li>
+
+
+                    <li class="has-subnav">
+                        <a href="usuario/registrar" target="iframe_a">
+                            <i class="bi bi-person-plus-fill"></i>
+                            <span class="nav-text">
+                                Ingresar Usuario
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    <li class="has-subnav">
+                        <a href="sucursal/registrar" target="iframe_a">
+                            <i class="bi bi-building"></i>
+                            <span class="nav-text">
+                                Ingresar Surcursal
+                            </span>
+                        </a>
+                    </li>
 
 
 
-            <li class="has-subnav">
-                <a href="usuario/registrar" target="iframe_a">
-                    <i class="bi bi-person-plus-fill"></i>
-                    <span class="nav-text">
-                        Ingresar Usuario
-                    </span>
-                </a>
-            </li>
+
+                    <li class="has-subnav">
+                        <a href="itinerario/registrar" target="iframe_a">
+                            <i class="bi bi-file-earmark-plus-fill"></i>
+                            <span class="nav-text">
+                                Itinerario
+                            </span>
+                        </a>
+                    </li>      
+
+
+
+                    <li>
+                        <a href="manifiesto/manifiesto" target="iframe_a">
+                            <i class="bi bi-calendar-plus-fill"></i>
+                            <span class="nav-text">
+                                Generar Manifiestos
+                            </span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="contabilidad/contabilidad" target="iframe_a">
+                            <i class="bi bi-cash-stack"></i>
+                            <span class="nav-text">
+                                Ventas & Contabilidad
+                            </span>
+                        </a>
+                    </li>
+
+
+                @endif
+
+
+            @endisset
+
+
             
 
 
-            <li class="has-subnav">
-                <a href="sucursal/registrar" target="iframe_a">
-                    <i class="bi bi-building"></i>
-                    <span class="nav-text">
-                        Ingresar Surcursal
-                    </span>
-                </a>
-            </li>
-
-
-
-
-            <li class="has-subnav">
-                <a href="itinerario/registrar" target="iframe_a">
-                    <i class="bi bi-file-earmark-plus-fill"></i>
-                    <span class="nav-text">
-                        Itinerario
-                    </span>
-                </a>
-            </li>      
-
-
+            <!------Gerente y Cajero-------->
 
             <li>
                 <a href="reserva/pasajero" target="iframe_a">
@@ -128,24 +184,20 @@
             </li>
 
 
+
+
             <li>
-                <a href="manifiesto/manifiesto" target="iframe_a">
+                <a href="informe/cierre_caja" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
-                        Generar Manifiestos
+                        Cierre de caja
                     </span>
                 </a>
             </li>
 
 
-            <li>
-                <a href="contabilidad/contabilidad" target="iframe_a">
-                    <i class="bi bi-cash-stack"></i>
-                    <span class="nav-text">
-                        Ventas & Contabilidad
-                    </span>
-                </a>
-            </li>
+
+         
 
              <li>
                 <a href="login/logout">
@@ -159,22 +211,31 @@
 
         </ul>
     </nav>
+
     <main>
+    
         <section class="anality-cards">
+    
             <article class="cards">
                 <h5>Total Vendido</h5>
                 <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i> 
-            </article><article class="cards-b1">
+            </article>
+
+            <article class="cards-b1">
                 <h5>Total Vendido</h5>
                 <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
+            
+
             <article class="cards-b2">
                 <h5>Total Vendido</h5>
                 <h5 class="totalmoney">$------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
+
+
         </section>
 
 
