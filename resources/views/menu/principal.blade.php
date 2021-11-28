@@ -69,7 +69,7 @@
 
                     <li class="has-subnav">
                         <a href="ruta/registrar" target="iframe_a">
-                            <i class="bi bi-plus-square-fill"></i>
+                            <i class="bi bi-map-fill"></i>
                             <span class="nav-text">
                                 Ingresar Ruta
                             </span>
@@ -102,12 +102,24 @@
 
                     <li class="has-subnav">
                         <a href="itinerario/registrar" target="iframe_a">
-                            <i class="bi bi-file-earmark-plus-fill"></i>
+                            <i class="bi bi-calendar-week"></i>
                             <span class="nav-text">
                                 Itinerario
                             </span>
                         </a>
-                    </li>      
+                    </li>   
+
+
+
+                    <li>
+                        <a href="contabilidad/contabilidad" target="iframe_a">
+                            <i class="bi bi-cash-stack"></i>
+                            <span class="nav-text">
+                                Ventas & Contabilidad
+                            </span>
+                        </a>
+                    </li>
+   
 
 
 
@@ -121,15 +133,7 @@
                     </li>
 
 
-                    <li>
-                        <a href="contabilidad/contabilidad" target="iframe_a">
-                            <i class="bi bi-cash-stack"></i>
-                            <span class="nav-text">
-                                Ventas & Contabilidad
-                            </span>
-                        </a>
-                    </li>
-
+                    
 
                 @endif
 
@@ -201,7 +205,7 @@
 
              <li>
                 <a href="login/logout">
-                    <i class="bi bi-cash-stack"></i>
+                    <i class="bi bi-box-arrow-right"></i>
                     <span class="nav-text">
                         Cerrar Sesion
                     </span>
