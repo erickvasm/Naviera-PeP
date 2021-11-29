@@ -20,6 +20,16 @@ class ContabilidadController extends Controller
 	}
 
 
+	public function mostrarCierreDeCaja() {
+
+		return View("contabilidad.cierre_caja");
+
+	}
+
+
+	/*************************DATOS ESTADISTICOS***************/
+
+
 	public function obtenerDatosEstadisticos(){
 
 		$datos = array(
@@ -41,19 +51,23 @@ class ContabilidadController extends Controller
 	}
 
 
+
+
+
+
 	public function cantidadTotalPasajes(){
 
-		$servicios = Pasaje::all()->count();
+		$pasajes = Pasaje::all()->count();
 
-		return $servicios;
+		return $pasajes;
 
 	}
 
 	public function cantidadTotalCargas(){
 
-		$servicios = Carga::all()->count();
+		$cargas = Carga::all()->count();
 		
-		return $servicios;
+		return $cargas;
 
 	}
 
@@ -61,17 +75,17 @@ class ContabilidadController extends Controller
 
 	public function cantidadTotalVenta(){
 
-		$servicios = Venta::all()->count();
+		$ventas = Venta::all()->count();
 
-		return $servicios;
+		return $ventas;
 
 	}
 
 	public function cantidadTotalReserva(){
 
-		$servicios = Reserva::all()->count();
+		$reservas = Reserva::all()->count();
 		
-		return $servicios;
+		return $reservas;
 
 	}
 
@@ -253,6 +267,202 @@ class ContabilidadController extends Controller
 		return $meses;
 
 	}
+
+
+
+
+	/********************CIERRE  DE CAJA*******************************/
+
+
+
+	public function cantidadPasajesDia() {
+
+
+		$pasajes = Pasaje::whereDate('created_at',Carbon::today())->count();
+
+		return $pasajes;
+
+
+	}
+
+
+
+	public function cantidadCargasDia() {
+
+
+		$cargas = Carga::whereDate('created_at',Carbon::today())->count();
+
+		return $cargas;
+
+
+	}
+
+
+	public function cantidadReservasDia() {
+
+
+		$reservas = Reserva::whereDate('created_at',Carbon::today())->count();
+
+		return $reservas;
+
+
+	}
+
+	public function cantidadVentasDia() {
+
+
+		$ventas = Venta::whereDate('created_at',Carbon::today())->count();
+
+		return $ventas;
+
+
+	}
+
+
+
+	public function totalPajasesDia() {
+
+		$totalPasajes = 0;
+
+		$ventas = Venta::whereDate('created_at',Carbon::today())->get();
+		$reservas = Reserva::whereDate('created_at',Carbon::today())->get();
+
+		foreach ($ventas as $venta) {
+
+
+			$servicio = Servicio::where('id','=',$venta->servicio_fk)->firstOrFail();
+
+			if($servicio->tipo_servicio==true) {
+				$totalPasajes += $venta->monto;
+			}
+			
+		}
+
+		foreach ($reservas as $reserva) {
+
+			$servicio = Servicio::where('id','=',$reserva->servicio_fk)->firstOrFail();
+
+			if($servicio->tipo_servicio==true) {
+				
+				$totalPasajes += $reserva->monto;
+			}
+
+		}
+
+
+		return $totalPasajes;
+
+	}
+
+
+
+	public function totalCargasDia() {
+
+		$totalCargas = 0;
+
+		$ventas = Venta::whereDate('created_at',Carbon::today())->get();
+		$reservas = Reserva::whereDate('created_at',Carbon::today())->get();
+
+	
+
+		foreach ($ventas as $venta) {
+
+
+			$servicio = Servicio::where('id','=',$venta->servicio_fk)->firstOrFail();
+
+			if($servicio->tipo_servicio==false) {
+				$totalCargas += $venta->monto;
+			}
+			
+		}
+
+		foreach ($reservas as $reserva) {
+
+			$servicio = Servicio::where('id','=',$reserva->servicio_fk)->firstOrFail();
+
+			if($servicio->tipo_servicio==false) {
+				
+				$totalCargas += $reserva->monto;
+			}
+
+		}
+
+
+		return $totalCargas;
+
+	}
+
+
+	public function totalVentasDia(){
+
+		$totalVentas = 0;
+
+		$ventas = Venta::whereDate('created_at',Carbon::today())->get();
+		
+
+	
+
+		foreach ($ventas as $venta) {
+
+
+			$totalVentas += $venta->monto;
+			
+		}
+
+
+		return $totalVentas;
+
+	}
+
+
+	public function totalReservasDia(){
+
+		$totalReservas = 0;
+
+		$reservas = Reserva::whereDate('created_at',Carbon::today())->get();
+		
+
+	
+
+		foreach ($reservas as $reserva) {
+
+
+			$totalReservas += $reserva->monto;
+			
+		}
+
+
+		return $totalReservas;
+
+	}
+
+
+
+	public function obtenerCierreCaja(){
+
+
+
+		$datos = array(
+
+			'cantidadPasajes' => $this->cantidadPasajesDia(),
+			'cantidadCargas' => $this->cantidadCargasDia(),
+			'cantidadReservas' => $this->cantidadReservasDia(),
+			'cantidadVentas' => $this->cantidadVentasDia(),
+			'montoPasajes' => $this->totalPajasesDia(),
+			'montoCargas' => $this->totalCargasDia(),
+			'montoReservas' => $this->totalReservasDia(),
+			'montoVentas' => $this->totalVentasDia()
+			
+		);
+
+		return $datos;
+
+	}
+
+
+
+
+
 
 
 

@@ -66,8 +66,12 @@ Route::middleware(['authsession'])->group(function(){
 
 	//Contabilidad
 	Route::get('/contabilidad',[ContabilidadController::class,'mostrarContabilidad']);
-	//Contabilidad
 	Route::get('/contabilidad/estadisticas',[ContabilidadController::class,'obtenerDatosEstadisticos']);
+
+	Route::get('/contabilidad/cierre_caja_v',[ContabilidadController::class,'mostrarCierreDeCaja']);
+
+	Route::get('/contabilidad/cierre_caja',[ContabilidadController::class,'obtenerCierreCaja']);
+
 
 
 	//Manifiesto

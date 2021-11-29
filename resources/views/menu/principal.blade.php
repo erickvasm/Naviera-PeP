@@ -202,7 +202,7 @@
 
 
             <li>
-                <a href="informe/cierre_caja" target="iframe_a">
+                <a href="contabilidad/cierre_caja_v" target="iframe_a">
                     <i class="bi bi-calendar-plus-fill"></i>
                     <span class="nav-text">
                         Cierre de caja
