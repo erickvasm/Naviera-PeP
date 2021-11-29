@@ -8,18 +8,15 @@
 
 </head>
 <body>
-    
-
-    <h1 class="bienvenido-h1">Bienvenidos</h1>
-    
-    <div class="bienvenido-cards">
-        <div class="cards-cierre">
-
-        </div>
-        <div class="cards-salir">
-            
-        </div>
-
+    <div>
+        <h1 class="bienvenido-h1">Bienvenidos</h1>
+        <style>
+            h1{
+               position: absolute;
+                top: 150px;
+                left: 750px; 
+            }
+        </style>
     </div>
 </body>
 </html>

@@ -50,6 +50,11 @@
 				
 				<br>
 				<br>
+
+				<input type="button" value ="Salir" class="button" onclick="volverMenu()"/>
+				
+				<br>
+				<br>
 		
 				<label id="mensaje" class="labels"></label>
 		</form>
@@ -219,6 +224,11 @@
 
 
 			}
+
+		function volverMenu(){
+
+			window.location.href = "{{url('/bienvenida')}}";
+		}
 			
 
 	</script>

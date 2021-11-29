@@ -71,10 +71,11 @@ body {
 }
 .bienvenido-h1{
     position: absolute;
-    width: 700px;
+    width: 1000px;
     height: 394px;
     left: 350px;
     top: 0px;
+
     font-size: 96px;
     line-height: 112px;
 
