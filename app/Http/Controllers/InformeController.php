@@ -5,10 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use App\Models\Reserva;
+use App\Models\Itineario;
+use App\Models\Ruta;
 
 class InformeController extends Controller
 {
 
+
+	public function mostrarInformeNave(){
+
+        return View("informe.nave");
+    
+    }
+
+
+    public function informeNave(Request $request) {
+
+
+    	$itinerarios = Itineario::where('nave_fk','=',$request->id);
+    	
+
+
+    	return NULL;
+    
+
+    }
 
 
 	public function obtenerTotalVendido(){

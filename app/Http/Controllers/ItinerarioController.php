@@ -80,6 +80,7 @@ class ItinerarioController extends Controller
 
             }
 
+
             $textos->add($mensaje);
             $identificadores->add($it->id);
             $capacidadesCarga->add($carga);
@@ -146,6 +147,60 @@ class ItinerarioController extends Controller
         return $response;
 
     }
+
+
+
+    public function listarItinerariosConFecha() {
+
+        $textos = collect();
+        $identificadores = collect();
+        $capacidadesCarga = collect();
+        $capacidadesPasaje = collect();
+
+        $itinerario =Itinerario::all();
+
+
+        foreach ($itinerario as $it) {
+             
+            $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        
+
+            $puertos = json_decode($ruta->puertos_intermedios);
+            $duraciones = json_decode($ruta->duracion_recorridos);
+
+            $pasaje = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
+            $carga = Nave::disponibilidadCargas($it->nave_fk,$it->servicio_fk);
+
+            $mensaje = "";
+
+            for ($i=0; $i < count($puertos); $i++) { 
+
+                $mensaje .=$puertos[$i];
+
+
+                if($i<=(count($duraciones)-1)) {
+                    $mensaje .= "  >$duraciones[$i] mins>  ";
+                }
+
+            }
+
+            $mensaje = $it->fecha_hora_zarpado." ".$mensaje;
+
+
+            $textos->add($mensaje);
+            $identificadores->add($it->id);
+            $capacidadesCarga->add($carga);
+            $capacidadesPasaje->add($pasaje);
+
+        }
+
+
+        $response = array('mensajes'=>$textos,'ident'=>$identificadores,'carga'=>$capacidadesCarga,'pasaje'=>$capacidadesPasaje);
+
+        return $response;
+
+
+    }
+
 
 
 

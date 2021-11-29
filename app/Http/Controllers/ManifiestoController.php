@@ -29,7 +29,7 @@ class ManifiestoController extends Controller
 
 
 			$cargaVenta = collect();
-			$cargaCompra = collect();
+			$cargaReserva = collect();
 
 			$ventas = Venta::all()->where('itinerario_fk','=',$request->id);
 			$reservas = Reserva::all()->where('itinerario_fk','=',$request->id);
@@ -40,37 +40,45 @@ class ManifiestoController extends Controller
 				
 				try{		
 	
-
 					$carga = Carga::where('servicio_fk','=',$venta->servicio_fk)->firstOrFail();
 					$cargaVenta->add($carga);
+	
 				}catch(\Exception $e){
+	
 				}catch(\Throwable $h){
+	
 				}
 
 			}
 
 			foreach ($reservas as $reserva) {
 
-				try{		
+				try{	
+
 					$carga = Carga::where('servicio_fk','=',$reserva->servicio_fk)->firstOrFail();
-					$cargaCompra->add($carga);
+					$cargaReserva->add($carga);
 					
 				}catch(\Exception $e){
+				
 				}catch(\Throwable $h){
+				
 				}
+			
 			}
 
 
-        	$response = array('venta'=>$cargaVenta,'compra'=>$cargaCompra);
+        	$response = array('venta'=>$cargaVenta,'reserva'=>$cargaReserva);
+
         	return $response;
 
 		}catch(\Exception $e){
 
-			error_log($e);
 			return NULL;
+		
 		}catch(\Throwable $h){
-			error_log($h);
+		
 			return NULL;
+		
 		}
 
 
@@ -91,15 +99,16 @@ class ManifiestoController extends Controller
 
 
 			foreach ($ventas as $venta) {
-
-				
+			
 				try{		
 	
-
 					$Pasaje = Pasaje::where('servicio_fk','=',$venta->servicio_fk)->firstOrFail();
 					$pasajeVenta->add($Pasaje);
+
 				}catch(\Exception $e){
+
 				}catch(\Throwable $h){
+
 				}
 
 			}
@@ -107,25 +116,31 @@ class ManifiestoController extends Controller
 			foreach ($reservas as $reserva) {
 
 				try{		
+
 					$pasaje = Pasaje::where('servicio_fk','=',$reserva->servicio_fk)->firstOrFail();
 					$pasajeReserva->add($pasaje);
 					
 				}catch(\Exception $e){
+
 				}catch(\Throwable $h){
+
 				}
+
 			}
 
 
         	$response = array('venta'=>$pasajeVenta,'reserva'=>$pasajeReserva);
+
         	return $response;
 
 		}catch(\Exception $e){
 
-			error_log($e);
 			return NULL;
+		
 		}catch(\Throwable $h){
-			error_log($h);
+		
 			return NULL;
+		
 		}
 
 

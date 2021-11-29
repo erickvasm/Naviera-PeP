@@ -46,6 +46,8 @@ Route::middleware(['authsession'])->group(function(){
 
 	//Informe
 	Route::get('/informe/total',[InformeController::class,'obtenerTotalVendido']);
+	Route::get('/informe/nave',[InformeController::class,'mostrarInformeNave']);
+	Route::get('/informe/informe_nave',[InformeController::class,'informeNave']);
 
 
 
@@ -55,6 +57,7 @@ Route::middleware(['authsession'])->group(function(){
 	Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
 	Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
 	Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
+	Route::get('/itinerario/listarconfecha',[ItinerarioController::class,'listarItinerariosConFecha']);
 
 
 

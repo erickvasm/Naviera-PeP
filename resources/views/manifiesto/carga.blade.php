@@ -54,7 +54,7 @@
 
 				type: 'GET',
 
-				url: "{{url('itinerario/listar')}}",
+				url: "{{url('itinerario/listarconfecha')}}",
 
 				success:function(data){
 					if(data!=''){
@@ -111,13 +111,17 @@
 					var tabla ="<tr><th>Indice</th><th>Peso</th><th>Detalles</th></tr>";
 
 
-					for(var i=0;i<data['compra'].length;i++){
-							tabla = tabla + "<tr><th>"+(i+1)+"</th><th>"+data['compra'][i]['peso']+"</th><th>"+data['compra'][i]['detalle']+"</th></tr>";
+					for(var i=0;i<data['reserva'].length;i++){
+
+							tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['reserva'][i]['peso']+"</td><td>"+data['reserva'][i]['detalle']+"</td></tr>";
+					
 					}
 
 
 					for(var i=0;i<data['venta'].length;i++){
-							tabla = tabla + "<tr><th>"+(i+1)+"</th><th>"+data['venta'][i]['peso']+"</th><th>"+data['venta'][i]['detalle']+"</th></tr>";
+
+							tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['venta'][i]['peso']+"</td><td>"+data['venta'][i]['detalle']+"</td></tr>";
+
 					}
 
 
@@ -125,8 +129,6 @@
 
 
 					$('#tabla').html(tabla);
-
-
 
 
 					mensaje('');

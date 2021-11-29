@@ -54,7 +54,7 @@
 
 				type: 'GET',
 
-				url: "{{url('itinerario/listar')}}",
+				url: "{{url('itinerario/listarconfecha')}}",
 
 				success:function(data){
 					if(data!=''){
@@ -133,7 +133,7 @@
 				},
 
 				error: function(data){
-					mensaje('Error en el servidor')
+					mensaje('Error en el servidor');
 				},
 				timeout:5000
 
