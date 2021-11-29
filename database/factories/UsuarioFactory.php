@@ -14,7 +14,11 @@ class UsuarioFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'tipo'=>1,
+            'nombre'=>$this->faker->name(),
+            'clave'=>'1234567',
+            'sucursal_fk'=>2
+
         ];
     }
 }
