@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use App\Models\Reserva;
-use App\Models\Itineario;
+use App\Models\Itinerario;
 use App\Models\Ruta;
+use Illuminate\Support\Collection;
+
 
 class InformeController extends Controller
 {
@@ -21,12 +23,45 @@ class InformeController extends Controller
 
     public function informeNave(Request $request) {
 
+    	$itinerarios =Itinerario::where('nave_fk','=',$request->id)->orderBy('fecha_hora_zarpado','DESC')->get();
 
-    	$itinerarios = Itineario::where('nave_fk','=',$request->id);
-    	
+    	$collection = collect();
+
+    	try{
+
+	    	
+	    	foreach ($itinerarios as $it) {
+
+	    		$ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();
+	    		
+
+		    	$itinerario =  array(
+				    'itinerario' => $it,
+				    'ruta' => $ruta
+				);
+
+				$collection->add($itinerario);
 
 
-    	return NULL;
+	    	}
+
+	    	$response = array('informe'=>$collection);
+
+	    	return $response;
+
+    	}catch(\Exception $e){
+
+    		error_log($e);
+
+    		return NULL;
+
+    	}catch(\Throwable $f){
+
+    		error_log($f);
+
+    		return NULL;
+
+    	}
     
 
     }
