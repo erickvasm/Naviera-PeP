@@ -65,7 +65,7 @@ Route::middleware(['authsession'])->group(function(){
 
 
 	//Contabilidad
-	Route::get('/contabilidad',[InformeController::class,'mostrarContabilidad']);
+	Route::get('/contabilidad',[ContabilidadController::class,'mostrarContabilidad']);
 	
 
 
