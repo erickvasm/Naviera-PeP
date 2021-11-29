@@ -13,7 +13,7 @@
 
 		<div>
 
-			Nave: <select id='nave' name='nave'></select>
+			Ruta: <select id='ruta' name='ruta'></select>
 
 			<br>
 			<br>
@@ -49,21 +49,21 @@
 
 	<script type="text/javascript">
 
-		obtenerNaves();
+		obtenerRuta();
 		
 
-		function obtenerNaves() {
+		function obtenerRuta() {
 
 
 
-			mensaje('Obteniendo naves...');
+			mensaje('Obteniendo rutas...');
 		
 
 			$.ajax({
 
 				type: 'GET',
 
-				url: "{{url('nave/listar')}}",
+				url: "{{url('ruta/listar')}}",
  
 				success: function(data) {
 					
@@ -72,14 +72,15 @@
 					if(data.length>0){
 
 
-						$("#nave").html("");
+						$("#ruta").html("");
 
 						data.forEach(function(elemento){
-							$("#nave").append("<option value='"+elemento.id+"'>"+elemento.nombre+"</option>");
+							
+							$("#ruta").append("<option value='"+elemento.id+"'>"+obtenerNombreRuta(elemento)+"</option>");
 						});
 
 						$("#bot").prop("disabled",false);
-						$("#nave").prop("disabled",false);
+						$("#ruta").prop("disabled",false);
 
 
 						mensaje('');
@@ -88,7 +89,7 @@
 					}else{
 						
 						$("#bot").prop("disabled",true);
-						$("#nave").prop("disabled",true);
+						$("#ruta").prop("disabled",true);
 
 						mensaje("No existen naves disponibles.");
 						
@@ -125,9 +126,9 @@
 
 				type: 'GET',
 
-				url: "{{url('informe/informe_nave')}}",
+				url: "{{url('informe/informe_ruta')}}",
 
-				data:{'id':$('#nave option').filter(':selected').val()},
+				data:{'id':$('#ruta option').filter(':selected').val()},
  
 				success: function(data) {
 					
@@ -147,7 +148,7 @@
 
 								
 
-								deploy = deploy + itinerarioYRuta(data['informe'][i]['itinerario'],data['informe'][i]['ruta'],i);
+								deploy = deploy + itinerarioYNave(data['informe'][i]['itinerario'],data['informe'][i]['nave'],i);
 
 
 							}
@@ -189,18 +190,9 @@
 
 		}
 
-		function itinerarioYRuta(informe,ruta,num) {
+		function itinerarioYNave(informe,nave,num) {
 
 			var mensaje = "<hr><div><ul>";
-
-			var r = obtenerRuta(ruta);
-			var p = JSON.parse(ruta['puertos_intermedios']);
-
-			var intermedios = "";
-
-			for(var i=0;i<p.length;i++) {
-				intermedios = intermedios + p[i]+"|";
-			}
 
 
 			mensaje = mensaje + "<li>Itinerario "+(num+1)+"</li>";
@@ -209,15 +201,13 @@
 
 			mensaje = mensaje + "<li>Fecha y hora de Registro: "+informe["created_at"]+"</li>";
 
-			mensaje = mensaje + "<li>Ruta relacionada:<ul>";
+			mensaje = mensaje + "<li>Nave relacionada:<ul>";
 
-			mensaje = mensaje + "<li>Puerto de inicio: "+p[0]+"</li>";
+			mensaje = mensaje + "<li>Nombre: "+nave['nombre']+"</li>";
 
-			mensaje = mensaje + "<li>Puerto destino: "+p[p.length-1]+"</li>";
+			mensaje = mensaje + "<li>Capacidad pasajeros: "+nave['capacidad_pasajeros']+"</li>";
 
-			mensaje = mensaje + "<li>Puertos: "+intermedios+"</li>";
-
-			mensaje = mensaje + "<li>Recorrido: "+r+"</li>";
+			mensaje = mensaje + "<li>Capacidad carga: "+nave['capacidad_carga']+"</li>";
 
 			mensaje = mensaje + "</ul></li></ul></div>";
 
@@ -226,7 +216,7 @@
 		}
 
 
-		function obtenerRuta(data){
+		function obtenerNombreRuta(data){
 
 			var mensaje = "";
 
@@ -245,12 +235,6 @@
 			}
 
 			return mensaje;
-
-		}
-
-
-
-		function obtenerMensajeItinerario(data){
 
 		}
 

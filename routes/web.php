@@ -47,7 +47,10 @@ Route::middleware(['authsession'])->group(function(){
 	//Informe
 	Route::get('/informe/total',[InformeController::class,'obtenerTotalVendido']);
 	Route::get('/informe/nave',[InformeController::class,'mostrarInformeNave']);
+	Route::get('/informe/ruta',[InformeController::class,'mostrarInformeRuta']);
 	Route::get('/informe/informe_nave',[InformeController::class,'informeNave']);
+	Route::get('/informe/informe_ruta',[InformeController::class,'informeRuta']);
+
 
 
 
