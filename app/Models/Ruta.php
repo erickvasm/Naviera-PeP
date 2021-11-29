@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ruta extends Model
 {
     use HasFactory;
+
+   
+    public function itinerarios()
+    {
+        return $this->hasMany(Itinerario::class, 'ruta_fk');
+    }
 }

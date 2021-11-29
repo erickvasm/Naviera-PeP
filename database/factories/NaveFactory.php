@@ -11,6 +11,8 @@ class NaveFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name(),
+            'capacidad_pasajeros'=>200,
+            'capacidad_carga'=>2000
          
         ];
     }

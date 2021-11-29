@@ -11,6 +11,12 @@ class Nave extends Model
     use HasFactory;
 
 
+	public function itinerarios()
+	{
+		return $this->hasMany(Itinerario::class, 'nave_fk');
+	}
+
+
     public function disponibilidadPasajes(String $nave,$servicio) {
 
     	$nave = Nave::where('id','=',$nave)->firstOrFail();

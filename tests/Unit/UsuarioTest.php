@@ -14,11 +14,7 @@ class UsuarioTest extends TestCase
 {
 
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+  
     public function test_un_usuario_vende_servicios()
     {
         $sucursal = Sucursal::factory()->create();
@@ -26,4 +22,6 @@ class UsuarioTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $usuario->servicios);
     }
+
+    
 }

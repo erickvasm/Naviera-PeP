@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Itinerario extends Model
 {
     use HasFactory;
+
 }

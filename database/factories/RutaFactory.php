@@ -14,7 +14,8 @@ class RutaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'puertos_intermedios'=>'["p1","p2","p3"]',
+            'duracion_recorridos'=>'["20","20"]'
         ];
     }
 }
