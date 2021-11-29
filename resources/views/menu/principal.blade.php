@@ -30,6 +30,8 @@
 
                     @isset($_SESSION['user'])
 
+                       
+
                         {{json_decode($_SESSION['user'])->nombre}}
 
                     @endisset
