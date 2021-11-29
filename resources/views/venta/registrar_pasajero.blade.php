@@ -11,7 +11,7 @@
 
 	<div>
 
-		<form id='registrar' name='registrar' action='#'>
+		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
 
