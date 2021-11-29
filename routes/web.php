@@ -63,6 +63,9 @@ Route::middleware(['authsession'])->group(function(){
 	Route::get('/itinerario/listarconfecha',[ItinerarioController::class,'listarItinerariosConFecha']);
 
 
+	//Contabilidad
+	Route::get('/contabilidad',[InformeController::class,'mostrarContabilidad']);
+	
 
 
 	//Manifiesto
