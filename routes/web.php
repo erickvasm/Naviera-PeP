@@ -12,6 +12,7 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ManifiestoController;
 use App\Http\Controllers\InformeController;
+use App\Http\Controllers\ContabilidadController;
 
 
 /*
