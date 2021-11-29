@@ -19,7 +19,7 @@ class UsuarioTest extends TestCase
     {
         $sucursal = Sucursal::factory()->create();
         $usuario = Usuario::factory()->create();
-        
+      
 
         $this->assertInstanceOf(Collection::class, $usuario->servicios);
     }

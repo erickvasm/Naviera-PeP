@@ -9,8 +9,14 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+         'id',
+         'cedula',
+         'nombre',
+        'apellido'
+    ];
 
-    public function compras()
+    public function ventas()
     {
         return $this->hasMany(Venta::class, 'cliente_fk');
     }
