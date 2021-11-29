@@ -14,7 +14,12 @@ class ReservaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'fecha_compra'=>'2021-11-28',
+            'fecha_vencimiento'=>'2021-11-30',
+            'monto'=>8900,
+            'cliente_fk'=>1,
+            'servicio_fk'=>1,
+            'itinerario_fk'=>1
         ];
     }
 }

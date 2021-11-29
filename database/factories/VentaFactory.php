@@ -14,7 +14,11 @@ class VentaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'monto'=>5600,
+            'fecha'=>'2021-11-28',
+            'cliente_fk'=>1,
+            'servicio_fk'=>1,
+            'itinerario_fk'=>1
         ];
     }
 }

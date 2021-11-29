@@ -13,11 +13,7 @@ class RutaTest extends TestCase
 {
 
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+   
     public function test_una_ruta_es_usada_por_uno_o_varios_itinerarios()
     {
         $ruta = Ruta::factory()->create();

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ServicioFactory extends Factory
+class ClienteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,9 @@ class ServicioFactory extends Factory
     public function definition()
     {
         return [
-            'tipo_servicio'=>1,
-            'usuario_fk'=>1
+            'cedula'=>'504208978',
+            'nombre'=>'Daniel',
+            'apellido'=>'Sandoval'
         ];
     }
 }

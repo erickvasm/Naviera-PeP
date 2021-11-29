@@ -13,11 +13,7 @@ class SucusalTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+    
     public function test_una_sucursal_tiene_muchos_usuarios()
     {
         $sucursal = Sucursal::factory()->create();

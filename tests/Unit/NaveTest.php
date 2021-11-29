@@ -11,11 +11,7 @@ class NaveTest extends TestCase
 {
 
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+   
     public function test_una_nave_posee_uno_o_varios_itinerarios()
     {
         $ruta = Ruta::factory()->create();
