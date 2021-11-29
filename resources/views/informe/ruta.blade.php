@@ -136,7 +136,7 @@
 
 					if(data!=''){
 
-						if(data['informe'].length>1) {
+						if(data['informe'].length>0) {
 
 							mensaje("");
 

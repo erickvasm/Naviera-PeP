@@ -47,11 +47,20 @@
 
                     <!---Solo gerente--->
 
-                    <li>
-                        <a href="informe/informe" target="iframe_a">
+                     <li>
+                        <a href="informe/nave" target="iframe_a">
                             <i class="bi bi-clipboard-data"></i>
                             <span class="nav-text">
-                                Informes
+                                Informes Nave
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="informe/ruta" target="iframe_a">
+                            <i class="bi bi-clipboard-data"></i>
+                            <span class="nav-text">
+                                Informes Ruta
                             </span>
                         </a>
                     </li>
@@ -112,7 +121,7 @@
 
 
                     <li>
-                        <a href="contabilidad/contabilidad" target="iframe_a">
+                        <a href="contabilidad" target="iframe_a">
                             <i class="bi bi-cash-stack"></i>
                             <span class="nav-text">
                                 Ventas & Contabilidad

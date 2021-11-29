@@ -3,47 +3,45 @@
 <head>
 
 	<script src="{{ asset('js/jquery.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 
 	
 </head>
 <body>
 
+	<form id='registrar' name='registrar' action='#' class="form-imputs">
 
-	<div>
-
+		@csrf
+		<h2 class="title" >Informes Nave</h2>
+		
 		<div>
 
-			Nave: <select id='nave' name='nave'></select>
+			<div>
 
-			<br>
-			<br>
+				Nave: <select id='nave' name='nave' class="select-content"></select>
 
-			<label id='mensaje'>				
-			</label>
+				<br>
+				<br>
 
-			<br>
-			<br>
+				<label id='mensaje' class="label">				
+				</label>
 
-			<input type="button" id="bot" onclick='obtenerInforme()' value="Generar Informe">
+				<br>
+				<br>
 
-			<br>
-			<br>
+				<input type="button" id="bot" onclick='obtenerInforme()' value="Generar Informe" class="button">
+
+				<br>
+				<br>
 			
+			</div>
+
+			<div id="tabla_informe">
 
 
+			</div>
 		</div>
-
-
-
-		<div id="tabla_informe">
-
-
-		</div>
-
-
-
-	</div>
-
+    </form>
 
 
 
@@ -135,7 +133,7 @@
 
 					if(data!=''){
 
-						if(data['informe'].length>1) {
+						if(data['informe'].length>0) {
 
 							mensaje("");
 
@@ -191,7 +189,7 @@
 
 		function itinerarioYRuta(informe,ruta,num) {
 
-			var mensaje = "<hr><div><ul>";
+			var mensaje = "<hr><div class='form-inputs'><ul>";
 
 			var r = obtenerRuta(ruta);
 			var p = JSON.parse(ruta['puertos_intermedios']);
@@ -203,21 +201,21 @@
 			}
 
 
-			mensaje = mensaje + "<li>Itinerario "+(num+1)+"</li>";
+			mensaje = mensaje + "<li class='labels'>Itinerario "+(num+1)+"</li>";
 			
-			mensaje = mensaje + "<li>Fecha y hora de zarpado: "+informe["fecha_hora_zarpado"]+"</li>";
+			mensaje = mensaje + "<li class='labels'>Fecha y hora de zarpado: "+informe["fecha_hora_zarpado"]+"</li>";
 
-			mensaje = mensaje + "<li>Fecha y hora de Registro: "+informe["created_at"]+"</li>";
+			mensaje = mensaje + "<li class='labels'>Fecha y hora de Registro: "+informe["created_at"]+"</li>";
 
-			mensaje = mensaje + "<li>Ruta relacionada:<ul>";
+			mensaje = mensaje + "<li class='labels'>Ruta relacionada:<ul>";
 
-			mensaje = mensaje + "<li>Puerto de inicio: "+p[0]+"</li>";
+			mensaje = mensaje + "<li class='labels'>Puerto de inicio: "+p[0]+"</li>";
 
-			mensaje = mensaje + "<li>Puerto destino: "+p[p.length-1]+"</li>";
+			mensaje = mensaje + "<li class='labels'>Puerto destino: "+p[p.length-1]+"</li>";
 
-			mensaje = mensaje + "<li>Puertos: "+intermedios+"</li>";
+			mensaje = mensaje + "<li class='labels'>Puertos: "+intermedios+"</li>";
 
-			mensaje = mensaje + "<li>Recorrido: "+r+"</li>";
+			mensaje = mensaje + "<li class='labels'>Recorrido: "+r+"</li>";
 
 			mensaje = mensaje + "</ul></li></ul></div>";
 
