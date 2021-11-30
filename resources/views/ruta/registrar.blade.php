@@ -18,7 +18,7 @@
  				<br>
  				<br>
  				
- 				<input type="button" value="Ingresar Puertos Intermedios" onclick="generarTabla()" class="input">
+ 				<input type="button" value="Ingresar Puertos Intermedios" onclick="generarTabla()" class="button">
 
  				<br>
  				<br>
