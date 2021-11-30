@@ -3,39 +3,38 @@
 <head>
 	
 	<script src="{{ asset('js/jquery.js') }}"></script>
-
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 
 </head>
 <body>
 
-	<div>
+	<form id="registrar" action="#" class="form-imputs">
+			
+		@csrf
+		<h2 class="title" >Cierre de caja</h2>
+
+		<div>
+
+			<br>
+			<br>
 
 
-		<center><h1>Cierre de caja</h1></center>
+			<input type="button" class="button" onclick="obtenerCierreDeCaja()" value="Obtener Cierre de Caja"/>
 
-		<br>
-		<br>
+			<br><br>
 
-
-		<input type="button" onclick="obtenerCierreDeCaja()" value="Obtener Cierre de Caja"/>
-
-		<br><br>
-
-		<label id="mensaje"></label>
+			<label id="mensaje"></label>
 
 
-		<br><br>
+			<br><br>
 
-		<div id="cierre_caja">
+			<div id="cierre_caja">
 
-
+			</div>
 
 
 		</div>
-
-
-	</div>
-
+    </form>
 
 	<script type="text/javascript">
 		

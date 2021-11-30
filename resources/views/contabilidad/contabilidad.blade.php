@@ -4,27 +4,31 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script src="{{ asset('js/jquery.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >	
 
 
 </head>
 <body>
+	
+	<form id="registrar" action="#" class="form-imputs">
+			
+		@csrf
+		<h2 class="title" >Contabilidad</h2>
 
-	<div>
+			<div>
 
-		<br><br>
+			<br><br>
 		
-		<label id="mensaje"></label>
+			<label id="mensaje"></label>
 
 
-		<br><br>
+			<br><br>
 
-		<div>
+			<div>
 
+				<table style="border: solid 1px gray;border-bottom: 0px;border-right: 0px;">
 
-			<table style="border: solid 1px gray;border-bottom: 0px;border-right: 0px;">
-
-
-				<tr>
+					<tr>
 
 					<td style="border-right: 2px dotted;border-bottom: 2px dotted;">
 
@@ -94,7 +98,7 @@
 
 	</div>
 
-
+ </form>
 
 
 

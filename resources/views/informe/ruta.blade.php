@@ -3,34 +3,37 @@
 <head>
 
 	<script src="{{ asset('js/jquery.js') }}"></script>
-
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	
 </head>
 <body>
 
 
-	<div>
-
-		<div>
-
-			Ruta: <select id='ruta' name='ruta'></select>
-
-			<br>
-			<br>
-
-			<label id='mensaje'>				
-			</label>
-
-			<br>
-			<br>
-
-			<input type="button" id="bot" onclick='obtenerInforme()' value="Generar Informe">
-
-			<br>
-			<br>
+		<form id="registrar" action="#" class="form-imputs">
 			
+			@csrf
+			<h2 class="title" >Informes Ruta</h2>
+			
+			<div>
 
+			<div>
 
+				Ruta: <select id='ruta' name='ruta' class="select-content"></select>
+
+				<br>
+				<br>
+
+				<label id='mensaje'>				
+				</label>
+
+				<br>
+				<br>
+
+				<input type="button" id="bot" class="button" 'obtenerInforme()' value="Generar Informe">
+
+				<br>
+				<br>
+			
 		</div>
 
 
@@ -42,9 +45,9 @@
 
 
 
-	</div>
+		</div>
 
-
+		</form>
 
 
 	<script type="text/javascript">
