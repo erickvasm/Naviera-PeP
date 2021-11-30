@@ -9,11 +9,20 @@ html {
 body {
     background-color: #f8f9fa;
 }
+body::-webkit-scrollbar{
+  width: 10px;
+  background: #f8f9fa;
+}
+body::-webkit-scrollbar-thumb{
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border-right: 2px solid #f8f9fa;
+}
 .form-imputs {
     position: absolute;
     width: 700px;
     height: 394px;
-    left: 350px;
+    left: 250px;
     top: 0px;
 }
 .input {

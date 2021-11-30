@@ -14,7 +14,7 @@
             h1{
                position: absolute;
                 top: 150px;
-                left: 750px; 
+                left: 550px; 
             }
         </style>
     </div>
