@@ -15,11 +15,15 @@
 
 		<div>
 
+<<<<<<< HEAD
 			<br>
 			<br>
 
 
 			<input type="button" class="button" onclick="obtenerCierreDeCaja()" value="Obtener Cierre de Caja"/>
+=======
+		<br><br>
+>>>>>>> d8345c9fe19d30988f8152d5ed382c8d9fa0053e
 
 			<br><br>
 
@@ -38,6 +42,7 @@
 
 	<script type="text/javascript">
 		
+		obtenerCierreDeCaja();
 
 
 		function obtenerCierreDeCaja() {
@@ -81,7 +86,7 @@
 
 			var body = "<ul>";
 
-				body = body + "<h1>Cierre de caja para el dia de hoy:</h1>";
+				body = body + "<h1>Cierre de caja para el dia "+time()+":</h1>";
 
 				body = body + "<h3>Cantidades:</h3>";
 
@@ -97,7 +102,7 @@
 
 				body = body + "<li>Por pasajes: "+data['montoPasajes']+"</li>";
 
-				body = body + "<li>Por espacios de cargas: "+data['montoPasajes']+"</li>";
+				body = body + "<li>Por espacios de cargas: "+data['montoCargas']+"</li>";
 
 				body = body + "<li>Por reservas: "+data['montoReservas']+"</li>";
 
@@ -105,7 +110,7 @@
 
 				body = body + "<h3>Total:</h3>";
 
-				body = body + "<li>Total diaro: "+(data['montoVentas']+data['montoReservas'])+"</li>";				
+				body = body + "<li>Total: "+(data['montoVentas']+data['montoReservas'])+"</li>";				
 
 			body = body + "</ul>";
 
@@ -120,6 +125,15 @@
 		
 		}
 
+		function time() {
+
+			var nowDate = new Date(); 
+			
+			var date = nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate(); 
+			
+			return date;
+
+		}
 
 
 	</script>
