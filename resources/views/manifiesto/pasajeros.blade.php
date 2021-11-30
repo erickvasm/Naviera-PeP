@@ -54,28 +54,28 @@
 
 				type: 'GET',
 
-				url: "{{url('itinerario/listarconfecha')}}",
+				url: "{{url('itinerario/obtener_itinerarios')}}",
 
 				success:function(data){
 					if(data!=''){
 
-						if(data['mensajes']!='') {
-								console.log(data['ident']);
+						if(data['itinerarios'].length>0) {
 
-							for(var i=0;i<data['mensajes'].length;i++) {
-								$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
-							}
-
-
+							desplegarItinerario(data);
 							mensaje('');
 
+						}else{
+
+							mensaje('No existen itinerarios');
 
 						}
 
 
 					}else{
+						
 						mensaje('No existen itinerarios');
 					}
+
 				},
 
 				error: function(data){
@@ -85,6 +85,62 @@
 
 			});
 
+
+		}
+
+
+
+
+		function desplegarItinerario(data) {
+
+			$("#itinerario").html("");
+
+			for(var i=0;i<data['itinerarios'].length;i++) {
+
+				var valores = data['itinerarios'][i];
+
+				var ruta = valores['ruta'];
+				
+				var itinerario = valores['itinerario'];
+
+				var body = "<option value='"+itinerario['id']+"'>";
+
+					body = body +mensajeDeItinerario(itinerario,ruta);
+
+					body = body + "</option>"
+
+				$("#itinerario").append(body);
+
+			}
+
+
+
+		}
+
+
+
+		function mensajeDeItinerario(itinerario,ruta) {
+
+			var mensajeItineario = itinerario.fecha_hora_zarpado+"\t/\t";
+
+			var puertos = JSON.parse(ruta.puertos_intermedios);
+			var duracion = JSON.parse(ruta.duracion_recorridos);
+			
+			for(var i= 0;i<puertos.length;i++) {
+							
+				if(i<=(duracion.length-1)){
+									
+					mensajeItineario = mensajeItineario + (puertos[i]+" > "+duracion[i]+" mins > ");
+				
+				}else{
+
+					mensajeItineario = mensajeItineario + puertos[i];
+				
+				}
+
+			}
+
+			return mensajeItineario;
 
 		}
 

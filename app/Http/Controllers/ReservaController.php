@@ -17,6 +17,12 @@ class ReservaController extends Controller
 	}
 
 
+	public function formPa() {
+		return View("reserva.registrar2");
+	}
+
+
+
 	public function formularioCarga() {
 		return View("reserva.registrar_carga");
 	}
@@ -24,7 +30,7 @@ class ReservaController extends Controller
 	public function registrarReservaCarga(Request $request){
 
 		DB::beginTransaction();
-
+		
 		try{
 
 

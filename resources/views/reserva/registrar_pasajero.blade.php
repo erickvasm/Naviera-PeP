@@ -40,16 +40,23 @@
 			<div>
 				<ul>
 					<li>
+
 						<label>Cliente:</label>
 						<br>
 						<br>
+						
 						<input type="text" name="cedula" class="input" placeholder="Cedula">
+						
 						<br>
 						<br>
+						
 						<input type="text" name="nombre" class="input" placeholder="Nombre">
+						
 						<br>
 						<br>
+						
 						<input type="text" name="apellido" class="input" placeholder="Apellido">
+					
 					</li>
 				</ul>
 			</div>
@@ -77,7 +84,8 @@
 			<br>
 			<br>
 
-		<label id='mensaje'></label>
+			<label id='mensaje'></label>
+		
 		</form>
 
 		

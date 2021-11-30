@@ -62,7 +62,47 @@ Route::middleware(['authsession'])->group(function(){
 	Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
 	Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
 	Route::get('/itinerario/listarconfecha',[ItinerarioController::class,'listarItinerariosConFecha']);
-	Route::get('/lisx',[ItinerarioController::class,'lisx']);
+	
+
+
+
+
+	/************************************NEW SERIES*************************************/
+
+
+	Route::get('/itinerario/obtener_itinerarios',[ItinerarioController::class,'obtenerItinerarios']);
+
+
+	Route::get('/itinerario/reserva/carga', function () {
+
+		return ItinerarioController::obtenerItineariosParaVentasYReservas(false,false);
+
+	});
+
+
+	Route::get('/itinerario/reserva/pasaje', function () {
+
+		return ItinerarioController::obtenerItineariosParaVentasYReservas(false,true);
+
+	});
+
+
+	Route::get('/itinerario/venta/carga', function () {
+
+		return ItinerarioController::obtenerItineariosParaVentasYReservas(true,false);
+
+	});
+
+
+
+	Route::get('/itinerario/venta/pasaje', function () {
+
+		return ItinerarioController::obtenerItineariosParaVentasYReservas(true,true);
+
+	});
+
+
+
 
 
 	//Contabilidad
@@ -106,6 +146,8 @@ Route::middleware(['authsession'])->group(function(){
 	Route::post('/reserva/pasajero',[ReservaController::class,'registrarReservaPasajero']);
 	Route::get('/reserva/carga',[ReservaController::class,'formularioCarga']);
 	Route::post('/reserva/carga',[ReservaController::class,'registrarReservaCarga']);
+
+	Route::get('/reserva/pa',[ReservaController::class,'formPa']);
 
 
 

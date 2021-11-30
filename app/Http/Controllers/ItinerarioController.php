@@ -292,6 +292,113 @@ class ItinerarioController extends Controller
     /****************************************NEW SERIES***************************/
 
     
+    
+
+
+    public function obtenerItinerarios() {
+
+        
+        $itinerarios = collect();
+
+        $listado = Itinerario::all();
+
+        foreach ($listado as $itinerario) {
+        
+            $ruta = Ruta::where('id','=',$itinerario->ruta_fk)->firstOrFail();
+
+            $inside = array(
+
+                'itinerario' => $itinerario,
+
+                'ruta' => $ruta
+
+            );
+
+            $itinerarios->add($inside);
+
+        }
+
+
+        return array("itinerarios" => $itinerarios);
+
+    }
+
+
+
+    public function obtenerItineariosParaVentasYReservas($modalidad,$tipo_servicio) {
+
+        $fechaInicial = date('Y-m-d H:i:s');
+
+        $itinerarios = Itinerario::all()->where('fecha_hora_zarpado','>=',$fechaInicial);
+
+        //TRUE = VENTA , FALSE = RESERVA
+        if($modalidad) {
+
+            $fechaMaxima = date('Y-m-d H:i:s', strtotime('+60 minutes', strtotime($fechaInicial)));
+        
+            $itinerarios = $itinerarios->where('fecha_hora_zarpado','<=',$fechaMaxima);
+
+        }
+
+        $itinerariosConDisponibilidad = collect();
+
+        //TRUE = PASAJE , FALSE = CARGA
+        if($tipo_servicio){
+
+            foreach ($itinerarios as $itinerario) {
+
+                $disponibilidadPasajes = Itinerario::pasajesDisponiblesEnIntinerario($itinerario);
+                
+                if($disponibilidadPasajes>0) {
+
+                    $guardar = array(
+
+                        'itinerario' => $itinerario,
+
+                        'ruta' => Ruta::where('id','=',$itinerario->ruta_fk)->firstOrFail(),
+
+                        'capacidad' => $disponibilidadPasajes 
+
+                    );
+
+                    $itinerariosConDisponibilidad->add($guardar);
+
+                }
+
+            }
+
+        }else{
+
+
+            foreach ($itinerarios as $itinerario) {
+                
+                $disponibilidadCargas = Itinerario::espaciosCargaDisponiblesEnIntinerario($itinerario);
+
+                if($disponibilidadCargas>0) {
+
+                    $guardar = array(
+
+                        'itinerario' => $itinerario,
+
+                        'ruta' => Ruta::where('id','=',$itinerario->ruta_fk)->firstOrFail(),
+
+                        'capacidad' => $disponibilidadCargas 
+
+                    );
+
+                    $itinerariosConDisponibilidad->add($guardar);
+
+                }
+
+
+            }
+
+
+        }
+
+        return array("itinerarios" => $itinerariosConDisponibilidad);
+
+    }
 
 
 
