@@ -62,6 +62,7 @@ Route::middleware(['authsession'])->group(function(){
 	Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
 	Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
 	Route::get('/itinerario/listarconfecha',[ItinerarioController::class,'listarItinerariosConFecha']);
+	Route::get('/lisx',[ItinerarioController::class,'lisx']);
 
 
 	//Contabilidad

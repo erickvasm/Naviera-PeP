@@ -159,13 +159,16 @@ class ItinerarioController extends Controller
 
         $itinerario =Itinerario::all();
 
-
         foreach ($itinerario as $it) {
              
             $ruta = Ruta::where('id','=',$it->ruta_fk)->firstOrFail();        
 
             $puertos = json_decode($ruta->puertos_intermedios);
             $duraciones = json_decode($ruta->duracion_recorridos);
+
+
+
+            error_log($it->servicio_fk."::::::::::::::");
 
             $pasaje = Nave::disponibilidadPasajes($it->nave_fk,$it->servicio_fk);
             $carga = Nave::disponibilidadCargas($it->nave_fk,$it->servicio_fk);
@@ -200,8 +203,6 @@ class ItinerarioController extends Controller
 
 
     }
-
-
 
 
      public function listarConRutasVenta() {
@@ -285,6 +286,12 @@ class ItinerarioController extends Controller
         return $response;
 
     }
+
+
+
+    /****************************************NEW SERIES***************************/
+
+    
 
 
 

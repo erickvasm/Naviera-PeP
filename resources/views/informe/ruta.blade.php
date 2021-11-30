@@ -29,7 +29,7 @@
 				<br>
 				<br>
 
-				<input type="button" id="bot" class="button" 'obtenerInforme()' value="Generar Informe">
+				<input type="button" id="bot" class="button" onclick='obtenerInforme()' value="Generar Informe">
 
 				<br>
 				<br>
