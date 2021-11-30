@@ -33,7 +33,7 @@
 				<br>
 				<br>
 
-				<input type="button"  id="bot" value ="Registrar Itinerario" onclick="enviarPeticion()" class="input" class="button">
+				<input type="button"  id="bot" value ="Registrar Itinerario" onclick="enviarPeticion()" class="button" class="button">
 
 				<br>
 				<br>
