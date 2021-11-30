@@ -15,15 +15,11 @@
 
 		<div>
 
-<<<<<<< HEAD
 			<br>
 			<br>
 
 
 			<input type="button" class="button" onclick="obtenerCierreDeCaja()" value="Obtener Cierre de Caja"/>
-=======
-		<br><br>
->>>>>>> d8345c9fe19d30988f8152d5ed382c8d9fa0053e
 
 			<br><br>
 
