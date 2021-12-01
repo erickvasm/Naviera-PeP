@@ -61,11 +61,11 @@
 					tabla+="<tr>";
 
 					if ((i%2)==0) {
-						tabla+="<td>Puerto</td><td><input type='text' value='xD' id='fila"+i+"'></td>";
+						tabla+="<td>Puerto</td><td><input type='text' class='input' placeholder='Puerto' id='fila"+i+"'></td>";
 
 
 					}else{
-						tabla+="<td>Duracion</td><td><input value='2' type='number' id='fila"+i+"'></td>";
+						tabla+="<td>Duracion</td><td><input placeholder='Duracion (mins) al siguiente puerto' class='input' type='number' id='fila"+i+"'></td>";
 
 					}
 					tabla+="</tr>";

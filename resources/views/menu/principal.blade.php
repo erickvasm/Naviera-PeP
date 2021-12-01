@@ -135,10 +135,21 @@
 
 
                     <li>
-                        <a href="manifiesto/manifiesto" target="iframe_a">
+                        <a href="manifiesto/carga_v" target="iframe_a">
                             <i class="bi bi-calendar-plus-fill"></i>
                             <span class="nav-text">
-                                Generar Manifiestos
+                                Generar Manifiesto de Cargas
+                            </span>
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="manifiesto/pasajero_v" target="iframe_a">
+                            <i class="bi bi-calendar-plus-fill"></i>
+                            <span class="nav-text">
+                                Generar Manifiesto de Pasajeros
                             </span>
                         </a>
                     </li>

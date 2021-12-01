@@ -18,11 +18,6 @@
 			<br>
 			<br>
 
-
-			<input type="button" class="button" onclick="obtenerCierreDeCaja()" value="Obtener Cierre de Caja"/>
-
-			<br><br>
-
 			<label id="mensaje"></label>
 
 
