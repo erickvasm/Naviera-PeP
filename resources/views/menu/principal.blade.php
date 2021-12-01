@@ -522,7 +522,7 @@
                     
                 success: function(data) {
 
-                    $('.totalmoney').html("$"+data);
+                    $('.totalmoney').html("₡"+data);
                        
 
                 },
