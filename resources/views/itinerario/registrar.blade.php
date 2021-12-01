@@ -14,7 +14,12 @@
 			@csrf
 			<h2 class="title" >Registro de itinerarios</h2>
 			
-				<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado" class="input">
+				Fecha:<input type="datetime-local" id="fecha" name="fecha_hora_zarpado" placeholder="Fecha de zarpado" class="input">
+
+				<br>
+				<br>
+
+				<label class="labels">Nota:Utilize formato 24hrs en la fecha</label>
 
 				<br>
 				<br>
@@ -127,6 +132,8 @@
 
 
 		function consultarDisponibilidad(){
+
+			console.log($("#fecha").val());
 
 			$.ajax({
 

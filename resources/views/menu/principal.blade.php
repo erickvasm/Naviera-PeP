@@ -459,20 +459,20 @@
     
             <article class="cards">
                 <h5>Total Vendido</h5>
-                <h5 class="totalmoney">$------<h2/>
+                <h5 class="totalmoney">₡------<h2/>
                     <i class="bi bi-wallet-fill"></i> 
             </article>
 
             <article class="cards-b1">
                 <h5>Total Vendido</h5>
-                <h5 class="totalmoney">$------<h2/>
+                <h5 class="totalmoney">₡------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
             
 
             <article class="cards-b2">
                 <h5>Total Vendido</h5>
-                <h5 class="totalmoney">$------<h2/>
+                <h5 class="totalmoney">₡------<h2/>
                     <i class="bi bi-wallet-fill"></i>  
             </article>
 
