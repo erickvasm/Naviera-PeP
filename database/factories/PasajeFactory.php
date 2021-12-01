@@ -14,7 +14,10 @@ class PasajeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'cedula'=>'50897657',
+            'nombre'=>'Josue',
+            'apellido'=>'Tristan',
+            'servicio_fk'=>1
         ];
     }
 }
