@@ -83,6 +83,9 @@ class NaveController extends Controller
                     $date_input =strtotime($request->fecha); 
                     $provided_date = date('Y/m/d H:i', strtotime('+0 year, +0 days', $date_input));
 
+
+                    error_log("Message:");
+
                     error_log($provided_date);
 
                     if($provided_date>=$zarpado){
