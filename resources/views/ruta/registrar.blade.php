@@ -13,7 +13,7 @@
 				
  				@csrf
 				 <h2 class="title" >Registro Ruta</h2>
- 				<input type="number" id="cantidad" min="2" name="puertos_intermedios" placeholder="Catidad de puertos intermedios" class="input">
+ 				<input type="number" id="cantidad" min="2" name="puertos_intermedios" placeholder="Cantidad de puertos intermedios" class="input">
  				
  				<br>
  				<br>
@@ -88,43 +88,81 @@
 		}
 
 
+
+		function comprobarDatos() {
+
+			var comprobacion = true;
+
+			for(var i=0;i<$('#tablaPuertos tr').length;i++){
+
+				var valor = $('#fila'+i).val();
+				
+				if((i%2)!=0) {
+
+					if(!$.isNumeric(valor)) {
+						comprobacion = false;
+					}
+					
+				}
+
+			}
+
+
+			return comprobacion;
+
+
+		}
+
+
+
+
+
 		function enviarPeticion() {
 
 			if($('#tablaPuertos tr').length>1) {
 
-				var datos = obtenerDatosDeTabla();
-				
-				var duraciones = datos[1];
-				var puertos = datos[0];
 
-				$.ajax({
 
-				    type: 'POST',
+				if(comprobarDatos()){
 
-				    url: "{{url('ruta/registrar')}}",
-				    
-				    data: {"_token": "{{ csrf_token() }}",'puertos':puertos,'duraciones':duraciones},
-				    
-				    success: function(data) {
 
-				    	if(data=="") {
-							$('#mensaje').html('Compruebe los datos ingresados');
-						}else {
+					var datos = obtenerDatosDeTabla();
+					
+					var duraciones = datos[1];
+					var puertos = datos[0];
 
-							$('#mensaje').html('Se agrego exitosamente');
-			    			$('form#registrar').trigger("reset");
-			    			$('#tablaPuertos').remove();
-			    			
-						}
-				    },
-				    
-				    error: function(data) {
-				        $('#mensaje').html('Error en el servidor');
-				    },
-				    
-					    timeout:5000
-				});
-				
+					$.ajax({
+
+					    type: 'POST',
+
+					    url: "{{url('ruta/registrar')}}",
+					    
+					    data: {"_token": "{{ csrf_token() }}",'puertos':puertos,'duraciones':duraciones},
+					    
+					    success: function(data) {
+
+					    	if(data=="") {
+								$('#mensaje').html('Compruebe los datos ingresados');
+							}else {
+
+								$('#mensaje').html('Se agrego exitosamente');
+				    			$('form#registrar').trigger("reset");
+				    			$('#tablaPuertos').remove();
+				    			
+							}
+					    },
+					    
+					    error: function(data) {
+					        $('#mensaje').html('Error en el servidor');
+					    },
+					    
+						    timeout:5000
+					});
+			
+				}else{
+
+					$('#mensaje').html('Verifique los datos ingresados');
+				}	
 
 			}
 

@@ -38,6 +38,7 @@ Route::middleware(['authsession'])->group(function(){
 	});
 
 
+
 	//Bievenida
 	Route::get("/bienvenida",function(){
 		return View("bienvenida.bienvenida");
@@ -56,23 +57,11 @@ Route::middleware(['authsession'])->group(function(){
 
 
 	//Itineario
-	/*
-	
-	
-	Route::get('/itinerario/listar',[ItinerarioController::class,'listarItinerarios']);
-	Route::get('/itinerario/listarconrutas',[ItinerarioController::class,'listarConRutas']);
-	Route::get('/itinerario/listarconrutasventas',[ItinerarioController::class,'listarConRutasVenta']);
-	Route::get('/itinerario/listarconfecha',[ItinerarioController::class,'listarItinerariosConFecha']);
-	*/
-
-
 	Route::post('/itinerario/registrar',[ItinerarioController::class,'registrarItinerario']);
 
 	Route::get('/itinerario/registrar',[ItinerarioController::class,'mostrarFormularioRegistrarItinerario']);
 
-
-	/************************************NEW SERIES*************************************/
-
+	Route::get('/itinerario/reg',[ItinerarioController::class,'mostrar']);
 
 
 

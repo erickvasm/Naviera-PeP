@@ -14,10 +14,10 @@
 			
 			@csrf
 			<h2 class="title" >Registro Sucursal</h2>
-				<input type="text" name="nombre" placeholder="Nombre" required class="input">
+				<input type="text" name="nombre" id="nombre" placeholder="Nombre" required class="input">
 				<br>
 				<br>
-				<input type="text" name="ciudad" placeholder="Ciudad" required class="input">
+				<input type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required class="input">
 				<br>
 				<br>
 				<input type="button" onclick="registrar()" value ="Registrar"/ class="button">
@@ -48,22 +48,37 @@
 			    data: $("#registrar").serialize(),
 			    
 			    success: function(data) {
-			    	if(data==true){
-			    		$('#mensaje').html('Se agrego exitosamente');
-			    		//$('form#registrar').trigger("reset");
+			    	if(data!=''){
+
+			    		limpiarCampos();
+			    		
+			    		mensaje("Se agrego exitosamente")
+			    		
 			    	}else{
-			    		$('#mensaje').html('Compruebe los datos ingresados');
+			    		mensaje("Verifique los datos ingresados")
 			    	}
 			    },
 			    
 			    error: function(data) {
-			        $('#mensaje').html('Error en el servidor');
+			        mensaje("Error en el servidor");
 			    },
 			    
 			    timeout:5000
 			});
 			
 
+		}
+
+		function limpiarCampos(){
+
+			$("#ciudad").val(null);
+			$("#nombre").val(null);
+
+		}
+
+
+		function mensaje(mensaje){
+			$("#mensaje").html(mensaje);
 		}
 
 	</script>

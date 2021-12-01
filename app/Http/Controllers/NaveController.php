@@ -122,6 +122,14 @@ class NaveController extends Controller
 
     }
 
+
+
+    public function disponibilidad(Request $request){
+
+
+    }
+
+
     
 
     

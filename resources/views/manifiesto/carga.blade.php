@@ -2,6 +2,34 @@
 <html>
 <head>
 	<title>Naviera PeP - Manifiesto de Carga</title>
+	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
+
+
+	<style>
+
+		table {
+		  border-collapse: collapse;
+		  
+		}
+
+		th, td {
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even){background-color: #f2f2f2}
+
+		th {
+		  background-color: #04AA6D;
+		  color: white;
+		}
+	</style>
+
+
+
+
+
+
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
@@ -13,17 +41,17 @@
 		<div>
 
 
-			Itinerario: <select id='itinerario' name='itinerario'></select>
+			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
 			<br>
 
-			<label id='mensaje'></label>
+			<label id='mensaje' class="labels"></label>
 
 			<br>
 			<br>
 
-			<input type="button" onclick='generarManifiesto()' value="Generar manifiesto de cargas">
+			<input type="button" class="button" onclick='generarManifiesto()' value="Generar manifiesto de cargas">
 
 			<br>
 			<br>
@@ -169,30 +197,62 @@
 					
 					$('#tabla').html('')
 
-					var tabla ="<tr><th>Indice</th><th>Peso</th><th>Detalles</th></tr>";
+					if(data!='') {
 
 
-					for(var i=0;i<data['reserva'].length;i++){
+						if((data['reserva']!='') || (data['venta']!='')){
 
-							tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['reserva'][i]['peso']+"</td><td>"+data['reserva'][i]['detalle']+"</td></tr>";
+
+							var tabla ="<h3>Manifiesto:</h3><br><table><tr><th>Indice</th><th>Peso</th><th>Detalles</th></tr>";
+
+
+							for(var i=0;i<data['reserva'].length;i++){
+
+									tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['reserva'][i]['peso']+"</td><td>"+data['reserva'][i]['detalle']+"</td></tr>";
+							
+							}
+
+
+							for(var i=0;i<data['venta'].length;i++){
+
+									tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['venta'][i]['peso']+"</td><td>"+data['venta'][i]['detalle']+"</td></tr>";
+
+							}
+
+
+							tabla = tabla + "</table>";
+
+
+							$('#tabla').html(tabla);
+
+
+							mensaje('');
+
+						}else{
+
+
+
+							mensaje('No existe informacion');
+
+
+						}
+
+
+					}else{
+
+
+						mensaje('No existe informacion');
+
+					}
+
+
+
+
+
+
 					
-					}
 
 
-					for(var i=0;i<data['venta'].length;i++){
-
-							tabla = tabla + "<tr><td>"+(i+1)+"</td><td>"+data['venta'][i]['peso']+"</td><td>"+data['venta'][i]['detalle']+"</td></tr>";
-
-					}
-
-
-					tabla = tabla + "</table>";
-
-
-					$('#tabla').html(tabla);
-
-
-					mensaje('');
 				},
 
 				error: function(data){

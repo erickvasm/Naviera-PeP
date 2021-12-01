@@ -14,8 +14,8 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
-
 			<h2 class="title" >Venta de Pasajes</h2>
+
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
@@ -26,13 +26,49 @@
 			<br>
 			<br>
 
+			<label id='mensaje' class="labels"></label>
 
-			<input type="number" name="cantidad" min="1" id="cantidad" placeholder="Cantidad" class="input">
 
 			<br>
 			<br>
 
-			<input type="number" min="1" id="monto" name="monto" placeholder="Monto" class="input">
+			<label id='registromensaje' class="labels"></label>
+
+
+			<br>
+			<br>
+
+			<label class="labels">Nota:Considere que en la venta solo se muestran aquellos itinerarios con fecha y hora de zarpado en la proxima hora o menos.</label>
+
+
+			<br>
+			<br>
+
+
+
+			<div>
+
+				<ul>
+
+					<li>
+
+						<label>Venta:</label>
+						
+						<br>
+						<br>
+
+						<input type="number" name="cantidad"  min="1" id="cantidad" class="input" placeholder="Cantidad de pasajes">
+
+						<br>
+						<br>
+
+						<input type="number"  min="1" id="monto" name="monto" class="input" placeholder="Monto por pasaje">
+
+					</li>
+
+				</ul>
+
+			</div>
 
 			<br>
 			<br>
@@ -40,16 +76,23 @@
 			<div>
 				<ul>
 					<li>
-						<label class="labels">Cliente:</label>
+
+						<label>Cliente:</label>
 						<br>
 						<br>
-						<input type="text" name="cedula" placeholder="Cedula" class="input">
+						
+						<input type="text" id="cedula" name="cedula" class="input" placeholder="Cedula">
+						
 						<br>
 						<br>
-						<input type="text" name="nombre" placeholder="Nombre" class="input">
+						
+						<input type="text" id="nombre" name="nombre" class="input" placeholder="Nombre">
+						
 						<br>
 						<br>
-						<input type="text" name="apellido" placeholder="Apellido" class="input">
+						
+						<input type="text" id="apellido" name="apellido" class="input" placeholder="Apellido">
+					
 					</li>
 				</ul>
 			</div>
@@ -57,14 +100,13 @@
 			<br>
 			<br>
 
-			<input type="button" id='boton' onclick='ingresarPasajeros()' value='Ingresar Pasajeros' class="button">
+			<input type="button" id='boton' onclick='ingresar()' value='Ingresar Pasajeros' class="button">
 
 			<br>
 			<br>
 
 		
 			<div id ='pasajeros' name='pasajeros'>
-			
 
 			</div>
 			
@@ -72,12 +114,10 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarReserva()' value='Registrar Venta' class="button">
-
-			<br>
-			<br>
-
-			<label id='mensaje' class="labels"></label>
+			<input type="button" id='bot' onclick='beforeAjax()' value='Vender' class="button"> 
+		
+			
+			
 		
 		</form>
 
@@ -93,20 +133,40 @@
 
 	<script>
 
-		let itinerario;
-		itinerario;
-
-		let selectedInd;
-		selectedInd=0;
-
-		setDisabledAll(true);
 		obtenerItinerarios();
 		cambioItinerario();
 
-		
-		function registrarReserva(){
+			
+		function beforeAjax(){
 
-			mensaje('');
+			mensajeRegistro('');
+			var monto =$('#monto').val();
+	
+			if($.isNumeric(monto)){
+
+				if(monto<=0){
+
+					mensaje('El monto debe ser mayor que 0');
+
+				}else{
+
+					registrarVenta();
+
+				}
+
+			}else{
+
+				mensaje('El monto debe ser numerico');
+			
+			}
+
+		}
+
+
+		function registrarVenta(){
+
+
+			mensaje('Registrando venta...');
 
 			$.ajax({
 
@@ -118,26 +178,34 @@
 				    
 				success: function(data) {
 
-						if(data=="") {
+					if(data!='') {
 
-							mensaje('Compruebe los datos ingresados');
+						if(data) {
 
+							limpiarCampos();
+							obtenerItinerarios();
+							mensajeRegistro('Se agrego exitosamente');
 
-						}else {
+						}else{
 
-
-							mensaje('Se agrego exitosamente');
-							$('#pasajeros').html("");
-		    			
+							mensaje("Verifique los datos ingresados");
+						
 						}
 
-					},
-				    
-				   error: function(data) {
-				   		mensaje('Error en el servidor');
-				   },
+					}else{
 
-				   timeout:5000
+						mensaje("Verifique los datos ingresados");
+					}
+
+				},
+				    
+				error: function(data) {
+				
+					mensaje("Error del servidor"); 		
+
+				},
+
+				timeout:5000
 
 			});
 
@@ -147,55 +215,52 @@
 
 		function obtenerItinerarios() {
 
-
 			mensaje('Obteniendo itinerarios...');
-			mensajeCapacidad('');
 
 			$.ajax({
 
 				type: 'GET',
 
-				url: "{{url('itinerario/listarconrutasventas')}}",
+				url: "{{url('itinerario/venta/pasaje')}}",
 
 				success:function(data){
 					
 
 					if(data!=''){
 
+						if(data['itinerarios'].length>0) {
 
-						if(data['pasaje']!='') {
-
-						itinerario=data;
-
-						
-
-						$('#itinerario').html('');
-						mensajeCapacidad('Pasajes disponibles:'+data['pasaje'][0]);
-
-						for(var i=0;i<data['mensajes'].length;i++) {
-							$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
-						}
-
-						setDisabledAll(false);
-						mensaje('');
+							desplegarItinerario(data);
+							
+							mensaje('');
+							mensajeCapacidad('Pasajes disponibles: '+data['itinerarios'][0]['capacidad']);
 
 						}else{
-							mensaje('No existen itinearios');
-							setDisabledAll(true);
+
+							mensaje('No existen itinerarios');
+							mensajeCapacidad('Pasajes disponibles: -----');
+
+
 						}
 
 
 					}else{
-						mensaje('No existen itinearios');
-						setDisabledAll(true);
+						
+						mensaje('No existen itinerarios');
+						mensajeCapacidad('Pasajes disponibles: -----');
+
 					}
 
 
 				},
 
 				error: function(data){
-					mensaje('Error en el servidor')
+
+					mensaje('Error de servidor');
+					mensajeCapacidad('Pasajes disponibles: -----');					
+
 				},
+
 				timeout:5000
 
 			});
@@ -203,56 +268,145 @@
 
 		}
 
-		function mensaje(mensaje){
-			$('#mensaje').html(mensaje);
+
+
+
+		function desplegarItinerario(data) {
+
+			$("#itinerario").html("");
+
+			for(var i=0;i<data['itinerarios'].length;i++) {
+
+				var valores = data['itinerarios'][i];
+
+				var ruta = valores['ruta'];
+
+				var capacidad = valores['capacidad'];
+				
+				var itinerario = valores['itinerario'];
+
+				var body = "<option id='option"+i+"' value='"+itinerario['id']+"' data-capacidad='"+capacidad+"'>";
+
+					body = body +mensajeDeItinerario(itinerario,ruta);
+
+					body = body + "</option>"
+
+				$("#itinerario").append(body);
+
+			}
+
+
+
 		}
 
 
-		function setDisabled(boole) {
-			$('#boton').prop('disabled',boole);
-			$('#cantidad').prop('disabled',boole);
-			$('#bot').prop('disabled',boole);
+
+		function mensajeDeItinerario(itinerario,ruta) {
+
+			var mensajeItineario = itinerario.fecha_hora_zarpado+"\t/\t";
+
+			var puertos = JSON.parse(ruta.puertos_intermedios);
+			var duracion = JSON.parse(ruta.duracion_recorridos);
+			
+			for(var i= 0;i<puertos.length;i++) {
+							
+				if(i<=(duracion.length-1)){
+									
+					mensajeItineario = mensajeItineario + (puertos[i]+" > "+duracion[i]+" mins > ");
+				
+				}else{
+
+					mensajeItineario = mensajeItineario + puertos[i];
+				
+				}
+
+			}
+
+			return mensajeItineario;
+
 		}
 
-		function setDisabledAll(boole) {
-			$('#itineario').prop('disabled',boole);
-			$('#cantidad').prop('disabled',boole);
-			$('#bot').prop('disabled',boole);
-		}
 
-
-		function mensajeCapacidad(mensaje){
-			$('#capacidad').html(mensaje);
-		}
+	
 
 
 		function cambioItinerario(){
+			
+		
 
 			$('#itinerario').change(function(){
 
-				var it = $('#itinerario').prop('selectedIndex');
+				limpiarCampos();
 
-				if(it>=0) {
+				var seleccion = $('#itinerario').prop('selectedIndex');
 
-					selectedInd=it;
+				if(seleccion>=0) {
 
-					mensajeCapacidad('Pasajes disponibles:'+itinerario['pasaje'][it]);
+					var capacidad = $("#option"+seleccion).data('capacidad');
+
+					mensajeCapacidad('Pasajes disponibles:'+capacidad);
+
 				}
 
 			})
-
 			
 		}
 
 
-		function desplegarFormularioPasajeros(cantidad){
+		function ingresar() {
 
+			mensaje('');
 			$('#pasajeros').html('');
+
+			var seleccion = $('#itinerario').prop('selectedIndex');
+			var capacidad = $("#option"+seleccion).data('capacidad');
+			var cantidad =$('#cantidad').val();
+
+	
+			if(cantidad>0){
+
+				if(cantidad<=capacidad){
+
+					desplegarFormulario(cantidad);
+			
+				}else{
+			
+					mensaje('No existen cupos para la cantidad indicada');
+			
+				}
+
+			}else{
+
+				mensaje('Ingrese una cantidad mayor a 0');
+			
+			}
+
+			
+
+		}
+
+
+		function desplegarFormulario(cantidad){
+
 
 			var formulario="<ul>";
 
 			for(var i=0;i<cantidad;i++){
-				formulario = formulario + formularioForma(i);
+				
+
+				var body="<li>"+
+							"<label>Pasaje "+(i+1)+"</label>"+
+							"<br><br>"+
+							"Cedula:<input type='text' class='input' placeholder='Cedula' name='cedula_pasajero[]'>"+
+							"<br><br>"+
+							"Nombre:<input type='text' class='input' placeholder='Nombre' name='nombre_pasajero[]'>"+
+							"<br><br>"+
+							"Apellido:<input type='text' class='input' placeholder='Apellido' name='apellido_pasajero[]'><br><br>"+
+						"</li>";
+
+				formulario = formulario + body;
+
+
 			}
 
 			formulario = formulario + "</ul>";
@@ -262,50 +416,31 @@
 		}
 
 
+		function limpiarCampos() {
 
-	
-
-		function formularioForma(parametro){
-
-
-			var formulario="<li>"+
-					"<label>Pasaje "+(parametro+1)+"</label>"+
-					"<br><br>"+
-					"Cedula:<input type='text' name='cedula_pasajero[]'>"+
-					"<br><br>"+
-					"Nombre:<input type='text' name='nombre_pasajero[]'>"+
-					"<br><br>"+
-					"Apellido:<input type='text' name='apellido_pasajero[]'><br><br>"+
-				"</li>";
-
-			return formulario;
+			$("#pasajeros").html("");
+			$("#cantidad").val(null);
+			$("#monto").val(null);
+			$("#cedula").val(null);
+			$("#nombre").val(null);
+			$("#apellido").val(null);
 
 		}
 
 
-		function ingresarPasajeros() {
+		function mensaje(mensaje){
+			$('#mensaje').html(mensaje);
+		}
 
-			mensaje('');
-			$('#pasajeros').html('');
 
-			var cantidad =$('#cantidad').val();
 
-			if(selectedInd!=-1){
+		function mensajeRegistro(mensaje) {
+			$("#registromensaje").html(mensaje);
+		}
 
-				if(cantidad>0){
 
-					if(cantidad<=itinerario['pasaje'][selectedInd]){
-						desplegarFormularioPasajeros(cantidad);
-					}else{
-						mensaje('No existen cupos para la cantidad indicada');
-					}
-
-				}else{
-					mensaje('Ingrese una cantidad mayor a 0');
-				}
-
-			}
-
+		function mensajeCapacidad(mensaje){
+			$('#capacidad').html(mensaje);
 		}
 
 

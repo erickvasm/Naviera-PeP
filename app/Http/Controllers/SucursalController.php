@@ -14,7 +14,7 @@ class SucursalController extends Controller
 
     public function registrarSucursal(Request $request) {
     
-        error_log($request);
+       
     	$sucursal = new Sucursal;
 
     	$sucursal->ciudad=$request->ciudad;
@@ -28,9 +28,14 @@ class SucursalController extends Controller
 
     	}
     	catch(\Exception $e){
-            error_log($e);
-       		return false;
-    	}
+            
+       		return NULL;
+            
+    	}catch(\Throwable $f) {
+
+            return NULL;
+
+        }
 
 
 

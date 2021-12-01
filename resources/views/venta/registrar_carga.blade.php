@@ -14,8 +14,8 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
+			<h2 class="title" >Venta de espacios de carga</h2>
 
-			<h2 class="title" >Venta de Carga</h2>
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
 			<br>
@@ -26,31 +26,72 @@
 			<br>
 			<br>
 
+			<label id='mensaje' class="labels"></label>
 
-			<input type="number" min="1" id="monto" name="monto" placeholder="Monto" class="input">
+			<br>
+			<br>
 
+			<label id='registromensaje' class="labels"></label>
+
+			<br>
+			<br>
+
+			<label class="labels">Nota:Considere que en la venta solo se muestran aquellos itinerarios con fecha y hora de zarpado en la proxima hora o menos.</label>
+
+			<br>
+			<br>
 
 			<div>
+
 				<ul>
+
 					<li>
-						<label class="labels">Cliente:</label>
+
+						<label>Venta:</label>
+
 						<br>
 						<br>
-						<input type="text" id='cedula' name="cedula" placeholder="Cedula" class="input">
-						<br>
-						<br>
-						<input type="text" id='nombre' name="nombre" placeholder="Nombre" class="input">
-						<br>
-						<br>
-						<input type="text" id='apellido' name="apellido" placeholder="Apellido" class="input">
+
+						<input type="number"  min="1" id="monto" name="monto" class="input" placeholder="Monto por la carga">
+
 					</li>
+
 				</ul>
+
 			</div>
 
 			<br>
 			<br>
 
+			<div>
+				<ul>
+					<li>
 
+						<label>Cliente:</label>
+						<br>
+						<br>
+						
+						<input type="text" id="cedula" name="cedula" class="input" placeholder="Cedula">
+						
+						<br>
+						<br>
+						
+						<input type="text" id="nombre" name="nombre" class="input" placeholder="Nombre">
+						
+						<br>
+						<br>
+						
+						<input type="text" id="apellido" name="apellido" class="input" placeholder="Apellido">
+					
+					</li>
+				</ul>
+			</div>
+
+		
+			<br>
+			<br>
+
+		
 			<div>
 				<ul>
 					<li>
@@ -60,28 +101,22 @@
 						<input type="text" id='detalles' name="detalles" class="input" placeholder="Detalles">
 						<br>
 						<br>
-						<input type="number" id='peso' name="peso" class="input" placeholder="Peso">
+						<input type="text" id='peso' name="peso" class="input" placeholder="Peso">
 					</li>
 				</ul>
 			</div>
 	
-
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='registrarVentas()' value='Registrar Venta' class="button">
+			<input type="button" id='bot' onclick='beforeAjax()' value='Vender' class="button"> 
+		
 			
-			<br>
-			<br>
-
-			<label id='mensaje'></label>
+			
+		
 		</form>
 
 		
-
-
-
-
 
 	</div>
 
@@ -89,20 +124,45 @@
 
 	<script>
 
-		let itinerario;
-		itinerario;
-
-		let selectedInd;
-		selectedInd=0;
-
-		setDisabledAll(true);
 		obtenerItinerarios();
 		cambioItinerario();
 
+
+
+		function beforeAjax(){
+
+			mensajeRegistro('');
+
+			var monto =$('#monto').val();
+			var peso =$('#peso').val();
+	
+			if($.isNumeric(monto) && $.isNumeric(peso)){
+
+				if((monto<=0) || (peso<=0)){
+
+					mensaje('El monto y peso de la carga debe ser mayor a 0');
+
+				}else{
+
+					registrarVenta();
+
+				}
+
+			}else{
+
+				mensaje('Tanto el monto como el peso de la carga son numericos');
+			
+			}
+
+		}
+
 		
+
+
 		function registrarVenta(){
 
-			mensaje('');
+			mensaje('Registrando venta...');
+			
 
 			$.ajax({
 
@@ -114,86 +174,37 @@
 				    
 				success: function(data) {
 
-						if(data=="") {
 
-							mensaje('Compruebe los datos ingresados');
+					if(data!='') {
 
+						if(data) {
 
-						}else {
-
-
-							mensaje('Se agrego exitosamente');
-							$('#pasajeros').html("");
-		    			
-						}
-
-					},
-				    
-				   error: function(data) {
-				   		mensaje('Error en el servidor');
-				   },
-
-				   timeout:5000
-
-			});
-
-
-		}
-
-
-
-
-		function obtenerItinerarios() {
-
-
-			mensaje('Obteniendo itinerarios...');
-			mensajeCapacidad('');
-
-			$.ajax({
-
-				type: 'GET',
-
-				url: "{{url('itinerario/listarconrutasventas')}}",
-
-				success:function(data){
-					
-
-					if(data!=''){
-
-
-						if(data['carga']!='') {
-
-						itinerario=data;
-
-						
-
-						$('#itinerario').html('');
-						mensajeCapacidad('Espacios disponibles:'+data['carga'][0]);
-
-						for(var i=0;i<data['mensajes'].length;i++) {
-							$('#itinerario').append("<option value='"+data['ident'][i]+"'>"+data['mensajes'][i]+"</option>");
-						}
-
-						setDisabledAll(false);
-						mensaje('');
+							limpiarCampos();
+							obtenerItinerarios();
+							mensajeRegistro('Se agrego exitosamente');
 
 						}else{
-							mensaje('No existen itinearios');
-							setDisabledAll(true);
+
+							mensaje('Verifique los datos ingresados')
+
 						}
 
-
+						
 					}else{
-						mensaje('No existen itinearios');
-						setDisabledAll(true);
+
+						mensaje('Verifique los datos ingresados')
+
 					}
 
+				},
+
+				    
+				error: function(data) {
+				
+					mensaje("Error del servidor"); 		
 
 				},
 
-				error: function(data){
-					mensaje('Error en el servidor')
-				},
 				timeout:5000
 
 			});
@@ -201,58 +212,174 @@
 
 		}
 
+
+		function obtenerItinerarios() {
+
+			mensaje('Obteniendo itinerarios...');
+
+			$.ajax({
+
+				type: 'GET',
+
+				url: "{{url('itinerario/venta/carga')}}",
+
+				success:function(data){
+					
+
+					if(data!=''){
+
+						if(data['itinerarios'].length>0) {
+
+							desplegarItinerario(data);
+							
+							mensaje('');
+							mensajeCapacidad('Espacios de carga disponibles: '+data['itinerarios'][0]['capacidad']);
+
+						}else{
+
+							mensaje('No existen itinerarios');
+							mensajeCapacidad('Espacios de carga disponibles: -----');
+
+
+						}
+
+
+					}else{
+						
+						mensaje('No existen itinerarios');
+						mensajeCapacidad('Espacios de carga disponibles: -----');
+
+					}
+
+
+				},
+
+				error: function(data){
+
+					mensaje('Error de servidor');
+					mensajeCapacidad('Pasajes disponibles: -----');					
+
+				},
+
+				timeout:5000
+
+			});
+
+
+		}
+
+
+
+
+		function desplegarItinerario(data) {
+
+			$("#itinerario").html("");
+
+			for(var i=0;i<data['itinerarios'].length;i++) {
+
+				var valores = data['itinerarios'][i];
+
+				var ruta = valores['ruta'];
+
+				var capacidad = valores['capacidad'];
+				
+				var itinerario = valores['itinerario'];
+
+				var body = "<option id='option"+i+"' value='"+itinerario['id']+"' data-capacidad='"+capacidad+"'>";
+
+					body = body +mensajeDeItinerario(itinerario,ruta);
+
+					body = body + "</option>"
+
+				$("#itinerario").append(body);
+
+			}
+
+
+
+		}
+
+
+
+		function mensajeDeItinerario(itinerario,ruta) {
+
+			var mensajeItineario = itinerario.fecha_hora_zarpado+"\t/\t";
+
+			var puertos = JSON.parse(ruta.puertos_intermedios);
+			var duracion = JSON.parse(ruta.duracion_recorridos);
+			
+			for(var i= 0;i<puertos.length;i++) {
+							
+				if(i<=(duracion.length-1)){
+									
+					mensajeItineario = mensajeItineario + (puertos[i]+" > "+duracion[i]+" mins > ");
+				
+				}else{
+
+					mensajeItineario = mensajeItineario + puertos[i];
+				
+				}
+
+			}
+
+			return mensajeItineario;
+
+		}
+
+
+	
+
+
+		function cambioItinerario(){
+			
+		
+
+			$('#itinerario').change(function(){
+
+				limpiarCampos();
+
+				var seleccion = $('#itinerario').prop('selectedIndex');
+
+				if(seleccion>=0) {
+
+					var capacidad = $("#option"+seleccion).data('capacidad');
+
+					mensajeCapacidad('Espacios de carga disponibles:'+capacidad);
+
+				}
+
+			})
+			
+		}
+
+
+		function limpiarCampos() {
+
+			
+			$("#monto").val(null);
+			$("#cedula").val(null);
+			$("#nombre").val(null);
+			$("#apellido").val(null);
+
+			$("#detalles").val(null);
+			$("#peso").val(null);
+
+		}
+
+
 		function mensaje(mensaje){
 			$('#mensaje').html(mensaje);
 		}
 
 
-		function setDisabled(boole) {
-			$('#cedula').prop('disabled',boole);
-			$('#nombre').prop('disabled',boole);
-			$('#apellido').prop('disabled',boole);
-			$('#monto').prop('disabled',boole);
-			$('#detalles').prop('disabled',boole);
-			$('#peso').prop('disabled',boole);
-			$('#bot').prop('disabled',boole);
-		}
-
-		function setDisabledAll(boole) {
-			$('#itineario').prop('disabled',boole);
-			$('#cedula').prop('disabled',boole);
-			$('#nombre').prop('disabled',boole);
-			$('#apellido').prop('disabled',boole);
-			$('#monto').prop('disabled',boole);
-			$('#detalles').prop('disabled',boole);
-			$('#peso').prop('disabled',boole);
-			$('#bot').prop('disabled',boole);
+		function mensajeRegistro(mensaje) {
+			$("#registromensaje").html(mensaje);
 		}
 
 
 		function mensajeCapacidad(mensaje){
 			$('#capacidad').html(mensaje);
 		}
-
-
-		function cambioItinerario(){
-
-			$('#itinerario').change(function(){
-
-				var it = $('#itinerario').prop('selectedIndex');
-
-				if(it>=0) {
-
-					selectedInd=it;
-
-					mensajeCapacidad('Pasajes disponibles:'+itinerario['carga'][it]);
-				}
-
-			})
-
-			
-		}
-
-
-
 
 
 	</script>

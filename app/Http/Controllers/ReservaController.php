@@ -13,13 +13,13 @@ use App\Models\Carga;
 class ReservaController extends Controller
 {
 	public function formularioPasajero() {
-		return View("reserva.registrar2");
+		return View("reserva.registrar_pasajero");
 	}
 
 
 
 	public function formularioCarga() {
-		return View("reserva.registrar3");
+		return View("reserva.registrar_carga");
 	}
 
 	public function registrarReservaCarga(Request $request){
