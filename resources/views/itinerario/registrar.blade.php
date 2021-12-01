@@ -130,8 +130,6 @@
 
 		function consultarDisponibilidad(){
 
-			console.log($("#fecha").val());
-
 			$.ajax({
 
 			    type: 'POST',
