@@ -48,7 +48,7 @@
 			<br>
 			<br>
 
-			<input type="button" class="button" onclick='generarManifiesto()' value="Generar manifiesto de cargas">
+			<input type="button" class="button" onclick='generarManifiesto()' value="Generar manifiesto de pasajeros">
 
 			<br>
 			<br>
