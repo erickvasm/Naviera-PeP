@@ -31,6 +31,9 @@ class ItinerarioController extends Controller
             $date_input =strtotime($request->fecha_hora_zarpado); 
             $provided_date = date('Y-m-d H:i:s', strtotime('+0 year, +0 days', $date_input));
 
+
+            error_log($provided_date);
+
         
             $itinerario->fecha_hora_zarpado=$provided_date;
             $itinerario->ruta_fk=$request->ruta;
