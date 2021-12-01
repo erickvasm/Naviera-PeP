@@ -14,12 +14,12 @@ use App\Models\Carga;
 class VentaController extends Controller
 {
     public function formularioPasajero(){
-        return View("venta.registrar_pasajero");
+        return View("venta.registrar2");
     }
 
 
     public function formularioCarga() {
-        return View("venta.registrar_carga");
+        return View("venta.registrar3");
     }
 
     public function registrarCarga(Request $request){

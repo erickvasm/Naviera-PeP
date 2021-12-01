@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Naviera PeP - Reserva de pasajes</title>
+	<title>Naviera PeP - Venta de espacios de carga</title>
 	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
@@ -14,7 +14,7 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
-			<h2 class="title" >Reservar Pasajes</h2>
+			<h2 class="title" >Venta de espacios de carga</h2>
 
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
@@ -28,16 +28,18 @@
 
 			<label id='mensaje' class="labels"></label>
 
-
 			<br>
 			<br>
 
 			<label id='registromensaje' class="labels"></label>
 
-
 			<br>
 			<br>
 
+			<label class="labels">Nota:Considere que en la venta solo se muestran aquellos itinerarios con fecha y hora de zarpado en la proxima hora o menos.</label>
+
+			<br>
+			<br>
 
 			<div>
 
@@ -45,17 +47,12 @@
 
 					<li>
 
-						<label>Reserva:</label>
-						
-						<br>
-						<br>
-
-						<input type="number" name="cantidad"  min="1" id="cantidad" class="input" placeholder="Cantidad de pasajes">
+						<label>Venta:</label>
 
 						<br>
 						<br>
 
-						<input type="number"  min="1" id="monto" name="monto" class="input" placeholder="Monto por pasaje">
+						<input type="number"  min="1" id="monto" name="monto" class="input" placeholder="Monto por la carga">
 
 					</li>
 
@@ -90,24 +87,29 @@
 				</ul>
 			</div>
 
-			<br>
-			<br>
-
-			<input type="button" id='boton' onclick='ingresar()' value='Ingresar Pasajeros' class="button">
-
+		
 			<br>
 			<br>
 
 		
-			<div id ='pasajeros' name='pasajeros'>
-
+			<div>
+				<ul>
+					<li>
+						<label class="labels">Carga:</label>
+						<br>
+						<br>
+						<input type="text" id='detalles' name="detalles" class="input" placeholder="Detalles">
+						<br>
+						<br>
+						<input type="text" id='peso' name="peso" class="input" placeholder="Peso">
+					</li>
+				</ul>
 			</div>
-			
-
+	
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='beforeAjax()' value='Reservar' class="button"> 
+			<input type="button" id='bot' onclick='beforeAjax()' value='Vender' class="button"> 
 		
 			
 			
@@ -115,10 +117,6 @@
 		</form>
 
 		
-
-
-
-
 
 	</div>
 
@@ -129,47 +127,53 @@
 		obtenerItinerarios();
 		cambioItinerario();
 
-			
+
+
 		function beforeAjax(){
 
 			mensajeRegistro('');
+
 			var monto =$('#monto').val();
+			var peso =$('#peso').val();
 	
-			if($.isNumeric(monto)){
+			if($.isNumeric(monto) && $.isNumeric(peso)){
 
-				if(monto<=0){
+				if((monto<=0) || (peso<=0)){
 
-					mensaje('El monto debe ser mayor que 0');
+					mensaje('El monto y peso de la carga debe ser mayor a 0');
 
 				}else{
 
-					registrarReserva();
+					registrarVenta();
 
 				}
 
 			}else{
 
-				mensaje('El monto debe ser numerico');
+				mensaje('Tanto el monto como el peso de la carga son numericos');
 			
 			}
 
 		}
 
+		
 
-		function registrarReserva(){
 
+		function registrarVenta(){
 
-			mensaje('Registrando reserva...');
+			mensaje('Registrando venta...');
+			
 
 			$.ajax({
 
 			    type: 'POST',
 
-				url: "{{url('reserva/pasajero')}}",
+				url: "{{url('venta/carga')}}",
 				    
 				data: $("#registrar").serialize(),
 				    
 				success: function(data) {
+
 
 					if(data!='') {
 
@@ -181,16 +185,19 @@
 
 						}else{
 
-							mensaje("Verifique los datos ingresados");
-						
+							mensaje('Verifique los datos ingresados')
+
 						}
 
+						
 					}else{
 
-						mensaje("Verifique los datos ingresados");
+						mensaje('Verifique los datos ingresados')
+
 					}
 
 				},
+
 				    
 				error: function(data) {
 				
@@ -214,7 +221,7 @@
 
 				type: 'GET',
 
-				url: "{{url('itinerario/reserva/pasaje')}}",
+				url: "{{url('itinerario/venta/carga')}}",
 
 				success:function(data){
 					
@@ -226,12 +233,12 @@
 							desplegarItinerario(data);
 							
 							mensaje('');
-							mensajeCapacidad('Pasajes disponibles: '+data['itinerarios'][0]['capacidad']);
+							mensajeCapacidad('Espacios de carga disponibles: '+data['itinerarios'][0]['capacidad']);
 
 						}else{
 
 							mensaje('No existen itinerarios');
-							mensajeCapacidad('Pasajes disponibles: -----');
+							mensajeCapacidad('Espacios de carga disponibles: -----');
 
 
 						}
@@ -240,7 +247,7 @@
 					}else{
 						
 						mensaje('No existen itinerarios');
-						mensajeCapacidad('Pasajes disponibles: -----');
+						mensajeCapacidad('Espacios de carga disponibles: -----');
 
 					}
 
@@ -337,7 +344,7 @@
 
 					var capacidad = $("#option"+seleccion).data('capacidad');
 
-					mensajeCapacidad('Pasajes disponibles:'+capacidad);
+					mensajeCapacidad('Espacios de carga disponibles:'+capacidad);
 
 				}
 
@@ -346,77 +353,16 @@
 		}
 
 
-		function ingresar() {
-
-			mensaje('');
-			$('#pasajeros').html('');
-
-			var seleccion = $('#itinerario').prop('selectedIndex');
-			var capacidad = $("#option"+seleccion).data('capacidad');
-			var cantidad =$('#cantidad').val();
-
-	
-			if(cantidad>0){
-
-				if(cantidad<=capacidad){
-
-					desplegarFormulario(cantidad);
-			
-				}else{
-			
-					mensaje('No existen cupos para la cantidad indicada');
-			
-				}
-
-			}else{
-
-				mensaje('Ingrese una cantidad mayor a 0');
-			
-			}
-
-			
-
-		}
-
-
-		function desplegarFormulario(cantidad){
-
-
-			var formulario="<ul>";
-
-			for(var i=0;i<cantidad;i++){
-				
-
-				var body="<li>"+
-							"<label>Pasaje "+(i+1)+"</label>"+
-							"<br><br>"+
-							"Cedula:<input type='text' class='input' placeholder='Cedula' name='cedula_pasajero[]'>"+
-							"<br><br>"+
-							"Nombre:<input type='text' class='input' placeholder='Nombre' name='nombre_pasajero[]'>"+
-							"<br><br>"+
-							"Apellido:<input type='text' class='input' placeholder='Apellido' name='apellido_pasajero[]'><br><br>"+
-						"</li>";
-
-				formulario = formulario + body;
-
-
-			}
-
-			formulario = formulario + "</ul>";
-
-			$('#pasajeros').html(formulario);
-
-		}
-
-
 		function limpiarCampos() {
 
-			$("#pasajeros").html("");
-			$("#cantidad").val(null);
+			
 			$("#monto").val(null);
 			$("#cedula").val(null);
 			$("#nombre").val(null);
 			$("#apellido").val(null);
+
+			$("#detalles").val(null);
+			$("#peso").val(null);
 
 		}
 
@@ -424,7 +370,6 @@
 		function mensaje(mensaje){
 			$('#mensaje').html(mensaje);
 		}
-
 
 
 		function mensajeRegistro(mensaje) {

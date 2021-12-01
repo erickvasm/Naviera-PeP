@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Naviera PeP - Reserva de pasajes</title>
+	<title>Naviera PeP - Venta de pasajes</title>
 	<link rel="stylesheet" href="{{ asset('css/class.css') }}" >
 	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
@@ -14,7 +14,7 @@
 		<form id='registrar' name='registrar' action='#' class="form-imputs">
 
 			@csrf
-			<h2 class="title" >Reservar Pasajes</h2>
+			<h2 class="title" >Venta de Pasajes</h2>
 
 			Itinerario: <select id='itinerario' name='itinerario' class="select-content"></select>
 
@@ -38,6 +38,13 @@
 			<br>
 			<br>
 
+			<label class="labels">Nota:Considere que en la venta solo se muestran aquellos itinerarios con fecha y hora de zarpado en la proxima hora o menos.</label>
+
+
+			<br>
+			<br>
+
+
 
 			<div>
 
@@ -45,7 +52,7 @@
 
 					<li>
 
-						<label>Reserva:</label>
+						<label>Venta:</label>
 						
 						<br>
 						<br>
@@ -107,7 +114,7 @@
 			<br>
 			<br>
 
-			<input type="button" id='bot' onclick='beforeAjax()' value='Reservar' class="button"> 
+			<input type="button" id='bot' onclick='beforeAjax()' value='Vender' class="button"> 
 		
 			
 			
@@ -143,7 +150,7 @@
 
 				}else{
 
-					registrarReserva();
+					registrarVenta();
 
 				}
 
@@ -156,16 +163,16 @@
 		}
 
 
-		function registrarReserva(){
+		function registrarVenta(){
 
 
-			mensaje('Registrando reserva...');
+			mensaje('Registrando venta...');
 
 			$.ajax({
 
 			    type: 'POST',
 
-				url: "{{url('reserva/pasajero')}}",
+				url: "{{url('venta/pasajero')}}",
 				    
 				data: $("#registrar").serialize(),
 				    
@@ -214,7 +221,7 @@
 
 				type: 'GET',
 
-				url: "{{url('itinerario/reserva/pasaje')}}",
+				url: "{{url('itinerario/venta/pasaje')}}",
 
 				success:function(data){
 					
